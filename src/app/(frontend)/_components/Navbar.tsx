@@ -13,11 +13,11 @@ import WalletButton from "./WalletButton";
 
 const ROUTES = [
   { name: "Home", url: "/" },
-  // { name: "LaunchPad", url: "/launchpad" },
-  // { name: "News", url: "/news" },
-  { name: "Roadmap", url: "/roadmap" },
-  { name: "White Paper", url: "" },
-  // { name: "Map", url: "/map" },
+  { name: "LaunchPad", url: "/launchpad" },
+  { name: "News", url: "/news" },
+  // { name: "Roadmap", url: "/roadmap" },
+  // { name: "White Paper", url: "" },
+  { name: "Map", url: "/map" },
   { name: "My Page", url: "/my-page" },
 ];
 

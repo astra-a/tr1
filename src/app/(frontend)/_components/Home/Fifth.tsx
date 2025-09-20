@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { motion, useAnimationFrame, useInView } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CDN_BASEURL } from "@/constants";
@@ -182,12 +183,12 @@ export default function Fifth() {
                 intelligent, unstoppable solutions.
               </p>
             </div>
-            <button
-              type="button"
-              className="text-xs md:text-sm xl:text-base text-jet-black btn-main rounded-lg px-6 py-2 cursor-pointer invisible"
+            <Link
+              className="text-xs md:text-sm xl:text-base text-jet-black btn-main rounded-lg px-6 py-2"
+              href="/launchpad"
             >
               Get Started
-            </button>
+            </Link>
           </motion.div>
         </div>
       </div>
