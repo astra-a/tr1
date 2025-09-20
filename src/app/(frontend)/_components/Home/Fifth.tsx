@@ -1,12 +1,101 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
-import dynamic from "next/dynamic";
+import Image from "next/image";
+import { motion, useAnimationFrame, useInView } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { CDN_BASEURL } from "@/constants";
 import Footer from "../Footer";
+import { useWindowSize } from "react-use";
 
-const LottiePlayer = dynamic(() => import("../LottiePlayer"), { ssr: false });
+const ICONS = [
+  "/images/icon-ornament-0.svg",
+  "/images/icon-ornament-1.svg",
+  "/images/icon-ornament-2.svg",
+  "/images/icon-ornament-3.svg",
+  "/images/icon-ornament-4.svg",
+  "/images/icon-ornament-5.svg",
+  "/images/icon-ornament-6.svg",
+];
+
+function Marquee({
+  speed,
+  direction,
+  isInView = true,
+}: {
+  speed: number;
+  direction: "left" | "right";
+  isInView?: boolean;
+}) {
+  const { width } = useWindowSize();
+  const distance = useMemo(() => {
+    if (width >= 1536) {
+      // 2xl
+      return (18 + 10) * 4 * ICONS.length;
+    } else if (width >= 1280) {
+      // xl
+      return (17 + 9) * 4 * ICONS.length;
+    } else if (width >= 1024) {
+      // lg
+      return (16 + 8) * 4 * ICONS.length;
+    } else if (width >= 768) {
+      // md
+      return (15 + 7) * 4 * ICONS.length;
+    } else {
+      // sm & xs
+      return (14 + 6) * 4 * ICONS.length;
+    }
+  }, [width]);
+
+  const ref = useRef<HTMLDivElement>(null);
+  const x = useRef(0);
+  const [paused, setPaused] = useState(false);
+
+  useAnimationFrame((_, delta) => {
+    if (isInView && !paused && ref.current) {
+      x.current += speed * delta * ("left" === direction ? -1 : 1);
+      const width = distance || ref.current.clientWidth;
+      if (
+        ("left" === direction && -x.current >= width) ||
+        ("right" === direction && x.current >= width)
+      ) {
+        x.current = 0;
+      }
+      ref.current.style.transform = `translateX(${x.current}px)`;
+    }
+  });
+
+  return (
+    <motion.div
+      className="relative w-full max-w-204 overflow-hidden"
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      initial={{ opacity: 0, y: 150 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+      viewport={{ amount: "some" }}
+    >
+      <div ref={ref} className="w-full will-change-transform">
+        <ul className="flex w-full gap-6 md:gap-7 lg:gap-8 xl:gap-9 2xl:gap-10 py-8">
+          {[...ICONS, ...ICONS, ...ICONS].map((icon, i) => (
+            <li
+              key={i}
+              id={`icon-${i}`}
+              className="flex justify-center items-center size-14 md:size-15 lg:size-16 xl:size-17 2xl:size-18 flex-shrink-0 icon-box"
+            >
+              <Image
+                src={icon}
+                alt=""
+                width={40}
+                height={40}
+                className="size-6 md:size-7 lg:size-8 xl:size-9 2xl:size-10"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+}
 
 function VideoBackground({
   isInView,
@@ -73,13 +162,8 @@ export default function Fifth() {
           />
         </div>
 
-        <div className="page-fifth-container flex flex-col justify-center items-center gap-8 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
-          <div className="w-full max-w-204 aspect-2/1 pointer-events-none">
-            <LottiePlayer
-              fileUrl="https://cdn.lottielab.com/l/3YmSJiNz2CLuxZ.json"
-              playing={isInView && videoEnded}
-            />
-          </div>
+        <div className="page-fifth-container flex flex-col justify-center items-center gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
+          <Marquee speed={0.05} direction="left" isInView={isInView} />
 
           <motion.div
             className="flex flex-col justify-center items-center gap-2 md:gap-3 lg:gap-4 xl:gap-5 2xl:gap-6 relative z-1"
