@@ -40,6 +40,7 @@ import {
   useWalletStore,
 } from "@/stores";
 import { LOCK_MAP } from "@/constants";
+import numeral from "numeral";
 
 dayjs.extend(relativeTime);
 
@@ -111,19 +112,15 @@ function TokenTabPanel() {
 
 function ActivityItem_ERC20({ tx }: { tx: ITransaction }) {
   const content = tx.content as IERC20Approve;
+
   return (
     <>
       <p className="text-sm leading-none text-white line-clamp-1">
         Approve{" "}
-        {content.amount === ONE_BYTES32 ? "" : displayBalance(content.amount)}{" "}
+        {content.amount === ONE_BYTES32
+          ? "∞"
+          : numeral(content.amount).format("0.00a")}{" "}
         {content.token.symbol}
-      </p>
-      <p
-        className="text-xs leading-none text-vermilion line-clamp-1"
-        // className="text-neon-green"
-        // className="text-vermilion"
-      >
-        Approve
       </p>
     </>
   );
@@ -134,7 +131,7 @@ function ActivityItem_PoolPurchase({ tx }: { tx: ITransaction }) {
   return (
     <>
       <p className="text-sm leading-none text-white line-clamp-1">
-        {LOCK_MAP.past} {displayBalance(content.stakedAmount)}{" "}
+        {LOCK_MAP.past} {numeral(content.stakedAmount).format("0.00a")}{" "}
         {content.poolConfig.saleToken.symbol}
       </p>
       <p
@@ -142,7 +139,7 @@ function ActivityItem_PoolPurchase({ tx }: { tx: ITransaction }) {
         // className="text-neon-green"
         // className="text-vermilion"
       >
-        Payment {displayBalance(content.paymentAmount)}{" "}
+        Payment {numeral(content.paymentAmount).format("0.00a")}{" "}
         {content.poolConfig.paymentToken.symbol}
       </p>
     </>
@@ -154,14 +151,9 @@ function ActivityItem_PoolClaim({ tx }: { tx: ITransaction }) {
   return (
     <>
       <p className="text-sm leading-none text-white line-clamp-1">
-        Claimed {displayBalance(content.amount)}{" "}
+        Claimed {numeral(content.amount).format("0.00a")}{" "}
         {content.poolConfig.saleToken.symbol}
       </p>
-      <p
-        className="text-xs leading-none text-neon-green line-clamp-1"
-        // className="text-neon-green"
-        // className="text-vermilion"
-      />
     </>
   );
 }
