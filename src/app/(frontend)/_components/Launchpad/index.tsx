@@ -1,7 +1,6 @@
 "use client";
 
 import dayjs from "dayjs";
-import duration from "dayjs/plugin/duration";
 import { motion } from "framer-motion";
 import dynamic from "next/dynamic";
 import Image from "next/image";
@@ -9,6 +8,7 @@ import Link from "next/link";
 import { useMemo, useState } from "react";
 import { formatUnits } from "viem";
 import {
+  DAY_SECONDS,
   DEFAULT_PRICE_SYMBOL,
   POOL_STATUS,
   PoolStatusLabels,
@@ -25,8 +25,6 @@ import GlowingEdgeCard from "../GlowingEdgeCard";
 import FixedStarVideoBackground from "../FixedStarVideoBackground";
 
 const Countdown = dynamic(() => import("./Countdown"), { ssr: false });
-
-dayjs.extend(duration);
 
 function PoolStatus({ status }: { status: POOL_STATUS }) {
   const color = useMemo(() => {
@@ -116,18 +114,6 @@ function PoolOverview({
   totalCap: number;
   totalRemaining: number;
 }) {
-  const lockStr = useMemo(() => {
-    const dur = dayjs.duration(pool.lockDuration, "seconds");
-    const days = dur.asDays();
-    if (days >= 30) {
-      const _months = Math.round(dur.asMonths());
-      return `${_months} month${_months > 1 ? "s" : ""}`;
-    } else {
-      const _days = Math.round(days);
-      return `${days} day${_days > 1 ? "s" : ""}`;
-    }
-  }, [pool.lockDuration]);
-
   return (
     <div className="flex flex-col gap-3">
       <div className="border-t border-dark-gray border-dashed" />
@@ -150,7 +136,12 @@ function PoolOverview({
         </div>
         <div className="flex justify-between items-center text-sm leading-none font-semibold text-white">
           <p>Cliff Lock</p>
-          <p>{lockStr}</p>
+          <p>
+            {(pool.lockDuration / DAY_SECONDS).toLocaleString(undefined, {
+              maximumFractionDigits: 2,
+            })}{" "}
+            days
+          </p>
         </div>
       </div>
       <div className="border-t border-dark-gray border-dashed" />
