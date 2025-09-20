@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>高斯光晕矩阵封装类</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background: #0f2027;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        overflow: hidden;
+        color: #e0f7fa;
+      }
+      .container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+      .canvas-wrapper {
+        position: relative;
+        width: 700px;
+        height: 230px;
+        margin: 20px 0;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 25px rgba(0, 150, 200, 0.5);
+      }
+      .title {
+        font-size: 2.2rem;
+        margin-bottom: 15px;
+        text-shadow: 0 0 10px rgba(0, 200, 255, 0.7);
+        letter-spacing: 1px;
+      }
+      .instructions {
+        text-align: center;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        max-width: 600px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="title">高斯光暈矩陣封裝類</h1>
+      <p class="instructions">
+        在網格上移動滑鼠或手指 - Y方向衰減更快，X方向衰減更慢
+      </p>
+
+      <div class="canvas-wrapper">
+        <div id="canvasContainer"></div>
+      </div>
+    </div>
+
+    <!-- 引進PixiJS庫 -->
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+    <!-- 引入高斯光暈矩陣類 -->
+    <script src="matrix.js"></script>
+
+    <script>
+      // 建立高斯光暈矩陣實例
+      const glowMatrix = new Matrix({
+        containerId: "canvasContainer",
+        width: 700,
+        height: 230,
+        boxSize: 0.3,
+        highlightColor: { r: 0, g: 255, b: 255 },
+        darkColor: { r: 0, g: 0, b: 0 },
+        fadeSpeed: 0.1,
+        decay: 0.25,
+        weightX: 0.8,
+        weightY: 1.5,
+        rangeFactor: 1.3,
+        maxScale: 12.0,
+        minGap: 8,
+      });
+
+      // 初始化效果
+      glowMatrix.init();
+    </script>
+  </body>
+</html>

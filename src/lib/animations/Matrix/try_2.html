@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Matrix效果展示</title>
+    <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.x/dist/pixi.min.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Arial", sans-serif;
+        background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        color: #e6e6e6;
+        padding: 20px;
+        min-height: 100vh;
+      }
+
+      header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: #00ffff;
+        text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+      }
+
+      .description {
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+
+      .matrix-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 25px;
+        max-width: 1800px;
+        margin: 0 auto;
+      }
+
+      .matrix-item {
+        background: rgba(0, 20, 40, 0.6);
+        border-radius: 12px;
+        padding: 15px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid rgba(0, 255, 255, 0.2);
+      }
+
+      .matrix-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+      }
+
+      .matrix-title {
+        font-size: 1.2rem;
+        margin-bottom: 12px;
+        color: #00ffcc;
+        text-align: center;
+        padding-bottom: 8px;
+        border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      }
+
+      .canvas-container {
+        width: 100%;
+        height: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 12px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: rgba(0, 0, 0, 0.3);
+      }
+
+      .matrix-params {
+        font-size: 0.75rem;
+        color: #a0a0c0;
+        padding: 10px;
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 6px;
+        flex-grow: 1;
+      }
+
+      .param-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 4px;
+      }
+
+      .param-name {
+        font-weight: bold;
+        color: #80b3ff;
+      }
+
+      footer {
+        text-align: center;
+        margin-top: 40px;
+        padding: 20px;
+        color: #6699cc;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 768px) {
+        .matrix-grid {
+          grid-template-columns: 1fr;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Matrix效果展示</h1>
+      <p class="description">
+        此頁面展示了10個不同設定參數的Matrix動畫效果。每個實例都有不同的尺寸和參數設置，將滑鼠懸停在畫布上可以查看互動效果。
+      </p>
+    </header>
+
+    <main class="matrix-grid">
+      <!-- 10個Matrix實例將在這裡動態生成 -->
+    </main>
+
+    <footer>
+      <p>基於Pixi.js實現的Matrix動畫效果 | 互動式設計展示</p>
+    </footer>
+
+    <script>
+      // Matrix類別定義
+      class Matrix {
+        constructor(options = {}) {
+          this.config = { ...options };
+          this.mousePos = { x: 0, y: 0 };
+          this.mouseActive = false;
+          this.boxes = [];
+          this.app = null;
+        }
+
+        init() {
+          this.createApp();
+          return this;
+        }
+
+        createApp() {
+          const { containerId, width, height } = this.config;
+          const container = document.getElementById(containerId);
+
+          if (!container) {
+            console.error(`容器元素 #${containerId} 未找到`);
+            return;
+          }
+
+          container.innerHTML = "";
+
+          this.app = new PIXI.Application({
+            width: width,
+            height: height,
+            backgroundColor: 0x111111,
+            antialias: true,
+          });
+
+          container.appendChild(this.app.view);
+          this.createGrid();
+          this.setupEventListeners();
+          this.startAnimation();
+        }
+
+        createGrid() {
+          const { width, height, boxSize, maxScale, minGap } = this.config;
+
+          const spacingX = boxSize * maxScale + minGap;
+          const spacingY = boxSize * maxScale + minGap;
+          const cols = Math.floor((width - boxSize) / spacingX) + 1;
+          const rows = Math.floor((height - boxSize) / spacingY) + 1;
+
+          const offsetX = (width - ((cols - 1) * spacingX + boxSize)) / 2;
+          const offsetY = (height - ((rows - 1) * spacingY + boxSize)) / 2;
+
+          this.boxes = [];
+          for (let row = 0; row < rows; row++) {
+            for (let col = 0; col < cols; col++) {
+              const box = new PIXI.Sprite(PIXI.Texture.WHITE);
+              box.anchor.set(0.5);
+              box.width = boxSize;
+              box.height = boxSize;
+              box.tint = 0x000000;
+              box.alpha = 0;
+
+              box.x = offsetX + col * spacingX;
+              box.y = offsetY + row * spacingY;
+
+              this.app.stage.addChild(box);
+              box.originalSize = boxSize;
+
+              this.boxes.push({
+                box,
+                cx: box.x,
+                cy: box.y,
+                targetAlpha: 0,
+              });
+            }
+          }
+        }
+
+        setupEventListeners() {
+          this.app.view.addEventListener("mousemove", (e) => {
+            const rect = this.app.view.getBoundingClientRect();
+            this.mousePos.x = e.clientX - rect.left;
+            this.mousePos.y = e.clientY - rect.top;
+            this.mouseActive = true;
+          });
+
+          this.app.view.addEventListener("mouseleave", () => {
+            this.mouseActive = false;
+          });
+
+          this.app.view.addEventListener("touchmove", (e) => {
+            e.preventDefault();
+            if (e.touches.length > 0) {
+              const rect = this.app.view.getBoundingClientRect();
+              this.mousePos.x = e.touches[0].clientX - rect.left;
+              this.mousePos.y = e.touches[0].clientY - rect.top;
+              this.mouseActive = true;
+            }
+          });
+
+          this.app.view.addEventListener("touchend", () => {
+            this.mouseActive = false;
+          });
+        }
+
+        computeBrightness(dx, dy, l) {
+          const { decay, weightX, weightY } = this.config;
+          const weightedDx = dx * weightX;
+          const weightedDy = dy * weightY;
+          const d = Math.sqrt(
+            weightedDx * weightedDx + weightedDy * weightedDy,
+          );
+          return Math.exp(-(d * d) / (l * l * decay * decay));
+        }
+
+        computeSizeFactor(dx, dy, l, minFactor = 1.0, maxFactor = 12.0) {
+          const { decay, weightX, weightY } = this.config;
+          const weightedDx = dx * weightX;
+          const weightedDy = dy * weightY;
+          const d = Math.sqrt(
+            weightedDx * weightedDx + weightedDy * weightedDy,
+          );
+          const t = Math.exp(-(d * d) / (l * l * decay * decay * 0.7));
+          return minFactor + (maxFactor - minFactor) * t;
+        }
+
+        startAnimation() {
+          const {
+            width,
+            height,
+            fadeSpeed,
+            highlightColor,
+            darkColor,
+            rangeFactor,
+          } = this.config;
+
+          this.app.ticker.add(() => {
+            const currentL =
+              Math.sqrt(width * width + height * height) * rangeFactor;
+
+            this.boxes.forEach(({ box, cx, cy }) => {
+              let dx = 0,
+                dy = 0;
+
+              if (this.mouseActive) {
+                dx = cx - this.mousePos.x;
+                dy = cy - this.mousePos.y;
+
+                let t = this.computeBrightness(dx, dy, currentL);
+                t = Math.max(0, Math.min(1, t));
+                box.targetAlpha = t;
+
+                const sizeFactor = this.computeSizeFactor(dx, dy, currentL);
+                box.width = box.originalSize * sizeFactor;
+                box.height = box.originalSize * sizeFactor;
+
+                const r = Math.round(
+                  darkColor.r + (highlightColor.r - darkColor.r) * t,
+                );
+                const g = Math.round(
+                  darkColor.g + (highlightColor.g - darkColor.g) * t,
+                );
+                const b = Math.round(
+                  darkColor.b + (highlightColor.b - darkColor.b) * t,
+                );
+                box.tint = (r << 16) + (g << 8) + b;
+              } else {
+                box.targetAlpha = 0;
+                box.width += (box.originalSize - box.width) * 0.2;
+                box.height += (box.originalSize - box.height) * 0.2;
+              }
+
+              if (box.alpha < box.targetAlpha) {
+                box.alpha = Math.min(box.alpha + fadeSpeed, box.targetAlpha);
+              } else if (box.alpha > box.targetAlpha) {
+                box.alpha = Math.max(box.alpha - fadeSpeed, box.targetAlpha);
+              }
+            });
+          });
+        }
+      }
+
+      // 建立10個不同尺寸和配置的Matrix實例
+      document.addEventListener("DOMContentLoaded", function () {
+        const matrixGrid = document.querySelector(".matrix-grid");
+
+        // 10個不同的配置
+        const configs = [
+          {
+            width: 300,
+            height: 150,
+            boxSize: 0.8,
+            fadeSpeed: 0.15,
+            title: "小型Matrix (300x150)",
+          },
+          {
+            width: 350,
+            height: 120,
+            boxSize: 1.0,
+            fadeSpeed: 0.08,
+            title: "窄型Matrix (350x120)",
+          },
+          {
+            width: 280,
+            height: 180,
+            boxSize: 0.7,
+            fadeSpeed: 0.12,
+            title: "緊湊Matrix (280x180)",
+          },
+          {
+            width: 320,
+            height: 200,
+            boxSize: 0.9,
+            fadeSpeed: 0.1,
+            title: "標準Matrix (320x200)",
+          },
+          {
+            width: 400,
+            height: 150,
+            boxSize: 1.2,
+            fadeSpeed: 0.18,
+            title: "寬型Matrix (400x150)",
+          },
+          {
+            width: 250,
+            height: 200,
+            boxSize: 0.6,
+            fadeSpeed: 0.09,
+            title: "方形Matrix (250x200)",
+          },
+          {
+            width: 380,
+            height: 180,
+            boxSize: 1.1,
+            fadeSpeed: 0.14,
+            title: "中型Matrix (380x180)",
+          },
+          {
+            width: 330,
+            height: 160,
+            boxSize: 0.85,
+            fadeSpeed: 0.11,
+            title: "平衡Matrix (330x160)",
+          },
+          {
+            width: 360,
+            height: 140,
+            boxSize: 0.95,
+            fadeSpeed: 0.13,
+            title: "狹長Matrix (360x140)",
+          },
+          {
+            width: 290,
+            height: 190,
+            boxSize: 0.75,
+            fadeSpeed: 0.16,
+            title: "最後Matrix (290x190)",
+          },
+        ];
+
+        // 為每個配置建立HTML和初始化Matrix
+        configs.forEach((config, index) => {
+          const containerId = `matrixContainer${index}`;
+
+          // 创建矩阵项目的HTML
+          const matrixItem = document.createElement("div");
+          matrixItem.className = "matrix-item";
+          matrixItem.innerHTML = `
+                    <h3 class="matrix-title">${config.title}</h3>
+                    <div class="canvas-container" id="${containerId}"></div>
+                    <div class="matrix-params">
+                        <div class="param-row"><span class="param-name">尺寸:</span> <span>${config.width} × ${config.height}</span></div>
+                        <div class="param-row"><span class="param-name">Box大小:</span> <span>${config.boxSize}</span></div>
+                        <div class="param-row"><span class="param-name">淡入速度:</span> <span>${config.fadeSpeed}</span></div>
+                        <div class="param-row"><span class="param-name">顏色:</span> <span>青綠色</span></div>
+                    </div>
+                `;
+
+          matrixGrid.appendChild(matrixItem);
+
+          // 初始化Matrix實例
+          setTimeout(() => {
+            const mart = new Matrix({
+              containerId: containerId,
+              width: config.width,
+              height: config.height,
+              boxSize: config.boxSize,
+              highlightColor: { r: 0, g: 255, b: 255 },
+              darkColor: { r: 0, g: 0, b: 0 },
+              fadeSpeed: config.fadeSpeed,
+              decay: 0.25,
+              weightX: 0.8,
+              weightY: 1.5,
+              rangeFactor: 1,
+              maxScale: 12.0,
+              minGap: 8,
+            });
+            mart.init();
+          }, 100);
+        });
+      });
+    </script>
+  </body>
+</html>

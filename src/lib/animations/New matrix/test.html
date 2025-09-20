@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>动态 Canvas 测试</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        margin: 0;
+        padding: 2rem;
+        background-color: #000;
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      h1 {
+        color: #1a237e;
+        margin-bottom: 2rem;
+        color: #fff;
+      }
+
+      .canvas-container {
+        border: 2px solid #ccc;
+        border-radius: 12px;
+        overflow: hidden;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .canvas-container.full-width {
+        width: 100%;
+        height: 400px;
+      }
+
+      @media (max-width: 768px) {
+        .canvas-container {
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+    </style>
+    <!-- 引入 three.js 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- 引入您提供的 js 脚本 -->
+    <script type="module">
+      import { MatrixEffect } from "./index.js";
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const container = document.getElementById("canvas-container-1");
+
+        // 实例化 MatrixEffect 对象，并传递不同的尺寸
+        new MatrixEffect(container, {
+          canvasWidth: window.innerWidth * 0.9,
+          canvasHeight: 400,
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <h1>动态 Canvas 矩阵效果测试</h1>
+
+    <div id="canvas-container-1" class="canvas-container full-width"></div>
+  </body>
+</html>

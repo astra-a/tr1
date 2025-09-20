@@ -1,0 +1,205 @@
+.roadmap {
+  &-bg-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate3d(-35vw, -50%, 0);
+  }
+
+  &-bg-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 78vw;
+  }
+
+  .circle-container {
+    position: absolute;
+    top: 51%;
+    left: 2.8%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    --center-x: 50%;
+    --center-y: 50%;
+  }
+
+  .center-point {
+    display: none;
+    position: absolute;
+    left: var(--center-x);
+    top: var(--center-y);
+    width: 8px;
+    height: 8px;
+    //background: rgba(255, 0, 0, 0.8);
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+  }
+
+  .inner-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 25.4%;
+    height: 1.33333333em;
+    transform: translateY(-50%);
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.33333333;
+    color: white;
+
+    .inner {
+      position: absolute;
+      inset: 0;
+      padding-left: calc(100% - 5.5em);
+      transform-origin: left center;
+
+      //background-color: rgba(255, 0, 0, 0.5);
+    }
+  }
+
+  .outer-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center stretch;
+
+    .outer {
+      position: relative;
+      grid-area: 1 /1;
+      transform-origin: left center;
+      padding-left: 48%;
+      height: min-content;
+      display: flex;
+      justify-content: flex-start;
+
+      //background-color: rgba(0, 255, 0, 0.3);
+
+      .block {
+        height: min-content;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+
+      .title {
+        position: relative;
+        max-width: 45rem;
+        padding: 12px 20px;
+        border: 2px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.875rem;
+        line-height: 1.2;
+        color: white;
+        letter-spacing: -0.02em;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: -2px;
+          bottom: -2px;
+          aspect-ratio: 52 / 65;
+        }
+
+        &::before {
+          left: -2px;
+          background: url("/images/bg-roadmap-title-left.svg") no-repeat top
+            left/ auto 100% border-box;
+        }
+
+        &::after {
+          right: -2px;
+          background: url("/images/bg-roadmap-title-right.svg") no-repeat top
+            right/ auto 100% border-box;
+        }
+      }
+
+      .content {
+        max-width: 45rem;
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 1.33333333;
+        color: white;
+        letter-spacing: -0.02em;
+      }
+    }
+  }
+
+  .small-logo-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center stretch;
+
+    .svg-item {
+      position: relative;
+      box-sizing: content-box;
+      grid-area: 1/1;
+      transform-origin: left center;
+      padding-left: 40.7%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      will-change: transform;
+
+      //background-color: rgba(0, 0, 255, 0.3);
+
+      .svg-container {
+        background: transparent;
+        transition-property: width, height;
+        transition-duration: 0.18s;
+        transition-timing-function: linear;
+        will-change: width, height, opacity, filter;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+
+        svg {
+          width: 100%;
+          height: 100%;
+          transition: none;
+          fill: #98fce4;
+        }
+      }
+    }
+
+    .fixed-center-svg {
+      position: absolute;
+      top: 0;
+      left: 40.7%;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      fill: #98fce4;
+    }
+  }
+
+  .center-svg-item {
+    position: absolute;
+    left: 58.2%;
+    top: 50%;
+    width: 160px;
+    height: 160px;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    pointer-events: none;
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
