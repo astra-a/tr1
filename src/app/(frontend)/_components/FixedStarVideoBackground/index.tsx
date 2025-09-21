@@ -1,8 +1,14 @@
 import { CDN_BASEURL } from "@/constants";
 
-export default function FixedStarVideoBackground() {
+export default function FixedStarVideoBackground({
+  wrapperClass,
+}: {
+  wrapperClass: string;
+}) {
   return (
-    <div className="fixed inset-0 w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
+    <div
+      className={`z-[0] morphing-particles-container overflow-hidden pointer-events-none ${wrapperClass}`}
+    >
       <video
         width={1920}
         height={1080}

@@ -52,7 +52,7 @@ export default function GlobeMap() {
     const world = new Globe(ref.current)
       .width(ref.current.clientWidth)
       .height(ref.current.clientHeight)
-      .backgroundColor("#0e0e0e")
+      .backgroundColor("rgba(0,0,0,0)")
       // 大氣層的顏色
       // .atmosphereColor('red')
       // 地球儀材質影像

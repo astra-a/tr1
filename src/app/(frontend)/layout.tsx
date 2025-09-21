@@ -7,6 +7,7 @@ import Navbar from "./_components/Navbar";
 import NavbarPlaceholder from "./_components/NavbarPlaceholder";
 import LayoutFooter from "./_components/LayoutFooter";
 import TransactionsPadding from "./_components/TransactionsPadding";
+import FixedStarVideoBackground from "./_components/FixedStarVideoBackground";
 import { APP_BASEURL, APP_DESCRIPTION, APP_TITLE } from "@/constants";
 
 import "./globals.scss";
@@ -71,6 +72,8 @@ export default function RootLayout({
       <body className={`${sarpanch.variable} font-sarpanch`}>
         <CustomWagmiProvider>
           <div className="flex flex-col min-h-screen">
+            <FixedStarVideoBackground wrapperClass="fixed inset-0" />
+
             <Navbar />
             <NavbarPlaceholder />
             <div className="w-full flex-auto overflow-hidden">{children}</div>

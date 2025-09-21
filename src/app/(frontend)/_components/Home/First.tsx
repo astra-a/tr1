@@ -31,7 +31,10 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         poster={`${CDN_BASEURL}/images/bg-first-sale-poster.png`}
         className="w-full h-full object-cover"
       >
-        <source src={`${CDN_BASEURL}/images/bg-first-sale.mp4`} type="video/mp4" />
+        <source
+          src={`${CDN_BASEURL}/images/bg-first-sale.mp4`}
+          type="video/mp4"
+        />
       </video>
     </div>
   );

@@ -11,7 +11,7 @@ export default function LottiePlayer({
 }) {
   return (
     <Lottie
-      className="lottie-player"
+      className="lottie-player w-full h-full"
       src={fileUrl}
       autoplay={false}
       playing={playing}

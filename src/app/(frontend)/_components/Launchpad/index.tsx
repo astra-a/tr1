@@ -22,7 +22,6 @@ import {
 } from "@/web3";
 import { Pool } from "@/payload-types";
 import GlowingEdgeCard from "../GlowingEdgeCard";
-import FixedStarVideoBackground from "../FixedStarVideoBackground";
 
 const Countdown = dynamic(() => import("./Countdown"), { ssr: false });
 
@@ -338,7 +337,6 @@ function Item({ pool }: { pool: Pool }) {
 export default function LaunchpadList({ pools }: { pools: Pool[] }) {
   return (
     <>
-      <FixedStarVideoBackground />
       <div className="launchpad w-full max-w-370 min-h-100 mx-auto px-4 sm:px-6 md:px-7 lg:px-8 xl:px-9 2xl:px-10 py-20 relative z-[1] overflow-hidden antialiased">
         <div className="launchpad-list flex flex-wrap gap-4">
           {pools.map((item) => (
