@@ -163,10 +163,11 @@ export default function Third() {
   return (
     <div
       ref={ref}
-      className="home-section page-third w-full h-screen-custom min-h-140 sm:min-h-150 md:min-h-180 lg:min-h-210 xl:min-h-220 flex flex-col justify-center items-center relative overflow-hidden z-[3]"
+      className="home-section page-third w-full h-screen-custom flex flex-col justify-center items-center relative overflow-hidden z-[3]"
     >
       <div className="page-third-container w-full flex flex-auto flex-col justify-between items-center relative">
-        <div className="w-full flex flex-col justify-start items-center gap-12 md:gap-14 lg:gap-16 xl:gap-18 2xl:gap-20 3xl:gap-22 pt-20 relative z-[1]">
+        <div />
+        <div className="w-full flex flex-col justify-start items-center gap-12 md:gap-14 lg:gap-16 xl:gap-18 2xl:gap-20 3xl:gap-22 relative z-[1]">
           <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
             <SectionHeader
               image="/images/icon-thumbs-up.svg"
@@ -178,7 +179,7 @@ export default function Third() {
         </div>
 
         <motion.div
-          className="relative w-321 aspect-16/5 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+          className="relative max-w-320 max-h-[40vh] aspect-16/5 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}

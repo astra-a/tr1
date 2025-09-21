@@ -47,7 +47,7 @@ export default function First() {
   return (
     <div
       ref={ref}
-      className="home-section page-first w-full h-screen-custom min-h-150 md:min-h-140 lg:min-h-150 xl:min-h-180 2xl:min-h-190 3xl:min-h-200 flex justify-center bg-black relative overflow-hidden z-[1]"
+      className="home-section page-first w-full h-screen-custom flex justify-center bg-black relative overflow-hidden z-[1]"
     >
       <div className="relative w-full h-full flex justify-center">
         <VideoBackground isInView={isInView} />

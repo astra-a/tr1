@@ -67,7 +67,7 @@ function Marquee({
 
   return (
     <div
-      className="relative w-full max-w-204 overflow-hidden"
+      className="relative w-full max-w-180 overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -116,7 +116,7 @@ function VideoBackground({
   }, [isInView]);
 
   return (
-    <div className="absolute inset-0 w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
+    <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
         ref={ref}
         width={1920}
@@ -161,7 +161,7 @@ export default function Fifth() {
 
         <div className="page-fifth-container flex flex-col justify-center items-center gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
           <motion.div
-            className="relative w-321 aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+            className="relative max-w-320 max-h-[40vh] aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             initial={{ opacity: 0, y: 150 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
@@ -175,7 +175,9 @@ export default function Fifth() {
               }}
             />
 
-            <Marquee speed={0.05} direction="left" started={videoEnded} />
+            <div className="absolute top-[50%] left-[50%] transform-[translate(-50%,-50%)]">
+              <Marquee speed={0.05} direction="left" started={videoEnded} />
+            </div>
           </motion.div>
 
           <motion.div
