@@ -10,8 +10,8 @@ const VC_ARRAY = [
   { name: "A16z", image: "/images/logo-a16z.svg", color: "#FFF" },
   { name: "Metamask", image: "/images/logo-metamask.svg", color: "#98FCE4" },
   {
-    name: "Blockchai capital",
-    image: "/images/logo-blockchai-capital.svg",
+    name: "Blockchain capital",
+    image: "/images/logo-blockchain-capital.svg",
     color: "#FFF",
   },
   {
