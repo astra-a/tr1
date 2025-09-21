@@ -1,12 +1,54 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import dynamic from "next/dynamic";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useWindowSize } from "react-use";
 import SectionHeader from "../SectionHeader";
+import { CDN_BASEURL } from "@/constants";
 
-const LottiePlayer = dynamic(() => import("../LottiePlayer"), { ssr: false });
+function VideoBackground({
+  url,
+  poster,
+  width,
+  height,
+  isInView,
+}: {
+  url: string;
+  poster?: string;
+  width?: number;
+  height?: number;
+  isInView?: boolean;
+}) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    if (!ref?.current) return;
+    if (isInView) {
+      ref.current.play().finally();
+    } else {
+      ref.current.pause();
+    }
+    // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
+  }, [isInView]);
+
+  return (
+    <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
+      <video
+        ref={ref}
+        width={width}
+        height={height}
+        autoPlay
+        loop
+        muted
+        controls={false}
+        preload="auto"
+        poster={poster}
+        className="w-full h-full"
+      >
+        <source src={url} type="video/mp4" />
+      </video>
+    </div>
+  );
+}
 
 export default function Second() {
   const ref = useRef<HTMLDivElement>(null);
@@ -58,10 +100,15 @@ export default function Second() {
               viewport={{ amount: "some" }}
               className="relative"
             >
-              <div className="relative z-[1] w-140 aspect-8/6">
-                <LottiePlayer
-                  fileUrl="https://cdn.lottielab.com/l/5Zd3EKE9Y78wcF.json"
-                  playing={isInView}
+              <div
+                className="relative z-[1] w-140 aspect-8/6"
+                data-border="border-gradient-rounded line-ray rounded-2xl overflow-hidden"
+              >
+                <VideoBackground
+                  url={`${CDN_BASEURL}/images/bg-second-right-top.mp4`}
+                  width={1280}
+                  height={660}
+                  isInView={isInView}
                 />
               </div>
             </motion.div>
@@ -98,10 +145,15 @@ export default function Second() {
               viewport={{ amount: "some" }}
               className="relative"
             >
-              <div className="relative z-[1] w-140 aspect-8/6">
-                <LottiePlayer
-                  fileUrl="https://cdn.lottielab.com/l/7yiqNKe9sDBJeB.json"
-                  playing={isInView}
+              <div
+                className="relative z-[1] w-140 aspect-8/6"
+                data-border="border-gradient-rounded line-ray rounded-2xl overflow-hidden"
+              >
+                <VideoBackground
+                  url={`${CDN_BASEURL}/images/bg-second-left-bottom.mp4`}
+                  width={1280}
+                  height={660}
+                  isInView={isInView}
                 />
               </div>
             </motion.div>
