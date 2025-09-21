@@ -113,7 +113,7 @@ function VideoBackground({
       ref.current.pause();
     }
     // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView]);
+  }, [isInView, played]);
 
   return (
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">

@@ -619,6 +619,28 @@ input:focus-visible {
   }
 }
 
+.globe-map {
+  height: calc(100vh - 48px);
+  @media (width >= 48rem) {
+    height: calc(100vh - 52px);
+  }
+  @media (width >= 64rem) {
+    height: calc(100vh - 56px);
+  }
+  @media (width >= 80rem) {
+    height: calc(100vh - 60px);
+  }
+  @media (width >= 96rem) {
+    height: calc(100vh - 72px);
+  }
+  @media (width >= 120rem) {
+    height: calc(100vh - 78px);
+  }
+  @media (width >= 150rem) {
+    height: calc(100vh - 128px);
+  }
+}
+
 .my-page {
   .header-card {
     .inner {
