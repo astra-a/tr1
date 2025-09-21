@@ -25,8 +25,8 @@ const VC_ARRAY = [
     color: "#73BBFF",
   },
   {
-    name: "Token metrics",
-    image: "/images/logo-token-metrics.svg",
+    name: "Spartan",
+    image: "/images/logo-spartan.svg",
     color: "#98FCE4",
   },
   {
@@ -36,8 +36,8 @@ const VC_ARRAY = [
   },
   { name: "PANTERA", image: "/images/logo-pantera.svg", color: "#FFF" },
   {
-    name: "Token Metrics Ventures",
-    image: "/images/logo-token-metrics-ventures.svg",
+    name: "Kleinerperkins",
+    image: "/images/logo-kleinerperkins.svg",
     color: "#FFF",
   },
   {
