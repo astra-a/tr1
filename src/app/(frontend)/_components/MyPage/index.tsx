@@ -34,7 +34,6 @@ import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { useWalletStore } from "@/stores";
 import GlowingEdgeCard from "../GlowingEdgeCard";
 import NewMatrix from "../NewMatrix";
-import FixedStarVideoBackground from "../FixedStarVideoBackground";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useDeepCompareEffect } from "ahooks";
 
@@ -520,7 +519,6 @@ export default function MyPage() {
 
   return (
     <>
-      <FixedStarVideoBackground />
       <div className="w-full max-w-320 min-h-100 mx-auto px-4 sm:px-6 md:px-7 lg:px-8 xl:px-9 2xl:px-10 py-20 relative z-[1] overflow-hidden antialiased">
         <div className="my-page flex flex-col gap-18">
           <Headers

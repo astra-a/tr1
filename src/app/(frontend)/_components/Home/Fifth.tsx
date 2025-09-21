@@ -21,11 +21,11 @@ const ICONS = [
 function Marquee({
   speed,
   direction,
-  isInView = true,
+  started = true,
 }: {
   speed: number;
   direction: "left" | "right";
-  isInView?: boolean;
+  started?: boolean;
 }) {
   const { width } = useWindowSize();
   const distance = useMemo(() => {
@@ -52,7 +52,7 @@ function Marquee({
   const [paused, setPaused] = useState(false);
 
   useAnimationFrame((_, delta) => {
-    if (isInView && !paused && ref.current) {
+    if (started && !paused && ref.current) {
       x.current += speed * delta * ("left" === direction ? -1 : 1);
       const width = distance || ref.current.clientWidth;
       if (
@@ -66,14 +66,10 @@ function Marquee({
   });
 
   return (
-    <motion.div
+    <div
       className="relative w-full max-w-204 overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
-      initial={{ opacity: 0, y: 150 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-      viewport={{ amount: "some" }}
     >
       <div ref={ref} className="w-full will-change-transform">
         <ul className="flex w-full gap-6 md:gap-7 lg:gap-8 xl:gap-9 2xl:gap-10 py-8">
@@ -94,7 +90,7 @@ function Marquee({
           ))}
         </ul>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
@@ -153,18 +149,34 @@ export default function Fifth() {
       className="home-section page-fifth-group w-full h-screen-custom min-h-120 md:min-h-140 lg:min-h-160 flex flex-col relative overflow-hidden z-[4]"
     >
       <div className="page-fifth flex flex-auto justify-center relative md:min-h-100 lg:min-h-110 xl:min-h-130 2xl:min-h-130">
-        <div className="absolute inset-0">
-          <VideoBackground
-            isInView={isInView}
-            played={videoEnded}
-            onEnded={() => {
-              setVideoEnded(true);
-            }}
-          />
-        </div>
+        {/*<div className="absolute inset-0">*/}
+        {/*  <VideoBackground*/}
+        {/*    isInView={isInView}*/}
+        {/*    played={videoEnded}*/}
+        {/*    onEnded={() => {*/}
+        {/*      setVideoEnded(true);*/}
+        {/*    }}*/}
+        {/*  />*/}
+        {/*</div>*/}
 
         <div className="page-fifth-container flex flex-col justify-center items-center gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
-          <Marquee speed={0.05} direction="left" isInView={isInView} />
+          <motion.div
+            className="relative w-321 aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+            initial={{ opacity: 0, y: 150 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+            viewport={{ amount: "some" }}
+          >
+            <VideoBackground
+              isInView={isInView}
+              played={videoEnded}
+              onEnded={() => {
+                setVideoEnded(true);
+              }}
+            />
+
+            <Marquee speed={0.05} direction="left" started={videoEnded} />
+          </motion.div>
 
           <motion.div
             className="flex flex-col justify-center items-center gap-2 md:gap-3 lg:gap-4 xl:gap-5 2xl:gap-6 relative z-1"

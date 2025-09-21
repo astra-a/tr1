@@ -1,12 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import SectionHeader from "../SectionHeader";
 import GlowingEdgeCard from "../GlowingEdgeCard";
-import NewMatrix from "@/app/(frontend)/_components/NewMatrix";
-import { CDN_BASEURL } from "@/constants";
+import NewMatrix from "../NewMatrix";
 
 const VC_ARRAY = [
   { name: "A16z", image: "/images/logo-a16z.svg", color: "#FFF" },
@@ -59,49 +57,9 @@ const VC_ARRAY = [
   },
 ];
 
-function VideoBackground({ isInView }: { isInView: boolean }) {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    if (!ref?.current) return;
-    if (isInView) {
-      ref.current.play().finally();
-    } else {
-      ref.current.pause();
-    }
-    // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView]);
-
-  return (
-    <div className="absolute inset-0 w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
-      <video
-        ref={ref}
-        width={1920}
-        height={1080}
-        autoPlay
-        loop
-        muted
-        controls={false}
-        preload="auto"
-        poster={`${CDN_BASEURL}/images/bg-second-poster.png`}
-        className="w-full h-full object-cover"
-      >
-        <source src={`${CDN_BASEURL}/images/bg-second.mp4`} type="video/mp4" />
-      </video>
-    </div>
-  );
-}
-
 export default function Fourth() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { amount: 0.2 });
-
   return (
-    <div
-      ref={ref}
-      className="home-section page-fourth w-full h-screen-custom flex flex-auto justify-center items-center relative bg-black/70"
-    >
-      <VideoBackground isInView={isInView} />
-
+    <div className="home-section page-fourth w-full h-screen-custom flex flex-auto justify-center items-center relative">
       <div className="w-321.5 page-fourth-container relative z-[1] flex flex-col items-center gap-10">
         <SectionHeader
           image="/images/icon-thumbs-up.svg"
