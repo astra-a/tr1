@@ -6,6 +6,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useAnimationFrame, useInView } from "framer-motion";
 import { useWindowSize } from "react-use";
 import { CDN_BASEURL } from "@/constants";
+import GlowingEdgeCard from "../GlowingEdgeCard";
 
 const FEATURES = [
   { icon: "/images/icon-review.svg", text: "Decentralized Intelligence" },
@@ -185,7 +186,9 @@ export default function Third() {
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
           viewport={{ amount: "some" }}
         >
-          <VideoBackground isInView={isInView} />
+          <GlowingEdgeCard autoPlayOnHover>
+            <VideoBackground isInView={isInView} />
+          </GlowingEdgeCard>
         </motion.div>
 
         <div className="flex flex-col w-full gap-0.5 bg-jet-black relative z-[1]">

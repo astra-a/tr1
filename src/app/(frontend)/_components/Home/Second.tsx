@@ -5,6 +5,7 @@ import { useEffect, useRef } from "react";
 import { useWindowSize } from "react-use";
 import SectionHeader from "../SectionHeader";
 import { CDN_BASEURL } from "@/constants";
+import GlowingEdgeCard from "../GlowingEdgeCard";
 
 function VideoBackground({
   url,
@@ -67,7 +68,7 @@ export default function Second() {
           title="Decentralized, Trustless, and Multi-Chain — By Design"
           description="The all-in-one decentralized AI platform for building, automating, and scaling in the Web3 era — with privacy and control at your core."
         />
-        <div className="max-w-full">
+        <div className="max-w-full 2xl:mt-6">
           <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
             <motion.div
               className="flex flex-col gap-2 max-w-full md:max-w-[50%] xl:max-w-146"
@@ -98,12 +99,9 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative"
+              className="relative z-[1] w-140 aspect-2496/1408 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
-              <div
-                className="relative z-[1] w-140 aspect-8/6"
-                data-border="border-gradient-rounded line-ray rounded-2xl overflow-hidden"
-              >
+              <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
                   url={`${CDN_BASEURL}/images/bg-second-right-top.mp4`}
                   poster={`${CDN_BASEURL}/images/bg-second-right-top-poster.png`}
@@ -111,10 +109,10 @@ export default function Second() {
                   height={1408}
                   isInView={isInView}
                 />
-              </div>
+              </GlowingEdgeCard>
             </motion.div>
           </div>
-          <div className="max-w-full -mt-40 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
+          <div className="max-w-full -mt-20 2xl:mt-0 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
             <motion.div
               className="flex flex-col gap-2 max-w-full md:max-w-[50%] xl:max-w-146"
               initial={{
@@ -144,12 +142,9 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative"
+              className="relative z-[1] w-140 aspect-1920/1080 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
-              <div
-                className="relative z-[1] w-140 aspect-8/6"
-                data-border="border-gradient-rounded line-ray rounded-2xl overflow-hidden"
-              >
+              <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
                   url={`${CDN_BASEURL}/images/bg-second-left-bottom.mp4`}
                   poster={`${CDN_BASEURL}/images/bg-second-left-bottom-poster.png`}
@@ -157,7 +152,7 @@ export default function Second() {
                   height={1080}
                   isInView={isInView}
                 />
-              </div>
+              </GlowingEdgeCard>
             </motion.div>
           </div>
         </div>
