@@ -119,8 +119,8 @@ function VideoBackground({
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
         ref={introRef}
-        width={1920}
-        height={1080}
+        width={2560}
+        height={1440}
         autoPlay
         muted
         loop={false}
@@ -139,8 +139,8 @@ function VideoBackground({
       />
       <video
         ref={loopRef}
-        width={1920}
-        height={1080}
+        width={2560}
+        height={1440}
         autoPlay
         muted
         controls={false}
