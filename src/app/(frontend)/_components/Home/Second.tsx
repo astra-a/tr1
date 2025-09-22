@@ -106,7 +106,7 @@ export default function Second() {
               >
                 <VideoBackground
                   url={`${CDN_BASEURL}/images/bg-second-right-top.mp4`}
-                  poster={`${CDN_BASEURL}/images/bg-second-right-top-poster.mp4`}
+                  poster={`${CDN_BASEURL}/images/bg-second-right-top-poster.png`}
                   width={1280}
                   height={660}
                   isInView={isInView}
@@ -152,7 +152,7 @@ export default function Second() {
               >
                 <VideoBackground
                   url={`${CDN_BASEURL}/images/bg-second-left-bottom.mp4`}
-                  poster={`${CDN_BASEURL}/images/bg-second-left-bottom-poster.mp4`}
+                  poster={`${CDN_BASEURL}/images/bg-second-left-bottom-poster.png`}
                   width={1280}
                   height={660}
                   isInView={isInView}
