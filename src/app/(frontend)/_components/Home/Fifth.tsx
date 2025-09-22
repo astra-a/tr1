@@ -6,6 +6,7 @@ import { motion, useAnimationFrame, useInView } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { CDN_BASEURL } from "@/constants";
 import Footer from "../Footer";
+import GlowingEdgeCard from "../GlowingEdgeCard";
 import { useWindowSize } from "react-use";
 
 const ICONS = [
@@ -175,7 +176,7 @@ export default function Fifth() {
         {/*  />*/}
         {/*</div>*/}
 
-        <div className="page-fifth-container flex flex-col justify-center items-center gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
+        <div className="page-fifth-container flex flex-col justify-center items-center gap-4 2xl:gap-12 3xl:gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
           <motion.div
             className="relative max-w-320 max-h-[40vh] aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             initial={{ opacity: 0, y: 150 }}
@@ -183,16 +184,14 @@ export default function Fifth() {
             transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
             viewport={{ amount: "some" }}
           >
-            <VideoBackground
-              isInView={isInView}
-              onEnded={() => {
-                setVideoEnded(true);
-              }}
-            />
-
-            <div className="absolute top-[50%] left-[50%] transform-[translate(-50%,-50%)]">
-              <Marquee speed={0.05} direction="left" started={videoEnded} />
-            </div>
+            <GlowingEdgeCard autoPlayOnHover>
+              <VideoBackground
+                isInView={isInView}
+                onEnded={() => {
+                  setVideoEnded(true);
+                }}
+              />
+            </GlowingEdgeCard>
           </motion.div>
 
           <motion.div
