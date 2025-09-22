@@ -96,44 +96,60 @@ function Marquee({
 
 function VideoBackground({
   isInView,
-  played,
   onEnded,
 }: {
   isInView: boolean;
-  played?: boolean;
   onEnded?: () => void;
 }) {
-  const ref = useRef<HTMLVideoElement>(null);
+  const [phase, setPhase] = useState<"intro" | "loop">("intro");
+
+  const introRef = useRef<HTMLVideoElement>(null);
+  const loopRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    if (!ref?.current) return;
-    if (played) return;
     if (isInView) {
-      ref.current.play().finally();
+      ("intro" === phase ? introRef : loopRef).current?.play().finally();
     } else {
-      ref.current.pause();
+      introRef.current?.pause();
+      loopRef.current?.pause();
     }
     // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView, played]);
+  }, [isInView, introRef?.current, loopRef?.current]);
 
   return (
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
-        ref={ref}
+        ref={introRef}
         width={1920}
         height={1080}
-        // autoPlay
-        // loop
+        autoPlay
         muted
+        loop={false}
         controls={false}
         preload="auto"
-        poster={`${CDN_BASEURL}/images/bg-fifth-poster.png`}
-        className="w-full h-full object-cover"
+        className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
+        poster={`${CDN_BASEURL}/images/bg-fifth-1-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-fifth-1.mp4`}
         onEnded={() => {
-          onEnded?.();
+          if ("intro" === phase) {
+            onEnded?.();
+            setPhase("loop");
+            loopRef.current?.play().finally();
+          }
         }}
-      >
-        <source src={`${CDN_BASEURL}/images/bg-fifth.mp4`} type="video/mp4" />
-      </video>
+      />
+      <video
+        ref={loopRef}
+        width={1920}
+        height={1080}
+        autoPlay
+        muted
+        controls={false}
+        loop={true}
+        preload="auto"
+        className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
+        poster={`${CDN_BASEURL}/images/bg-fifth-2-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-fifth-2.mp4`}
+      />
     </div>
   );
 }
@@ -169,7 +185,6 @@ export default function Fifth() {
           >
             <VideoBackground
               isInView={isInView}
-              played={videoEnded}
               onEnded={() => {
                 setVideoEnded(true);
               }}
