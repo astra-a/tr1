@@ -104,54 +104,33 @@ function Marquee({
 }
 
 function VideoBackground({ isInView }: { isInView: boolean }) {
-  const [phase, setPhase] = useState<"intro" | "loop">("intro");
-
-  const introRef = useRef<HTMLVideoElement>(null);
-  const loopRef = useRef<HTMLVideoElement>(null);
+  const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
+    if (!ref?.current) return;
     if (isInView) {
-      ("intro" === phase ? introRef : loopRef).current?.play().finally();
+      ref.current.play().finally();
     } else {
-      introRef.current?.pause();
-      loopRef.current?.pause();
+      ref.current.pause();
     }
     // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView, introRef?.current, loopRef?.current]);
+  }, [isInView]);
 
   return (
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
-        ref={introRef}
-        width={1920}
-        height={1080}
+        ref={ref}
+        width={2560}
+        height={1440}
         autoPlay
+        loop
         muted
         controls={false}
-        loop={false}
         preload="auto"
-        className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-third-1-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-third-1.mp4`}
-        onEnded={() => {
-          if ("intro" === phase) {
-            setPhase("loop");
-            loopRef.current?.play().finally();
-          }
-        }}
-      />
-      <video
-        ref={loopRef}
-        width={1920}
-        height={1080}
-        autoPlay
-        muted
-        controls={false}
-        loop={true}
-        preload="auto"
-        className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-third-2-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-third-2.mp4`}
-      />
+        poster={`${CDN_BASEURL}/images/bg-third-poster.png`}
+        className="w-full h-full object-cover"
+      >
+        <source src={`${CDN_BASEURL}/images/bg-third.mp4`} type="video/mp4" />
+      </video>
     </div>
   );
 }
