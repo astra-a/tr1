@@ -8,36 +8,36 @@ import { Countries } from "../../_mocks/map";
 // @see https://github.com/vasturiano/globe.gl/blob/master/example/countries-population/index.html
 
 const CATEGORIES = [
-  { label: "Available", color: "#52FFA8" }, // rgb(82, 255, 168)
-  { label: "Waitlist", color: "#15E4FF" }, // rgb(21, 228, 255)
-  { label: "Coming soon", color: "#7452FF" }, // rgb(116, 82, 255)
-  { label: "None", color: "#FF52E2" }, // rgb(255, 82, 226)
+  { label: "Available", color: "#59FF93" }, // rgb(89, 255, 147)
+  { label: "Waitlist", color: "#59FFEE" }, // rgb(89, 255, 238)
+  { label: "Coming soon", color: "#3399FF" }, // rgb(51, 153, 255)
+  { label: "None", color: "#1F2B37" }, // rgb(31, 43, 55)
 ];
 
 const CATEGORIES_COLOR: {
   [key: string]: { cap: string; side: string; base: number; increment: number };
 } = {
   available: {
-    cap: "#52FFA8",
-    side: "rgba(82, 255, 168, 0.05)",
+    cap: "#59FF93",
+    side: "rgba(89, 255, 147, 0.05)",
     base: 0.55,
     increment: 0.15,
   },
   waitlist: {
-    cap: "#15E4FF",
-    side: "rgba(21, 228, 255, 0.05)",
+    cap: "#59FFEE",
+    side: "rgba(89, 255, 238, 0.05)",
     base: 0.4,
     increment: 0.15,
   },
   "coming soon": {
-    cap: "#7452FF",
-    side: "rgba(116, 82, 255, 0.05)",
+    cap: "#3399FF",
+    side: "rgba(51, 153, 255, 0.05)",
     base: 0.3,
     increment: 0.1,
   },
   none: {
-    cap: "#FF52E2",
-    side: "rgba(255, 82, 226, 0.05)",
+    cap: "#1F2B37",
+    side: "rgba(31, 43, 55, 0.05)",
     base: 0.2,
     increment: 0.1,
   },
@@ -62,13 +62,14 @@ export default function GlobeMap() {
       // 多邊形的顏色
       .polygonCapColor(({ properties: d }: any) => {
         // console.log("feat.STATE", d.ADMIN, d.STATE);
-        return CATEGORIES_COLOR?.[d?.STATE]?.cap ?? "#FF52E2";
+        return CATEGORIES_COLOR?.[d?.STATE]?.cap ?? "#1F2B37";
       })
       // 多邊形凸起後的邊緣射線顏色
       .polygonSideColor(({ properties: d }: any) => {
         // console.log("feat.STATE", d.ADMIN, d.STATE);
-        return CATEGORIES_COLOR?.[d?.STATE]?.side ?? "#FF52E2";
+        return CATEGORIES_COLOR?.[d?.STATE]?.side ?? "#1F2B37";
       })
+      .polygonStrokeColor(() => "#7D654B")
       // 多邊形 hover 显示的内容
       .polygonLabel(
         ({ properties: d }: any) => `
