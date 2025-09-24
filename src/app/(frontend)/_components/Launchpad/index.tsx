@@ -252,16 +252,14 @@ function Item({ pool }: { pool: Pool }) {
         className={`w-full h-full ${[POOL_STATUS.SoldOut].includes(poolStatus) ? "red" : ""}`}
       >
         <Link
-          className={`launchpad-item flex flex-col p-5 bg-eerie-black ${[POOL_STATUS.Active, POOL_STATUS.Paused].includes(poolStatus) ? "" : "cursor-auto"}`}
+          className={`launchpad-item flex flex-col p-5 bg-eerie-black ${[POOL_STATUS.Active].includes(poolStatus) ? "" : "cursor-auto"}`}
           href={
-            [POOL_STATUS.Active, POOL_STATUS.Paused].includes(poolStatus)
+            [POOL_STATUS.Active].includes(poolStatus)
               ? `/launchpad/${pool.address}`
               : "#"
           }
           onClick={(e) => {
-            if (
-              ![POOL_STATUS.Active, POOL_STATUS.Paused].includes(poolStatus)
-            ) {
+            if (![POOL_STATUS.Active].includes(poolStatus)) {
               e.preventDefault();
             }
           }}
