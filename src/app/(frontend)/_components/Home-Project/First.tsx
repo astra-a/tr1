@@ -28,10 +28,13 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         muted
         controls={false}
         preload="auto"
-        poster={`${CDN_BASEURL}/images/bg-first-poster.png`}
+        poster={`${CDN_BASEURL}/images/bg-project-first-poster.png`}
         className="w-full h-full object-cover"
       >
-        <source src={`${CDN_BASEURL}/images/bg-first.mp4`} type="video/mp4" />
+        <source
+          src={`${CDN_BASEURL}/images/bg-project-first.mp4`}
+          type="video/mp4"
+        />
       </video>
     </div>
   );

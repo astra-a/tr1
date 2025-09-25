@@ -127,8 +127,8 @@ function VideoBackground({
         controls={false}
         preload="auto"
         className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-fifth-1-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-fifth-1.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-project-fifth-1-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-project-fifth-1.mp4`}
         onEnded={() => {
           if ("intro" === phase) {
             onEnded?.();
@@ -147,8 +147,8 @@ function VideoBackground({
         loop={true}
         preload="auto"
         className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-fifth-2-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-fifth-2.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-project-fifth-2-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-project-fifth-2.mp4`}
       />
     </div>
   );
@@ -190,6 +190,10 @@ export default function Fifth() {
                   setVideoEnded(true);
                 }}
               />
+
+              <div className="absolute top-[50%] left-[50%] transform-[translate(-50%,-50%)]">
+                <Marquee speed={0.05} direction="left" started={videoEnded} />
+              </div>
             </GlowingEdgeCard>
           </motion.div>
 
@@ -201,21 +205,25 @@ export default function Fifth() {
             viewport={{ amount: "some" }}
           >
             <div className="flex flex-col items-center gap-2">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-mint-green-gradient text-shadow-black-10 text-center">
-                Let’s Shape the Decentralized Future Together
+              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] 2xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-mint-green-gradient text-shadow-black-10 text-center">
+                Join Us in Shaping the Next Decentralized Epoch
               </h2>
               <p className="text-xs md:text-sm xl:text-base text-mint-green-gradient-2 text-center">
-                Step into a new era where AI is your ally, blockchains unite
-                without borders, and your sovereignty is secure — build
-                intelligent, unstoppable solutions.
+                Step into a world where{" "}
+                <b>
+                  AI is self-owned, blockchains interoperate without friction
+                </b>
+                , and{" "}
+                <b>
+                  every individual holds sovereignty over their data and models
+                </b>
+                .
+              </p>
+              <p className="text-xs md:text-sm xl:text-base text-mint-green-gradient-2 text-center">
+                This is more than technology—it’s a shift in how humans,
+                machines, and economies interact.
               </p>
             </div>
-            <button
-              type="button"
-              className="text-xs md:text-sm xl:text-base text-jet-black btn-main rounded-lg px-6 py-2 invisible"
-            >
-              Get Started
-            </button>
           </motion.div>
         </div>
       </div>
