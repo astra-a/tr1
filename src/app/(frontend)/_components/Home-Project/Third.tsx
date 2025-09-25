@@ -105,54 +105,36 @@ function Marquee({
 }
 
 function VideoBackground({ isInView }: { isInView: boolean }) {
-  const [phase, setPhase] = useState<"intro" | "loop">("intro");
-
-  const introRef = useRef<HTMLVideoElement>(null);
-  const loopRef = useRef<HTMLVideoElement>(null);
+  const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
+    if (!ref?.current) return;
     if (isInView) {
-      ("intro" === phase ? introRef : loopRef).current?.play().finally();
+      ref.current.play().finally();
     } else {
-      introRef.current?.pause();
-      loopRef.current?.pause();
+      ref.current.pause();
     }
     // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView, introRef?.current, loopRef?.current]);
+  }, [isInView, ref?.current]);
 
   return (
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
-        ref={introRef}
+        ref={ref}
         width={2560}
         height={1440}
         autoPlay
+        loop
         muted
         controls={false}
-        loop={false}
         preload="auto"
-        className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-third-1-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-third-1.mp4`}
-        onEnded={() => {
-          if ("intro" === phase) {
-            setPhase("loop");
-            loopRef.current?.play().finally();
-          }
-        }}
-      />
-      <video
-        ref={loopRef}
-        width={2560}
-        height={1440}
-        autoPlay
-        muted
-        controls={false}
-        loop={true}
-        preload="auto"
-        className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-third-2-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-third-2.mp4`}
-      />
+        className="w-full h-full object-cover"
+        poster={`${CDN_BASEURL}/images/bg-project-third-poster.png`}
+      >
+        <source
+          src={`${CDN_BASEURL}/images/bg-project-third.mp4`}
+          type="video/mp4"
+        />
+      </video>
     </div>
   );
 }
@@ -173,8 +155,8 @@ export default function Third() {
             <SectionHeader
               image="/images/icon-thumbs-up.svg"
               tag="Our Values"
-              title="Decentralized by Design  Intelligent by Nature"
-              description="Merging adaptive AI with the resilience of distributed ledger technology to create trustless, permissionless systems built for global scale."
+              title="Intelligence + Decentralization = A New Social Operating System"
+              description={`Our mission is to merge adaptive AI reasoning with the fault tolerance of distributed ledgers, enabling <b>trustless, permissionless collaboration</b> at global scale.`}
             />
           </div>
         </div>

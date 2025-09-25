@@ -3,7 +3,6 @@
 import First from "./First";
 import Second from "./Second";
 import Third from "./Third";
-import Fourth from "./Fourth";
 import Fifth from "./Fifth";
 import ReactFullpage from "@fullpage/react-fullpage";
 import dayjs from "dayjs";
@@ -36,9 +35,6 @@ export default function ProjectHome() {
               <div className="w-full h-0.25 line-ray" />
               <div id="section3" className="section">
                 <Third />
-              </div>
-              <div id="section4" className="section">
-                <Fourth />
               </div>
               <div id="section5" className="section">
                 <Fifth />
@@ -100,7 +96,6 @@ export default function ProjectHome() {
           <Second />
           <div className="w-full h-0.25 line-ray" />
           <Third />
-          <Fourth />
           <Fifth />
         </>
       )}
