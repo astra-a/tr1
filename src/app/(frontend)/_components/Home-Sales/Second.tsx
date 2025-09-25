@@ -65,13 +65,13 @@ export default function Second() {
         <SectionHeader
           image="/images/icon-zap.svg"
           tag="Features"
-          title="Decentralized, Trustless, and Multi-Chain — By Design"
-          description="The all-in-one decentralized AI platform for building, automating, and scaling in the Web3 era — with privacy and control at your core."
+          title="The World’s First Local-First AI + Multi-Chain Operating System for Web3"
+          description={`An all-in-one, local-first AI platform to <b>build</b>, <b>automate</b>, and <b>scale</b> in the Web3 era—where <b>self-custody</b>, <b>zero-knowledge privacy</b>, and <b>sovereign control</b> are the defaults, not add-ons.`}
         />
         <div className="max-w-full 2xl:mt-6">
           <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
             <motion.div
-              className="flex flex-col gap-2 max-w-full md:max-w-[50%] xl:max-w-146"
+              className="flex flex-col gap-2 w-full xl:max-w-146 2xl:max-w-158"
               initial={{
                 opacity: 0,
                 x: width >= 768 ? -200 : 0,
@@ -85,9 +85,16 @@ export default function Second() {
                 Multi-Chain Mastery
               </h3>
               <p className="text-xs md:text-sm xl:text-base text-cool-gray">
-                Seamlessly connect to Ethereum, Solana, Binance Smart Chain, and
-                beyond through one unified dashboard. No bridges, no barriers —
-                pure multi-chain interoperability.
+                Plug into <b>Ethereum</b>, <b>Solana</b>, <b>BNB Chain</b>,{" "}
+                <b>Layer 2s</b>, and emerging ecosystems through a single,
+                intent-driven dashboard. Our routing engine abstracts wallets,
+                RPCs, and token formats so you ship faster with fewer moving
+                parts.{" "}
+                <b>
+                  No brittle manual bridges, no chain-hopping guesswork—just
+                  permissionless, programmable interoperability
+                </b>{" "}
+                with built-in risk scoring, fee simulation, and slippage guards.
               </p>
             </motion.div>
             <motion.div
@@ -99,12 +106,12 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-140 aspect-2496/1408 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full max-w-120 2xl:max-w-140 aspect-2496/1408 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
-                  url={`${CDN_BASEURL}/images/bg-second-right-top.mp4`}
-                  poster={`${CDN_BASEURL}/images/bg-second-right-top-poster.png`}
+                  url={`${CDN_BASEURL}/images/bg-sales-second-right-top.mp4`}
+                  poster={`${CDN_BASEURL}/images/bg-sales-second-right-top-poster.png`}
                   width={2496}
                   height={1408}
                   isInView={isInView}
@@ -112,9 +119,9 @@ export default function Second() {
               </GlowingEdgeCard>
             </motion.div>
           </div>
-          <div className="max-w-full -mt-20 2xl:mt-0 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
+          <div className="max-w-full -mt-5 2xl:mt-2 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
             <motion.div
-              className="flex flex-col gap-2 max-w-full md:max-w-[50%] xl:max-w-146"
+              className="flex flex-col gap-2 w-full xl:max-w-146 2xl:max-w-158"
               initial={{
                 opacity: 0,
                 x: width >= 768 ? 200 : 0,
@@ -128,9 +135,17 @@ export default function Second() {
                 Sovereign AI Agents
               </h3>
               <p className="text-xs md:text-sm xl:text-base text-cool-gray">
-                Run your personal AI locally with zero-knowledge privacy — no
-                data leaks, no centralized control, only you and your digital
-                partner.
+                Run your <b>personal AI</b> locally—fine-tuned to your
+                preferences, sealed by device-level keys, and{" "}
+                <b>shielded by ZK/MPC</b>. Your intent becomes executable
+                on-chain actions without exposing your data to centralized
+                servers.{" "}
+                <b>
+                  No data extraction. No third-party custody. Only you and your
+                  verifiable digital counterpart
+                </b>
+                , signing with <b>account-abstraction</b> policies, spending
+                caps, and human-in-the-loop confirmations when it matters.
               </p>
             </motion.div>
             <motion.div
@@ -142,12 +157,12 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-140 aspect-1920/1080 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full max-w-120 2xl:max-w-140 aspect-1920/1080 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
-                  url={`${CDN_BASEURL}/images/bg-second-left-bottom.mp4`}
-                  poster={`${CDN_BASEURL}/images/bg-second-left-bottom-poster.png`}
+                  url={`${CDN_BASEURL}/images/bg-sales-second-left-bottom.mp4`}
+                  poster={`${CDN_BASEURL}/images/bg-sales-second-left-bottom-poster.png`}
                   width={1920}
                   height={1080}
                   isInView={isInView}

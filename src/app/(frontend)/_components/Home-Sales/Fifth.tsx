@@ -128,8 +128,8 @@ function VideoBackground({
         controls={false}
         preload="auto"
         className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-fifth-1-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-fifth-1.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-sales-fifth-1-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-sales-fifth-1.mp4`}
         onEnded={() => {
           if ("intro" === phase) {
             onEnded?.();
@@ -148,8 +148,8 @@ function VideoBackground({
         loop={true}
         preload="auto"
         className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-fifth-2-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-fifth-2.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-sales-fifth-2-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-sales-fifth-2.mp4`}
       />
     </div>
   );
@@ -202,13 +202,14 @@ export default function Fifth() {
             viewport={{ amount: "some" }}
           >
             <div className="flex flex-col items-center gap-2">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-mint-green-gradient text-shadow-black-10 text-center">
-                Let’s Shape the Decentralized Future Together
+              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] 2xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-mint-green-gradient text-shadow-black-10 text-center">
+                Co-Create the Future of Decentralized AI and Borderless Finance
               </h2>
               <p className="text-xs md:text-sm xl:text-base text-mint-green-gradient-2 text-center">
-                Step into a new era where AI is your ally, blockchains unite
-                without borders, and your sovereignty is secure — build
-                intelligent, unstoppable solutions.
+                Step into a world where your{" "}
+                <b>AI is an ally, blockchains interoperate without borders</b>,
+                and your <b>sovereignty is non-negotiable—build</b> intelligent,
+                unstoppable systems with us.
               </p>
             </div>
             <Link
