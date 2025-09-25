@@ -40,10 +40,9 @@ export default function SectionHeader({
         </h2>
         <p
           className="text-xs md:text-sm xl:text-base text-aquaGreen-skyblue-gradient text-center"
-          data-text={description}
-        >
-          {description}
-        </p>
+          // data-text={description}
+          dangerouslySetInnerHTML={{ __html: description }}
+        />
       </div>
     </motion.div>
   );

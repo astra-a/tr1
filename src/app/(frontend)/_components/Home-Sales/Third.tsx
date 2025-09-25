@@ -131,8 +131,8 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         loop={false}
         preload="auto"
         className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-third-1-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-third-1.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-sales-third-1-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-sales-third-1.mp4`}
         onEnded={() => {
           if ("intro" === phase) {
             setPhase("loop");
@@ -150,8 +150,8 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         loop={true}
         preload="auto"
         className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-third-2-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-third-2.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-sales-third-2-poster.png`}
+        src={`${CDN_BASEURL}/images/bg-sales-third-2.mp4`}
       />
     </div>
   );
@@ -173,8 +173,8 @@ export default function Third() {
             <SectionHeader
               image="/images/icon-thumbs-up.svg"
               tag="Our Values"
-              title="Decentralized by Design  Intelligent by Nature"
-              description="Merging adaptive AI with the resilience of distributed ledger technology to create trustless, permissionless systems built for global scale."
+              title="Where Autonomous AI Meets Trustless Blockchains — A Global-Scale Intelligence Network"
+              description={`We fuse <b>adaptive AI reasoning</b> with the <b>resilience of distributed ledgers</b> to produce trustless, composable systems that scale globally—<b>without sacrificing privacy or control</b>.`}
             />
           </div>
         </div>
