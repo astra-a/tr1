@@ -43,7 +43,7 @@ function VideoBackground({
         controls={false}
         preload="auto"
         poster={poster}
-        className="w-full h-full"
+        className="w-full h-full object-cover"
       >
         <source src={url} type="video/mp4" />
       </video>
