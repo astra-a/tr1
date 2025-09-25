@@ -86,14 +86,14 @@ export default function First() {
                 </p>
               </motion.div>
             </div>
-            <div className="w-full flex items-center gap-10">
-              <motion.div
-                className="lg:w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6"
-                initial={{ opacity: 0, y: 150 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-                viewport={{ amount: "some" }}
-              >
+            <motion.div
+              className="w-full flex items-center gap-10"
+              initial={{ opacity: 0, y: 150 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+              viewport={{ amount: "some" }}
+            >
+              <div className="lg:w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6">
                 <div
                   className={`glow-text ${isInView ? "" : "paused"} text-xs md:text-sm xl:text-base text-light-blue-gray`}
                 >
@@ -132,14 +132,8 @@ export default function First() {
                     />
                   </a>
                 </div>
-              </motion.div>
-              <motion.div
-                className="flex justify-start"
-                initial={{ opacity: 0, y: 150 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-                viewport={{ amount: "some" }}
-              >
+              </div>
+              <div className="flex justify-start">
                 <Link
                   className="flex text-sm md:text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
                   href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
@@ -147,8 +141,8 @@ export default function First() {
                 >
                   Go to Project
                 </Link>
-              </motion.div>
-            </div>
+              </div>
+            </motion.div>
           </div>
           {/*<div className="flex flex-col justify-center gap-4 md:gap-20 lg:gap-24 xl:gap-28 2xl:gap-30">*/}
           {/*  <div className="flex flex-col gap-2 md:gap-28 lg:gap-32 xl:gap-36 2xl:gap-40 w-full md:w-38 xl:w-40">*/}
