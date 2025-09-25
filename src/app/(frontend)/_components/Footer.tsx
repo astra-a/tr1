@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { APP_NAME } from "@/constants";
 
 export default function Footer({ small }: { small?: boolean }) {
   return (
@@ -15,7 +16,7 @@ export default function Footer({ small }: { small?: boolean }) {
             <div className="text-3xl text-white font-semibold text-center sm:text-left">
               <Image
                 src="/images/logo-full.png"
-                alt="AIOS"
+                alt={APP_NAME}
                 width={192}
                 height={73}
                 className="w-auto h-8 xl:h-10 2xl:h-12"
@@ -25,11 +26,20 @@ export default function Footer({ small }: { small?: boolean }) {
               Decentralized AI Infrastructure for Global Scale
             </p>
           </div>
-          <div>
+          <div className="flex items-center gap-6">
             <a className="" href="" target="_blank" rel="noopener noreferrer">
               <Image
                 src="/images/icon-twitter.svg"
                 alt="Twitter"
+                width={20}
+                height={20}
+                className="size-4 lg:size-5"
+              />
+            </a>
+            <a className="" href="" target="_blank" rel="noopener noreferrer">
+              <Image
+                src="/images/icon-telegram.svg"
+                alt="Telegram"
                 width={20}
                 height={20}
                 className="size-4 lg:size-5"

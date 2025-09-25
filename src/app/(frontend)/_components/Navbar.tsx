@@ -9,7 +9,7 @@ import {
 } from "@headlessui/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { SITE_TYPE } from "@/constants";
+import { APP_NAME, SITE_TYPE } from "@/constants";
 import WalletButton from "./WalletButton";
 
 const ROUTES =
@@ -60,14 +60,14 @@ function WindowNavChild({ route }: { route: { name: string; url: string } }) {
     return (
       <a
         href={route.url}
-        className={`text-base 3xl:text-lg 4xl:text-2xl ${isActive ? "text-white" : "text-white/60"} hover:text-white hover:underline transition`}
+        className={`text-base 3xl:text-lg 4xl:text-xl ${isActive ? "text-white" : "text-white/60"} hover:text-white hover:underline transition`}
       >
         {route.name}
       </a>
     );
   } else {
     return (
-      <div className="text-base 3xl:text-lg 4xl:text-2xl text-white/60">
+      <div className="text-base 3xl:text-lg 4xl:text-xl text-white/60">
         {route.name}
       </div>
     );
@@ -81,14 +81,14 @@ function WindowNav() {
         <div className="text-xl tracking-[-0.03em] text-white flex justify-center items-center px-4 xl:px-6 2xl:px-8">
           <Image
             src="/images/logo-full.png"
-            alt="AIOS"
+            alt={APP_NAME}
             width={192}
             height={73}
             className="w-auto h-8 xl:h-10 2xl:h-12 3xl:h-14"
           />
         </div>
         <div className="h-full w-px bg-dark-slate-gray" />
-        <div className="flex items-center gap-4 lg:gap-10 px-8 lg:px-20 4xl:px-36">
+        <div className="flex items-center gap-4 lg:gap-10 px-8 lg:px-16 xl:px-18 2xl:px-20 3xl:px-22 4xl:px-24">
           {ROUTES.map((item, i) => (
             <WindowNavChild key={i} route={item} />
           ))}
@@ -123,7 +123,7 @@ function MobileNav() {
       <div className="flex items-center h-full px-2 border-r border-dark-slate-gray">
         <Image
           src="/images/logo-full.png"
-          alt="AIOS"
+          alt={APP_NAME}
           width={192}
           height={73}
           className="w-auto h-6"
@@ -168,7 +168,7 @@ function MobileNav() {
 export default function Navbar() {
   return (
     <>
-      <div className="navbar fixed top-0 w-full h-12 md:h-13 lg:h-14 xl:h-15 2xl:h-18 3xl:h-19.5 4xl:h-32 z-40 flex justify-center bg-jet-black border-b border-dark-slate-gray">
+      <div className="navbar fixed top-0 w-full h-12 md:h-13 lg:h-14 xl:h-15 2xl:h-18 3xl:h-20 4xl:h-22 z-40 flex justify-center bg-jet-black border-b border-dark-slate-gray">
         <div className="navbar-container flex items-center justify-between w-full h-full">
           <MobileNav />
           <WindowNav />
