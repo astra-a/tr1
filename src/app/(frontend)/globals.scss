@@ -539,8 +539,15 @@ input:focus-visible {
 
 .launchpad-list {
   .launchpad-item-wrapper {
-    width: calc((100% - 16px * 2) / 3);
+    width: 100%;
+    max-width: 456px;
     box-shadow: 0 12px 16px 0 var(--color-black);
+    @media (width >= 48rem) {
+      width: calc((100% - 16px) / 2);
+    }
+    @media (width >= 80rem) {
+      width: calc((100% - 16px * 2) / 3);
+    }
   }
 
   .launchpad-item {

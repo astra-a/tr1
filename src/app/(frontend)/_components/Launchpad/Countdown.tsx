@@ -30,7 +30,7 @@ export default function Countdown({
   }, [deadline, countdown]);
 
   return (
-    <div className="flex items-center gap-5 text-xs leading-none font-semibold text-white uppercase">
+    <div className="flex items-center gap-2 lg:gap-3 xl:gap-4 2xl:gap-5 text-xs leading-none font-semibold text-white uppercase">
       <div className="time-block rounded-lg day">
         <div className="time-block-inner px-2 py-1.25 flex flex-col justify-center items-center gap-1 rounded-inherit">
           <p>{days}</p>

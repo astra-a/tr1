@@ -88,7 +88,7 @@ function StakedProgress({
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-col gap-2">
-        <div className="flex justify-between items-center text-base leading-none font-semibold text-white">
+        <div className="flex justify-between items-center text-sm lg:text-base leading-none font-semibold text-white">
           <p>
             {displayBalance(soldValue)}/{displayBalance(capValue)}{" "}
             {DEFAULT_PRICE_SYMBOL}
@@ -172,7 +172,7 @@ function IdoEnded({
   }, [pool, poolStatus]);
   return (
     <div className="h-10 flex justify-between items-center">
-      <h2 className="text-base leading-none font-semibold text-white">
+      <h2 className="text-sm lg:text-base leading-none font-semibold text-white">
         {title}
       </h2>
       <Countdown
@@ -252,7 +252,7 @@ function Item({ pool }: { pool: Pool }) {
         className={`w-full h-full ${[POOL_STATUS.SoldOut].includes(poolStatus) ? "red" : ""}`}
       >
         <Link
-          className={`launchpad-item flex flex-col p-5 bg-eerie-black ${[POOL_STATUS.Active].includes(poolStatus) ? "" : "cursor-auto"}`}
+          className={`launchpad-item flex flex-col p-4 xl:p-5 bg-eerie-black ${[POOL_STATUS.Active].includes(poolStatus) ? "" : "cursor-auto"}`}
           href={
             [POOL_STATUS.Active].includes(poolStatus)
               ? `/launchpad/${pool.address}`
@@ -335,8 +335,8 @@ function Item({ pool }: { pool: Pool }) {
 export default function LaunchpadList({ pools }: { pools: Pool[] }) {
   return (
     <>
-      <div className="launchpad w-full max-w-370 min-h-100 mx-auto px-4 sm:px-6 md:px-7 lg:px-8 xl:px-9 2xl:px-10 py-20 relative z-[1] overflow-hidden antialiased">
-        <div className="launchpad-list flex flex-wrap gap-4">
+      <div className="launchpad w-full max-w-370 min-h-100 mx-auto px-4 md:px-6 lg:px-8 xl:px-9 2xl:px-10 py-20 relative z-[1] overflow-hidden antialiased">
+        <div className="launchpad-list flex flex-wrap gap-4 justify-center xl:justify-start">
           {pools.map((item) => (
             <Item key={item.id} pool={item} />
           ))}
