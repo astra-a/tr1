@@ -36,6 +36,7 @@ import GlowingEdgeCard from "../GlowingEdgeCard";
 import NewMatrix from "../NewMatrix";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useDeepCompareEffect } from "ahooks";
+import { useWindowSize } from "react-use";
 
 const Countdown = dynamic(() => import("./Countdown"), { ssr: false });
 
@@ -198,7 +199,7 @@ function PurchaseItem({
 
   return (
     <motion.div
-      className="relative flex flex-col gap-5 px-7 py-8 bg-eerie-black box-shadow-2 border-2 border-dark-greenish-gray rounded-xl"
+      className="relative flex flex-col gap-5 px-5 md:px-6 xl:px-7 py-6 md:py-7 xl:py-8 bg-eerie-black box-shadow-2 border-2 border-dark-greenish-gray rounded-xl"
       initial={{ opacity: 0, y: 150 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.75 }}
@@ -213,7 +214,7 @@ function PurchaseItem({
             APR: {getAprPercent(purchase.pool.apr)}
           </div>
         </div>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center">
           <div className="text-lg text-white">
             {LOCK_MAP.past}：
             <span className="font-semibold text-mint-green">
@@ -322,6 +323,7 @@ function Headers({
   allRewardAmount: number;
   tempClaimedAmounts: { saleAmount: number; rewardAmount: number };
 }) {
+  const { width } = useWindowSize();
   const [animationComplete, setAnimationComplete] = useState(false);
   const [tokenStaked, setTokenStaked] = useState(0);
   const [tokenCurrentFarmed, setTokenCurrentFarmed] = useState(0);
@@ -348,35 +350,41 @@ function Headers({
   ]);
 
   return (
-    <div className="flex gap-6">
+    <div className="flex flex-col lg:flex-row gap-6">
       <motion.div
-        className="header-card w-104 box-shadow-1 border-gradient-rounded rounded-lg"
-        initial={{ opacity: 0, x: -150 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        className="header-card w-full lg:max-w-96 xl:max-w-104 box-shadow-1 border-gradient-rounded rounded-lg"
+        initial={{
+          opacity: 0,
+          x: width >= 768 ? -150 : 0,
+          y: width >= 768 ? 0 : 150,
+        }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 0.75 }}
         viewport={{ once: true }}
         onAnimationComplete={() => setAnimationComplete(true)}
       >
         <GlowingEdgeCard autoPlayOnHover>
-          <div className="inner relative w-full h-full flex flex-col gap-11 px-7 py-9">
+          <div className="inner relative w-full h-full flex flex-col gap-8 md:gap-9 xl:gap-11 px-5 md:px-6 xl:px-7 py-7 md:py-8 xl:py-9">
             <NewMatrix
               className="absolute inset-0 z-0 overflow-hidden rounded-inherit bg-eerie-black"
               baseColor={0x7453ff}
               hoverColor={0x52ffa8}
             />
 
-            <h3 className="z-1 text-lg font-semibold text-white pointer-events-none">
+            <h3 className="z-1 text-base md:text-lg font-semibold text-white pointer-events-none">
               {DEFAULT_TOKEN_NAME} Balance ({LOCK_MAP.past} + {EARN_MAP.past})
             </h3>
             <div className="z-1 flex items-center gap-4 pointer-events-none">
-              <Image
-                src="/images/token-aios.svg"
-                alt={DEFAULT_TOKEN_NAME}
-                width={56}
-                height={56}
-                className="w-14"
-              />
-              <p className="text-2xl tracking-[-0.02em] font-semibold text-white">
+              <div className="w-12 md:w-14">
+                <Image
+                  src="/images/token-aios.svg"
+                  alt={DEFAULT_TOKEN_NAME}
+                  width={56}
+                  height={56}
+                  className="w-full"
+                />
+              </div>
+              <p className="h-[1.33333em] text-2xl tracking-[-0.02em] font-semibold text-white">
                 <CountUp
                   // key="token-value"
                   // start={0}
@@ -392,27 +400,31 @@ function Headers({
       </motion.div>
 
       <motion.div
-        className="header-card w-190 box-shadow-1 border-gradient-rounded rounded-lg"
-        initial={{ opacity: 0, x: 150 }}
-        whileInView={{ opacity: 1, x: 0 }}
+        className="header-card w-full xl:max-w-190 box-shadow-1 border-gradient-rounded rounded-lg"
+        initial={{
+          opacity: 0,
+          x: width >= 768 ? 150 : 0,
+          y: width >= 768 ? 0 : 150,
+        }}
+        whileInView={{ opacity: 1, x: 0, y: 0 }}
         transition={{ duration: 0.75 }}
         viewport={{ once: true }}
         onAnimationComplete={() => setAnimationComplete(true)}
       >
         <GlowingEdgeCard autoPlayOnHover>
-          <div className="inner relative w-full h-full flex flex-col gap-6 px-7 py-9">
+          <div className="inner relative w-full h-full flex flex-col gap-6 px-5 md:px-6 xl:px-7 py-7 md:py-8 xl:py-9">
             <NewMatrix
               className="absolute inset-0 z-0 overflow-hidden rounded-inherit bg-eerie-black"
               baseColor={0x7453ff}
               hoverColor={0x52ffa8}
             />
 
-            <h3 className="z-1 text-lg font-semibold text-white pointer-events-none">
+            <h3 className="z-1 text-base md:text-lg font-semibold text-white pointer-events-none">
               {LOCK_MAP.progressive} and {EARN_MAP.progressive} Balance
             </h3>
-            <div className="z-1 flex justify-center items-end gap-23 pointer-events-none">
-              <div className="flex flex-col py-1 gap-2 items-center">
-                <p className="text-2xl tracking-[-0.02em] font-semibold text-aquamarine">
+            <div className="z-1 flex flex-col sm:flex-row justify-center sm:justify-around md:items-end gap-2 pointer-events-none">
+              <div className="flex flex-col lg:py-1 gap-2 items-center">
+                <p className="h-[1.33333em] text-2xl tracking-[-0.02em] font-semibold text-aquamarine">
                   <CountUp
                     // key="token-staked"
                     // start={0}
@@ -426,8 +438,8 @@ function Headers({
                 </p>
               </div>
               <div className="w-0.25 h-[90%] bg-dark-greenish-gray" />
-              <div className="flex flex-col py-1 gap-2 items-center">
-                <p className="text-2xl tracking-[-0.02em] font-semibold text-aquamarine">
+              <div className="flex flex-col lg:py-1 gap-2 items-center">
+                <p className="h-[1.33333em] text-2xl tracking-[-0.02em] font-semibold text-aquamarine">
                   <CountUp
                     // key="token-current-farmed"
                     // start={0}
