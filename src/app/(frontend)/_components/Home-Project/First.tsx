@@ -115,6 +115,20 @@ export default function First() {
                     className="size-4 lg:size-5"
                   />
                 </a>
+                <a
+                  className=""
+                  href=""
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/icon-telegram.svg"
+                    alt="Telegram"
+                    width={20}
+                    height={20}
+                    className="size-4 lg:size-5"
+                  />
+                </a>
               </div>
             </motion.div>
           </div>

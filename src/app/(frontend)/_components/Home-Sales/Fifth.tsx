@@ -213,7 +213,7 @@ export default function Fifth() {
               </p>
             </div>
             <Link
-              className="text-xs md:text-sm xl:text-base text-jet-black btn-main rounded-lg px-6 py-2"
+              className="flex text-sm md:text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
               href="/launchpad"
             >
               Get Started

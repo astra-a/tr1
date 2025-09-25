@@ -10,6 +10,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { metaMaskWallet, trustWallet } from "@rainbow-me/rainbowkit/wallets";
 import QueryClientProvider from "./TanstackQueryProvider";
+import { APP_NAME } from "@/constants";
 
 const connectors = connectorsForWallets(
   [
@@ -19,7 +20,7 @@ const connectors = connectorsForWallets(
     },
   ],
   {
-    appName: "AIOS",
+    appName: APP_NAME,
     projectId: "YOUR_PROJECT_ID",
   },
 );

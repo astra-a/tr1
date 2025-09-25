@@ -26,7 +26,7 @@ export default function WalletButton() {
                 return (
                   <button
                     type="button"
-                    className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-112 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-sm 3xl:text-base 4xl:text-3xl text-[#051117] cursor-pointer"
+                    className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-72 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-sm 3xl:text-base 4xl:text-2xl text-[#051117] cursor-pointer"
                     onClick={openConnectModal}
                   >
                     Connect Wallet
@@ -38,7 +38,7 @@ export default function WalletButton() {
                 return (
                   <button
                     type="button"
-                    className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-112 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-sm 3xl:text-base 4xl:text-3xl text-[#051117] cursor-pointer"
+                    className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-72 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-sm 3xl:text-base 4xl:text-2xl text-[#051117] cursor-pointer"
                     onClick={openChainModal}
                   >
                     Wrong network
@@ -48,7 +48,7 @@ export default function WalletButton() {
 
               return (
                 <Popover className="relative h-full">
-                  <PopoverButton className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-112 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-lg 3xl:text-xl 4xl:text-3xl text-[#051117] cursor-pointer">
+                  <PopoverButton className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-72 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-lg 3xl:text-xl 4xl:text-2xl text-[#051117] cursor-pointer">
                     {account.displayName}
                   </PopoverButton>
                   <WalletPanel account={account} chain={chain} />
@@ -58,7 +58,7 @@ export default function WalletButton() {
               // return (
               //   <button
               //     type="button"
-              //     className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-112 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-sm 3xl:text-base 4xl:text-3xl text-[#051117] cursor-pointer"
+              //     className="btn-mint-green connect-wallet w-48 3xl:w-64 4xl:w-72 h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-sm 3xl:text-base 4xl:text-2xl text-[#051117] cursor-pointer"
               //     onClick={openAccountModal}
               //   >
               //     {account.displayName}

@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { CDN_BASEURL } from "@/constants";
+import Link from "next/link";
 
 function VideoBackground({ isInView }: { isInView: boolean }) {
   const ref = useRef<HTMLVideoElement>(null);
@@ -115,7 +116,36 @@ export default function First() {
                     className="size-4 lg:size-5"
                   />
                 </a>
+                <a
+                  className=""
+                  href=""
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/icon-telegram.svg"
+                    alt="Telegram"
+                    width={20}
+                    height={20}
+                    className="size-4 lg:size-5"
+                  />
+                </a>
               </div>
+            </motion.div>
+            <motion.div
+              className="flex justify-start"
+              initial={{ opacity: 0, y: 150 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+              viewport={{ margin: "150px" }}
+            >
+              <Link
+                className="flex text-sm md:text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
+                href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
+                target="_blank"
+              >
+                Go to Project
+              </Link>
             </motion.div>
           </div>
           {/*<div className="flex flex-col justify-center gap-4 md:gap-20 lg:gap-24 xl:gap-28 2xl:gap-30">*/}
