@@ -86,67 +86,69 @@ export default function First() {
                 </p>
               </motion.div>
             </div>
-            <motion.div
-              className="lg:w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6"
-              initial={{ opacity: 0, y: 150 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-              viewport={{ amount: "some" }}
-            >
-              <div
-                className={`glow-text ${isInView ? "" : "paused"} text-xs md:text-sm xl:text-base text-light-blue-gray`}
+            <div className="w-full flex items-center gap-10">
+              <motion.div
+                className="lg:w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6"
+                initial={{ opacity: 0, y: 150 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+                viewport={{ amount: "some" }}
               >
-                Built on distributed ledgers and cross-chain interoperability,
-                it streamlines blockchain interaction — from Ethereum to Solana
-                to BSC — with AI managing contracts, transfers, and security,
-                all while you retain full control.
-              </div>
-              <div className="flex items-center gap-7.5">
-                <a
-                  className=""
-                  href=""
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <div
+                  className={`glow-text ${isInView ? "" : "paused"} text-xs md:text-sm xl:text-base text-light-blue-gray`}
                 >
-                  <Image
-                    src="/images/icon-twitter.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="size-4 lg:size-5"
-                  />
-                </a>
-                <a
-                  className=""
-                  href=""
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/images/icon-telegram.svg"
-                    alt="Telegram"
-                    width={20}
-                    height={20}
-                    className="size-4 lg:size-5"
-                  />
-                </a>
-              </div>
-            </motion.div>
-            <motion.div
-              className="flex justify-start"
-              initial={{ opacity: 0, y: 150 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
-              viewport={{ margin: "150px" }}
-            >
-              <Link
-                className="flex text-sm md:text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
-                href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
-                target="_blank"
+                  Built on distributed ledgers and cross-chain interoperability,
+                  it streamlines blockchain interaction — from Ethereum to
+                  Solana to BSC — with AI managing contracts, transfers, and
+                  security, all while you retain full control.
+                </div>
+                <div className="flex items-center gap-7.5">
+                  <a
+                    className=""
+                    href=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/images/icon-twitter.svg"
+                      alt="Twitter"
+                      width={20}
+                      height={20}
+                      className="size-4 lg:size-5"
+                    />
+                  </a>
+                  <a
+                    className=""
+                    href=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/images/icon-telegram.svg"
+                      alt="Telegram"
+                      width={20}
+                      height={20}
+                      className="size-4 lg:size-5"
+                    />
+                  </a>
+                </div>
+              </motion.div>
+              <motion.div
+                className="flex justify-start"
+                initial={{ opacity: 0, y: 150 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+                viewport={{ amount: "some" }}
               >
-                Go to Project
-              </Link>
-            </motion.div>
+                <Link
+                  className="flex text-sm md:text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
+                  href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
+                  target="_blank"
+                >
+                  Go to Project
+                </Link>
+              </motion.div>
+            </div>
           </div>
           {/*<div className="flex flex-col justify-center gap-4 md:gap-20 lg:gap-24 xl:gap-28 2xl:gap-30">*/}
           {/*  <div className="flex flex-col gap-2 md:gap-28 lg:gap-32 xl:gap-36 2xl:gap-40 w-full md:w-38 xl:w-40">*/}
