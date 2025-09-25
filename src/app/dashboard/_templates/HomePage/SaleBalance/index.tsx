@@ -62,7 +62,7 @@ const SaleBalance = ({ chain }: { chain: Chain }) => {
   }, [stats]);
 
   return (
-    <Card className="h-full max-md:overflow-hidden" title="Sale">
+    <Card className="h-full max-md:overflow-hidden" title="Progress">
       <div className="relative p-5 pt-4 before:hidden after:hidden before:absolute before:-left-3 before:top-0 before:bottom-0 before:z-3 before:w-8 before:bg-linear-to-r before:from-b-surface2 before:to-transparent before:pointer-events-none after:absolute after:-right-3 after:top-0 after:bottom-0 after:z-3 after:w-8 after:bg-linear-to-l after:from-b-surface2 after:to-transparent after:pointer-events-none max-lg:p-3 max-md:before:block max-md:after:block">
         <div className="flex gap-6 max-md:-mx-6 max-md:px-6 max-md:gap-6 max-md:overflow-auto max-md:scrollbar-none">
           <Item
@@ -72,7 +72,7 @@ const SaleBalance = ({ chain }: { chain: Chain }) => {
             subValues={stats ? [amounts.totalSold, amounts.totalRewarded] : []}
           />
           <Item
-            title={`Left in Pool`}
+            title={`Unsold`}
             token={factory.saleToken}
             value={amounts.leftAmountInPool}
             subValues={
@@ -81,7 +81,7 @@ const SaleBalance = ({ chain }: { chain: Chain }) => {
             showTokenIcon={false}
           />
           <Item
-            title={`Left in Allocation`}
+            title={`IDO Reserves`}
             token={factory.saleToken}
             value={amounts.leftAllocation}
             showTokenIcon={false}

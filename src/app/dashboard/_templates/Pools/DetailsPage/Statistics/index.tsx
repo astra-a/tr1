@@ -71,11 +71,11 @@ const Statistics = ({ pool }: { pool: Pool }) => {
     <Card title="Statistics">
       <div className="flex-auto">
         <Parameter
-          label="Sold Amount"
+          label="Sold"
           content={`${displayBalance(amounts.totalSold)} / ${displayBalance(amounts.totalRewarded)} ${pool.saleToken.symbol}`}
         />
         <Parameter
-          label="Left in Pool"
+          label="Unsold"
           content={`${displayBalance(amounts.leftInPool)} / ${displayBalance(amounts.leftRewardInPool)} ${pool.saleToken.symbol}`}
         />
         <Parameter label="Participants" content={amounts.participants} />
