@@ -1,12 +1,23 @@
 "use client";
 
 import { useCountDown } from "ahooks";
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 
-export default function Countdown({ deadline }: { deadline: number }) {
+export default function Countdown({
+  deadline,
+  onEnd,
+}: {
+  deadline: number;
+  onEnd?: () => void;
+}) {
   const [countdown, formattedResult] = useCountDown({
     targetDate: deadline * 1_000,
   });
+  useEffect(() => {
+    if (deadline > 0 && countdown <= 0) {
+      onEnd?.();
+    }
+  }, [deadline, countdown]);
   const [days, hours, minutes, seconds] = useMemo(() => {
     return [
       formattedResult.days,

@@ -190,6 +190,7 @@ function PurchaseItem({
 }: {
   purchase: IPurchase & { deadline: number; currentReward: number };
 }) {
+  const [localDeadline, setLocalDeadline] = useState(purchase.deadline);
   const [claimState, setClaimState] = useState<{
     claimed: boolean;
     amount: string;
@@ -236,9 +237,13 @@ function PurchaseItem({
           Claimed {displayBalance(claimState.amount)}{" "}
           {purchase.pool?.saleToken?.symbol ?? DEFAULT_TOKEN_NAME}
         </div>
-      ) : purchase.deadline > dayjs().unix() ? (
+      ) : localDeadline > dayjs().unix() ? (
         <div className="text-lg text-white z-1">
-          Unlock: <Countdown deadline={purchase.deadline} />
+          Unlock:{" "}
+          <Countdown
+            deadline={localDeadline}
+            onEnd={() => setLocalDeadline((prevState) => prevState - 1)}
+          />
         </div>
       ) : (
         <ClaimAction purchase={purchase} updateClaimState={setClaimState} />
