@@ -64,8 +64,8 @@ export default function Fourth() {
         <SectionHeader
           image="/images/icon-thumbs-up.svg"
           tag="Our Values"
-          title="Decentralized by Design  Intelligent by Nature"
-          description="Merging adaptive AI with the resilience of distributed ledger technology to create trustless, permissionless systems built for global scale."
+          title="Backed by Visionaries Fueling the Next Decentralized Revolution"
+          description={`From <b>wallet automation</b> to <b>cross-chain orchestration</b>, our local-first AI absorbs Web3 complexity so builders and power users can focus on outcomes—not tooling.`}
         />
         <motion.div
           className="w-240 2xl:w-321.5 border-gradient-rounded line-ray rounded-[20px] shadow-[0_20px_32px_28px_#000,1px_1px_1px_0_rgba(255,255,255,0.1)_inset] backdrop-blur-[20px]"
