@@ -19,6 +19,7 @@ import { useShallow } from "zustand/react/shallow";
 import {
   DAY_SECONDS,
   DEFAULT_PRICE_SYMBOL,
+  EARN_MAP,
   LOCK_MAP,
   POOL_STATUS,
   PoolStatusLabels,
@@ -43,6 +44,7 @@ import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { Pool } from "@/payload-types";
 import GlowingEdgeCard from "../GlowingEdgeCard";
 import { TokenApproveButton } from "../TokenApproveButton";
+import { useWindowSize } from "react-use";
 
 interface IAmounts {
   paymentRule: IPaymentRule;
@@ -68,17 +70,17 @@ function PoolInfo({
 
   return (
     <motion.div
-      className="pool-info flex flex-col gap-8"
+      className="pool-info flex flex-col gap-6 lg:gap-7 2xl:gap-8"
       initial={{ opacity: 0, x: -150 }}
       whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.75 }}
       viewport={{ once: true }}
     >
       <div className="pool-info-item flex flex-col items-end gap-1 pr-4">
-        <p className="text-3xl 2xl:text-[2rem] leading-[1.4] tracking-[-0.02em] font-semibold text-white">
+        <p className="text-xl lg:text-2xl xl:text-3xl 2xl:text-[2rem] leading-[1.4] tracking-[-0.02em] font-semibold text-white">
           Pool
         </p>
-        <table className="border-collapse border-none text-2xl tracking-[-0.02em] font-semibold text-white/70">
+        <table className="border-collapse border-none text-base sm:text-lg lg:text-xl xl:text-2xl tracking-[-0.02em] font-semibold text-white/70">
           <tbody>
             <tr className="border-none">
               <td align="right" className="pr-1 py-1 border-none">
@@ -98,7 +100,7 @@ function PoolInfo({
         </table>
       </div>
       <div className="pool-info-item flex flex-col items-end gap-1 pr-4">
-        <p className="text-3xl 2xl:text-[2rem] leading-[1.4] tracking-[-0.02em] font-semibold text-white">
+        <p className="text-xl lg:text-2xl xl:text-3xl 2xl:text-[2rem] leading-[1.4] tracking-[-0.02em] font-semibold text-white">
           Chain
         </p>
         <div className="flex items-center gap-2">
@@ -109,17 +111,17 @@ function PoolInfo({
             height={24}
             className="w-5"
           />
-          <p className="text-2xl tracking-[-0.02em] font-semibold text-white/70">
+          <p className="text-base sm:text-lg lg:text-xl xl:text-2xl tracking-[-0.02em] font-semibold text-white/70">
             {pool.network}
           </p>
         </div>
       </div>
       <div className="pool-info-item flex flex-col items-end gap-1 pr-4">
-        <p className="text-3xl 2xl:text-[2rem] leading-[1.4] tracking-[-0.02em] font-semibold text-white">
+        <p className="text-xl lg:text-2xl xl:text-3xl 2xl:text-[2rem] leading-[1.4] tracking-[-0.02em] font-semibold text-white">
           {LOCK_MAP.plural}
         </p>
 
-        <table className="border-collapse border-none text-2xl tracking-[-0.02em] font-semibold text-white/70">
+        <table className="border-collapse border-none text-base sm:text-lg lg:text-xl xl:text-2xl tracking-[-0.02em] font-semibold text-white/70">
           <tbody>
             <tr className="border-none">
               <td align="right" className="pr-1 py-1 border-none">
@@ -254,7 +256,7 @@ function BuyPanel({
   }, [updateData]);
 
   return (
-    <div className="pool-operate relative w-140 flex flex-col gap-14 px-14 py-12 border-2 border-dark-charcoal rounded-inherit">
+    <div className="pool-operate relative w-full max-w-120 lg:w-120 xl:w-140 xl:max-w-none flex flex-col gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 px-6 sm:px-8 lg:px-10 xl:px-12 2xl:px-14 py-6 sm:py-8 lg:py-10 xl:py-12 2xl:py-14 3xl:py-18 border-2 border-dark-charcoal rounded-inherit">
       <div className="pool-operate-header flex flex-col items-center gap-2">
         <h3 className="text-lg leading-none font-semibold text-white">
           Lock & Earn {pool.saleToken.name}
@@ -274,7 +276,7 @@ function BuyPanel({
           </div>
           <div className="w-full h-[1.5px] bg-dark-gray" />
           <div className="flex justify-between items-center gap-2">
-            <p className="flex-none text-lg text-white">Earned</p>
+            <p className="flex-none text-lg text-white">{EARN_MAP.past}</p>
             <p className="text-lg text-white">
               {displayBalance(yieldAmount)} {saleToken.symbol}
             </p>
@@ -302,7 +304,7 @@ function BuyPanel({
                   onValueChange={(values) => {
                     setAmountIn(values.value);
                   }}
-                  className="numeric-input text-lg text-white text-right"
+                  className="numeric-input w-full text-lg text-white text-right"
                 />
                 <p className="text-lg text-white">{paymentToken.symbol}</p>
               </div>
@@ -650,7 +652,7 @@ function ConfirmPanel({
   };
 
   return (
-    <div className="pool-operate w-140 flex flex-col gap-12 px-14 py-18 border-2 border-dark-charcoal rounded-inherit">
+    <div className="pool-operate relative w-full max-w-120 lg:w-120 xl:w-140 xl:max-w-none flex flex-col gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 px-6 sm:px-8 lg:px-10 xl:px-12 2xl:px-14 py-6 sm:py-8 lg:py-10 xl:py-12 2xl:py-14 3xl:py-18 border-2 border-dark-charcoal rounded-inherit">
       <div className="pool-operate-centent flex flex-col gap-8">
         <div className="flex flex-col gap-7">
           <div className="flex justify-between items-center">
@@ -664,7 +666,7 @@ function ConfirmPanel({
           <div className="w-full h-[1.5px] bg-dark-gray" />
           <div className="flex justify-between items-center">
             <label htmlFor="" className="text-lg text-white">
-              Earned
+              {EARN_MAP.past}
             </label>
             <p className="text-lg text-white">
               {displayBalance(yieldAmount)} {saleToken.symbol}
@@ -735,6 +737,7 @@ function ConfirmPanel({
 }
 
 export default function BuyAndStake({ pool }: { pool: Pool }) {
+  const { width } = useWindowSize();
   const ref = useRef<HTMLDivElement>(null);
   const [isFlipped, setIsFlipped] = useState(false);
   const [containerHeight, setContainerHeight] = useState<number | undefined>(
@@ -823,63 +826,79 @@ export default function BuyAndStake({ pool }: { pool: Pool }) {
   }, [status, saleStats, pool]);
 
   return (
-    <div
-      className="launchpad-buy flex justify-center items-center gap-49 relative"
-      style={{ height: containerHeight }}
-    >
-      <PoolInfo
-        pool={pool}
-        totalCap={totalCap}
-        totalRemaining={totalRemaining}
-        price={price}
-      />
-
-      <motion.div
-        initial={{ opacity: 0, x: 150 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.75 }}
-        viewport={{ once: true }}
+    <div className="launchpad-details w-full max-w-370 min-h-100 mx-auto px-4 md:px-6 lg:px-8 xl:px-9 2xl:px-10 py-20 lg:py-24 xl:py-28 relative z-[1] overflow-hidden antialiased">
+      <div
+        className="launchpad-buy relative flex flex-col items-center lg:flex-row lg:justify-center gap-8 lg:gap-12 xl:gap-24 2xl:gap-36 3xl:gap-48"
+        style={{ height: width > 1024 ? containerHeight : "auto" }}
       >
-        <ReactCardFlip
-          isFlipped={isFlipped}
-          flipDirection="horizontal"
-          flipSpeedBackToFront={1.5}
-          flipSpeedFrontToBack={1.5}
-          containerClassName="relative"
+        <PoolInfo
+          pool={pool}
+          totalCap={totalCap}
+          totalRemaining={totalRemaining}
+          price={price}
+        />
+
+        <motion.div
+          initial={{ opacity: 0, x: 150 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.75 }}
+          viewport={{ once: true }}
+          className="w-full lg:w-auto"
         >
-          <div ref={ref} className="rounded-2xl">
-            <GlowingEdgeCard autoPlayOnHover>
-              <BuyPanel
-                pool={pool}
-                poolStatus={poolStatus}
-                deadline={deadline}
-                totalRemaining={totalRemaining}
-                amounts={amounts}
-                setAmountIn={(v) => updateAmounts(v)}
-                setPaymentRule={(paymentRule) => {
-                  setAmounts((prevState) => ({ ...prevState, paymentRule }));
-                }}
-                flipToConfirm={() => setIsFlipped(true)}
-              />
-            </GlowingEdgeCard>
-          </div>
-          <div
-            className="flex items-center rounded-2xl"
-            style={{ height: containerHeight }}
+          <ReactCardFlip
+            isFlipped={isFlipped}
+            flipDirection="horizontal"
+            flipSpeedBackToFront={1.5}
+            flipSpeedFrontToBack={1.5}
+            containerClassName="relative"
           >
-            <GlowingEdgeCard autoPlayOnHover className="w-full">
-              <ConfirmPanel
-                pool={pool}
-                poolStatus={poolStatus}
-                deadline={deadline}
-                amounts={amounts}
-                setAmountIn={(v) => updateAmounts(v)}
-                flipToBuy={() => setIsFlipped(false)}
-              />
-            </GlowingEdgeCard>
-          </div>
-        </ReactCardFlip>
-      </motion.div>
+            <div ref={ref} className="w-full rounded-2xl">
+              <GlowingEdgeCard
+                autoPlayOnHover
+                className="w-full rounded-inherit"
+              >
+                <div className="flex justify-center rounded-inherit">
+                  <BuyPanel
+                    pool={pool}
+                    poolStatus={poolStatus}
+                    deadline={deadline}
+                    totalRemaining={totalRemaining}
+                    amounts={amounts}
+                    setAmountIn={(v) => updateAmounts(v)}
+                    setPaymentRule={(paymentRule) => {
+                      setAmounts((prevState) => ({
+                        ...prevState,
+                        paymentRule,
+                      }));
+                    }}
+                    flipToConfirm={() => setIsFlipped(true)}
+                  />
+                </div>
+              </GlowingEdgeCard>
+            </div>
+            <div
+              className="flex items-center w-full rounded-2xl"
+              style={{ height: containerHeight }}
+            >
+              <GlowingEdgeCard
+                autoPlayOnHover
+                className="w-full rounded-inherit"
+              >
+                <div className="flex justify-center rounded-inherit">
+                  <ConfirmPanel
+                    pool={pool}
+                    poolStatus={poolStatus}
+                    deadline={deadline}
+                    amounts={amounts}
+                    setAmountIn={(v) => updateAmounts(v)}
+                    flipToBuy={() => setIsFlipped(false)}
+                  />
+                </div>
+              </GlowingEdgeCard>
+            </div>
+          </ReactCardFlip>
+        </motion.div>
+      </div>
     </div>
   );
 }
