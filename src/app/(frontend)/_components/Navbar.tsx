@@ -9,17 +9,29 @@ import {
 } from "@headlessui/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { SITE_TYPE } from "@/constants";
 import WalletButton from "./WalletButton";
 
-const ROUTES = [
-  { name: "Home", url: "/" },
-  { name: "LaunchPad", url: "/launchpad" },
-  { name: "News", url: "/news" },
-  // { name: "Roadmap", url: "/roadmap" },
-  // { name: "White Paper", url: "" },
-  { name: "Map", url: "/map" },
-  { name: "My Page", url: "/my-page" },
-];
+const ROUTES =
+  "sales" === SITE_TYPE
+    ? [
+        { name: "Home", url: "/" },
+        { name: "LaunchPad", url: "/launchpad" },
+        { name: "News", url: "/news" },
+        // { name: "Roadmap", url: "/roadmap" },
+        // { name: "White Paper", url: "" },
+        { name: "Map", url: "/map" },
+        { name: "My Page", url: "/my-page" },
+      ]
+    : [
+        { name: "Home", url: "/" },
+        // { name: "LaunchPad", url: "/launchpad" },
+        // { name: "News", url: "/news" },
+        { name: "Roadmap", url: "/roadmap" },
+        { name: "White Paper", url: "" },
+        // { name: "Map", url: "/map" },
+        { name: "My Page", url: "/my-page" },
+      ];
 
 function WindowNavChild({ route }: { route: { name: string; url: string } }) {
   const pathname = usePathname();

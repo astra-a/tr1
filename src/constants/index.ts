@@ -11,6 +11,9 @@ export const DASHBOARD_APP_TITLE = `${DASHBOARD_APP_NAME} Dashboard`;
 export const DASHBOARD_APP_DESCRIPTION = `${DASHBOARD_APP_NAME} Dashboard`;
 export const DASHBOARD_APP_BASEURL = APP_BASEURL;
 
+export const SITE_TYPE: "project" | "sales" =
+  (process.env.NEXT_PUBLIC_SITE_TYPE as "project" | "sales") || "project";
+
 export const DEFAULT_TOKEN_NAME = "AIOS";
 
 export const DEFAULT_TOKEN_PRICE = 0.1;
