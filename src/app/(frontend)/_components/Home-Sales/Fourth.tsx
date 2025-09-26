@@ -63,7 +63,7 @@ export default function Fourth() {
       <div className="page-fourth-container relative z-[1] flex flex-col items-center gap-10">
         <SectionHeader
           image="/images/icon-thumbs-up.svg"
-          tag="Our Values"
+          tag="Our Ecosystem"
           title="Backed by Visionaries Fueling the Next Decentralized Revolution"
           description={`From <b>wallet automation</b> to <b>cross-chain orchestration</b>, our local-first AI absorbs Web3 complexity so builders and power users can focus on outcomes—not tooling.`}
         />
