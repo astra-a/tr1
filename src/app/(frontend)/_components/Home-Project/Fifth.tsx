@@ -67,7 +67,7 @@ function Marquee({
 
   return (
     <div
-      className="relative w-full max-w-180 overflow-hidden"
+      className="relative w-full overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -90,6 +90,7 @@ function Marquee({
           ))}
         </ul>
       </div>
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0)_20%,rgba(0,0,0,0)_80%,#000_100%)]" />
     </div>
   );
 }
@@ -194,7 +195,7 @@ export default function Fifth() {
                 }}
               />
 
-              <div className="absolute top-[50%] left-[50%] transform-[translate(-50%,-50%)]">
+              <div className="absolute top-[50%] left-[50%] w-[80%] transform-[translate(-50%,-50%)]">
                 <Marquee speed={0.05} direction="left" started={videoEnded} />
               </div>
             </GlowingEdgeCard>
