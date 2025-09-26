@@ -47,43 +47,41 @@ function CountriesList() {
   return (
     <div className="relative w-full max-w-270 mt-10 border-gradient-rounded line-ray rounded-xl text-base font-semibold text-jet-black">
       <GlowingEdgeCard autoPlayOnHover className="w-full h-full">
-        <div className="flex flex-col w-full bg-eerie-black rounded-xl">
+        <div className="flex flex-col w-full pb-4 bg-eerie-black rounded-xl">
           <div
-            className="py-4.5 -m-0.25 rounded-xl"
+            className="-m-0.25 rounded-xl"
             style={{
               background: "linear-gradient(90deg, #00FFC2 0%, #7DDAFF 100%)",
             }}
           >
-            <div className="flex justify-between px-10">
-              <div className="shrink-0" style={{ width }}>
+            <div className="flex justify-between px-6">
+              <div className="shrink-0 px-3 py-4 border-r-1 border-r-dark-gray" style={{ width }}>
                 Available
               </div>
-              {new Array(columns - 1).fill("").map((_, i) => (
-                <div key={i} className="shrink-0" style={{ width }}>
-                  Waitlist
-                </div>
-              ))}
+              <div className="flex-auto shrink-0 px-3 py-4">
+                Waitlist
+              </div>
             </div>
           </div>
-          <div className="text-white px-10">
+          <div className="text-white px-6">
             {new Array(rows).fill("").map((_, i) => (
               <div
                 key={i}
-                className="flex justify-between py-4 border-b-1 border-b-dark-gray"
+                className="flex justify-between border-b-1 border-b-dark-gray"
               >
-                <div className="shrink-0" style={{ width }}>
+                <div className="shrink-0 px-3 py-2 border-r-1 border-r-dark-gray" style={{ width }}>
                   {availableArr?.[i]}
                 </div>
-                <div className="shrink-0" style={{ width }}>
+                <div className="shrink-0 px-3 py-2" style={{ width }}>
                   {waitlistArr?.[0]?.[i]}
                 </div>
                 {columns >= 3 && (
-                  <div className="shrink-0" style={{ width }}>
+                  <div className="shrink-0 px-3 py-2" style={{ width }}>
                     {waitlistArr?.[1]?.[i]}
                   </div>
                 )}
                 {columns >= 4 && (
-                  <div className="shrink-0" style={{ width }}>
+                  <div className="shrink-0 px-3 py-2" style={{ width }}>
                     {waitlistArr?.[2]?.[i]}
                   </div>
                 )}
