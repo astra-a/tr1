@@ -37,9 +37,11 @@ export default function SalesHome() {
               <div id="section3" className="section">
                 <Third />
               </div>
+              <div className="w-full h-0.25 line-ray" />
               <div id="section4" className="section">
                 <Fourth />
               </div>
+              <div className="w-full h-0.25 line-ray" />
               <div id="section5" className="section">
                 <Fifth />
               </div>
@@ -100,7 +102,9 @@ export default function SalesHome() {
           <Second />
           <div className="w-full h-0.25 line-ray" />
           <Third />
+          <div className="w-full h-0.25 line-ray" />
           <Fourth />
+          <div className="w-full h-0.25 line-ray" />
           <Fifth />
         </>
       )}
