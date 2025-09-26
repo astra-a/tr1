@@ -8,8 +8,8 @@ import NewMatrix from "../NewMatrix";
 
 export default function TopNews({ pinnedPosts }: { pinnedPosts: Post[] }) {
   return (
-    <div className="top-news flex flex-col-reverse md:flex-row gap-4 sm:gap-6 md:gap-2 mt-4 md:mt-5 lg:mt-6 xl:mt-7 relative z-[1]">
-      <div className="top-news-left md:w-[50%] flex flex-col gap-2">
+    <div className="top-news flex flex-col-reverse lg:flex-row gap-4 sm:gap-6 md:gap-2 mt-4 md:mt-5 lg:mt-6 xl:mt-7 relative z-[1]">
+      <div className="top-news-left lg:w-[50%] flex flex-col gap-2">
         {pinnedPosts.map((item, i) => {
           if (0 === i) return;
           const infoAtLeft = i % 2 === 1;
@@ -23,29 +23,29 @@ export default function TopNews({ pinnedPosts }: { pinnedPosts: Post[] }) {
             >
               <Link
                 href={`/news/${item.id}`}
-                className={`news-container flex ${infoAtLeft ? "flex-row" : "flex-row-reverse"} border-gradient-rounded vertical hover rounded-xl`}
+                className={`news-container flex flex-col-reverse ${infoAtLeft ? "sm:flex-row" : "sm:flex-row-reverse"} border-gradient-rounded vertical hover rounded-xl`}
               >
                 <div
-                  className={`news-info-container relative flex flex-col flex-auto w-0 justify-center gap-0.5 sm:gap-1 md:gap-2.5 lg:gap-3 xl:gap-3.5 2xl:gap-4 p-3 sm:p-4 md:p-6 lg:p-7 xl:p-8 2xl:p-9 ${infoAtLeft ? "rounded-s-inherit" : "rounded-e-inherit"}`}
+                  className={`news-info-container relative w-full flex flex-col flex-auto justify-center gap-0.5 sm:gap-1 md:gap-2.5 lg:gap-3 xl:gap-3.5 2xl:gap-4 p-3 sm:p-4 md:p-6 lg:p-7 xl:p-8 2xl:p-9 max-sm:rounded-b-xl ${infoAtLeft ? "sm:rounded-s-xl" : "sm:rounded-e-xl"}`}
                 >
                   <NewMatrix className="absolute inset-0 z-0 overflow-hidden rounded-inherit bg-jet-black" />
 
-                  <h3 className="news-title text-xs md:text-sm xl:text-base font-semibold text-white line-clamp-4 z-[1] pointer-events-none">
+                  <h3 className="news-title text-base xl:text-lg font-semibold text-white line-clamp-4 z-[1] pointer-events-none">
                     {item.title}
                   </h3>
-                  <div className="text-[0.625rem] md:text-xs text-ash-gray z-[1] pointer-events-none">
+                  <div className="text-xs md:text-sm xl:text-base text-ash-gray z-[1] pointer-events-none">
                     <p className="line-clamp-1">{item.description}</p>
                   </div>
                 </div>
                 <div
-                  className={`news-image-container relative w-[50%] sm:w-[40%] md:w-[50%] aspect-5/3 bg-jet-black ${infoAtLeft ? "rounded-e-xl" : "rounded-s-xl"} overflow-hidden`}
+                  className={`news-image-container relative w-full sm:w-[40%] lg:w-[50%] aspect-5/3 shrink-0 bg-jet-black max-sm:rounded-t-xl ${infoAtLeft ? "sm:rounded-e-xl" : "sm:rounded-s-xl"} overflow-hidden`}
                 >
                   <Image
                     src={(item.coverImage as Media)?.url ?? ""}
                     alt={item.title}
                     width={697}
                     height={420}
-                    className="aspect-5/3"
+                    className="w-full h-full object-cover"
                     priority
                   />
                   {item?.category ? (
@@ -71,7 +71,7 @@ export default function TopNews({ pinnedPosts }: { pinnedPosts: Post[] }) {
 
       {pinnedPosts.length > 0 && (
         <motion.div
-          className="top-news-right md:w-[50%] flex flex-auto"
+          className="top-news-right lg:w-[50%] flex flex-auto"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75 }}
@@ -88,7 +88,7 @@ export default function TopNews({ pinnedPosts }: { pinnedPosts: Post[] }) {
                   alt={pinnedPosts[0].title}
                   width={697}
                   height={420}
-                  className="w-full aspect-5/3"
+                  className="w-full h-full object-cover"
                   priority
                 />
               ) : (
@@ -109,13 +109,13 @@ export default function TopNews({ pinnedPosts }: { pinnedPosts: Post[] }) {
                 <></>
               )}
             </div>
-            <div className="news-info-container relative flex flex-col flex-auto justify-between gap-0.5 sm:gap-1.5 md:gap-2 lg:gap-2.5 xl:gap-3 p-3 sm:p-4 md:p-6 lg:p-7 xl:p-8 2xl:p-9 md:pt-4.5 lg:pt-5 xl:pt-6 2xl:pt-7 rounded-b-inherit">
+            <div className="news-info-container relative flex flex-col flex-auto justify-between gap-0.5 sm:gap-1.5 md:gap-2 lg:gap-2.5 xl:gap-3 p-3 sm:p-4 md:p-6 lg:p-7 xl:p-8 2xl:p-9 md:pt-4.5 lg:pt-5 xl:pt-6 2xl:pt-7 rounded-b-xl">
               <NewMatrix className="absolute inset-0 z-0 overflow-hidden rounded-inherit bg-jet-black" />
 
-              <h2 className="text-base md:text-3xl 2xl:text-[2rem] tracking-[-0.02em] font-semibold text-white line-clamp-3 z-[1] pointer-events-none">
+              <h2 className="text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-[2rem] tracking-[-0.02em] font-semibold text-white line-clamp-3 z-[1] pointer-events-none">
                 {pinnedPosts[0].title}
               </h2>
-              <div className="text-[0.625rem] md:text-xs text-ash-gray z-[1] pointer-events-none">
+              <div className="text-xs md:text-sm xl:text-base text-ash-gray z-[1] pointer-events-none">
                 <p className="line-clamp-1">{pinnedPosts[0].description}</p>
               </div>
             </div>

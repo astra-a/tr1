@@ -63,7 +63,9 @@ export default function NewsFlash() {
   return (
     <div className="news-flash flex items-center">
       <div className="news-flash-title flex justify-between items-center gap-1 md:gap-1.5 lg:gap-2 xl:gap-3 2xl:gap-4 px-1 sm:px-1.5 md:px-2 lg:px-3 xl:px4 2xl:px-4.5 py-2 md:py-2.25 xl:py-2.5 bg-mint-green text-jet-black">
-        <FontAwesomeIcon icon={faBoltLightning} />
+        <div className="w-5 h-6">
+          <FontAwesomeIcon icon={faBoltLightning} />
+        </div>
         <p className="hidden md:block text-xs md:text-sm xl:text-base font-semibold uppercase">
           newsflash
         </p>
