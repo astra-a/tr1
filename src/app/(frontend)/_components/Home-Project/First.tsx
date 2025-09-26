@@ -100,7 +100,7 @@ export default function First() {
                 to BSC — with AI managing contracts, transfers, and security,
                 all while you retain full control.
               </div>
-              <div className="flex items-center gap-7.5">
+              <div className="flex items-center gap-7.5 invisible">
                 <a
                   className=""
                   href=""

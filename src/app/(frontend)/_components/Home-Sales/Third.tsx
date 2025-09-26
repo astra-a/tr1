@@ -169,7 +169,7 @@ export default function Third() {
       ref={ref}
       className="home-section page-third w-full h-screen-custom flex flex-col justify-center items-center relative overflow-hidden z-[3]"
     >
-      <div className="page-third-container w-full flex flex-auto flex-col justify-between items-center relative">
+      <div className="page-third-container w-full flex flex-auto flex-col justify-between items-center relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
         <div />
         <div className="w-full flex flex-col justify-start items-center gap-12 md:gap-14 lg:gap-16 xl:gap-18 2xl:gap-20 3xl:gap-22 relative z-[1]">
           <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
@@ -198,19 +198,12 @@ export default function Third() {
           <div className="w-full">
             <Marquee speed={0.05} direction="left" isInView={isInView} />
           </div>
-          <div className="flex items-center justify-between gap-2 sm:gap-2.5 md:gap-3 lg:gap-3.5 xl:gap-4 px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-14 3xl:px-16 py-4 md:py-5 lg:py-6 xl:py-7 border-b-[0.6px] border-[#9f9f9f]">
+          <div className="flex justify-center px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-14 3xl:px-16 py-4 md:py-5 lg:py-6 xl:py-7 border-b-[0.6px] border-[#9f9f9f]">
             <p className="text-xs md:text-sm xl:text-base font-semibold text-white">
               By uniting adaptive AI with resilient decentralized
               infrastructure, we deliver smarter, faster, and truly sovereign
               experiences — built to empower human potential worldwide.
             </p>
-            <Image
-              src="/images/icon-benefit-increase.svg"
-              alt=""
-              width={20}
-              height={20}
-              className="size-4 lg:size-5"
-            />
           </div>
         </div>
       </div>
