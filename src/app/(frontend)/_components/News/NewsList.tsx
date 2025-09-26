@@ -15,14 +15,14 @@ function NewsItem({ news }: { news: Post }) {
       href={`/news/${news.id}`}
       className="news-container flex flex-col sm:flex-row bg-eerie-black border-2 border-dark-greenish-gray rounded-xl hover:border-mint-green transition-all ease-in-out duration-200"
     >
-      <div className="news-image-container sm:max-w-[40%] md:max-w-100 w-100 aspect-5/3 rounded-s-xl overflow-hidden">
+      <div className="news-image-container w-full sm:max-w-[40%] aspect-5/3 shrink-0 max-sm:rounded-t-xl sm:rounded-s-xl overflow-hidden">
         {news.coverImage ? (
           <Image
             src={(news.coverImage as Media)?.url ?? ""}
             alt={news.title}
             width={697}
             height={420}
-            className="aspect-5/3"
+            className="w-full h-full object-cover"
             priority
           />
         ) : (
@@ -33,7 +33,7 @@ function NewsItem({ news }: { news: Post }) {
       <div className="news-info-container relative flex flex-col sm:flex-auto sm:w-0 justify-between gap-1.5 md:gap-3 p-3 pb-5 md:p-8 rounded-e-inherit">
         <NewMatrix className="absolute inset-0 z-0 overflow-hidden rounded-inherit bg-eerie-black" />
 
-        <h2 className="news-title z-1 text-base sm:text-lg lg:text-xl xl:text-2xl md:text-3xl 2xl:text-[2rem] tracking-[-0.02em] font-semibold text-white transition-all ease-in-out duration-200 pointer-events-none">
+        <h2 className="news-title z-1 text-base md:text-lg lg:text-xl xl:text-2xl 2xl:text-3xl 3xl:text-[2rem] tracking-[-0.02em] font-semibold text-white line-clamp-2 transition-all ease-in-out duration-200 pointer-events-none">
           {news.title}
         </h2>
         <div className="flex z-1 flex-col gap-2 pointer-events-none">
