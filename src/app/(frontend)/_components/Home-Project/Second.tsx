@@ -64,7 +64,7 @@ export default function Second() {
       <div className="page-second-container flex flex-col items-center gap-4 w-full max-w-[1920px] relative z-[1] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
         <SectionHeader
           image="/images/icon-zap.svg"
-          tag="Features"
+          tag="Our Foundation"
           title="A Local-First AI + Web3 Ecosystem for the Decentralized Era"
           description="A trust-minimized intelligence network that unites AI agents, multi-chain protocols, and sovereign identities—built for openness, resilience, and human-centric design."
         />
