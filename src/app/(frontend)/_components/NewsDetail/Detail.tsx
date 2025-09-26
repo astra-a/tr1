@@ -9,8 +9,8 @@ import { convertLexicalToHTML } from "@payloadcms/richtext-lexical/html";
 export default function NewsDetail({ news }: { news: Post }) {
   return (
     <div className="news-detail-container mt-9 bg-eerie-black rounded-[20px]">
-      <div className="w-[70%] mx-auto py-20 min-h-100">
-        <h3 className="news-title text-4xl leading-[1.4em] text-white font-semibold tracking-[-0.02em]">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:px-[6%] xl:px-[10%] 2xl:px-[15%] py-10 sm:py-12 md:py-14 lg:py-16 xl:py-18 2xl:py-20 min-h-100">
+        <h3 className="news-title text-xl md:text-2xl xl:text-3xl 2xl:text-4xl leading-[1.4em] text-white font-semibold tracking-[-0.02em]">
           {news.title}
         </h3>
 
@@ -52,7 +52,7 @@ export default function NewsDetail({ news }: { news: Post }) {
         )}
 
         {news?.category ? (
-          <div className="news-tags flex items-center gap-4 mt-10">
+          <div className="news-tags flex items-center gap-4 mt-6 md:mt-8 lg:mt-10">
             <div className="flex items-center gap-1 text-white">
               <FontAwesomeIcon icon={faTags} />
               <p className="text-xs font-semibold uppercase">tags</p>

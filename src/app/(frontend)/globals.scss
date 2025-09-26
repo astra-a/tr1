@@ -499,11 +499,19 @@ input:focus-visible {
   .news-content {
     p {
       color: var(--color-white);
-      font-size: 18px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
       margin-bottom: 1.5rem;
+
+      @media (width >= 48rem) {
+        font-size: 16px;
+      }
+
+      @media (width >= 80rem) {
+        font-size: 18px;
+      }
 
       a {
         color: var(--color-bright-aqua);
