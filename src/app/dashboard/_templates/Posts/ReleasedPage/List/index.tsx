@@ -5,7 +5,13 @@ import { Post } from "@/payload-types";
 import Item from "./Item";
 
 // "Rating", "Views"
-const tableHead = ["Post", "Category", "Status", "Pin", "Published At (UTC)"];
+const tableHead = [
+  "Post",
+  "Category",
+  "Status",
+  "Pin",
+  "Published At (UTC 0:00)",
+];
 
 type ListProps = {
   posts: Post[];

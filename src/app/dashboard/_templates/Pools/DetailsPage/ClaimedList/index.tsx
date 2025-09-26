@@ -26,7 +26,7 @@ const ClaimedList = ({ pool }: { pool: Pool }) => {
 
   const tableHeads = useMemo(
     () => [
-      { field: "claimedAt", title: "Date (UTC)", enableSort: true },
+      { field: "claimedAt", title: "Date (UTC 0:00)", enableSort: true },
       { field: "buyer__id", title: "Buyer" },
       { field: "paymentAmount", title: "Payment" },
       { field: "claimedAmount", title: `Claimed` },
