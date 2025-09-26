@@ -16,6 +16,9 @@ import Jdenticon from "react-jdenticon";
 import { displayBalance } from "@/web3";
 import { useMemo } from "react";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 function Item({ pool }: { pool: Pool }) {
   return (
@@ -59,7 +62,7 @@ function Item({ pool }: { pool: Pool }) {
         {displayBalance(pool.totalSold)} / {displayBalance(pool.totalSaleCap)}
       </td>
       <td className="max-lg:hidden">
-        {dayjs(pool.createdAt).format("DD MMM, hh:mm A")}
+        {dayjs(pool.createdAt).utc().format("DD MMM, hh:mm A")}
       </td>
     </TableRow>
   );
@@ -67,7 +70,7 @@ function Item({ pool }: { pool: Pool }) {
 
 const List = ({ pools }: { pools: Pool[] }) => {
   const tableHeads = useMemo(
-    () => ["Pool", "Status", "Price", `Sale Cap`, "Created At"],
+    () => ["Pool", "Status", "Price", `Sale Cap`, "Created At (UTC)"],
     [],
   );
 

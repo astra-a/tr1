@@ -8,9 +8,12 @@ import { Pool } from "@/payload-types";
 import { usePoolClaimedPurchases } from "@/subgraph";
 import { displayBalance, shortenAddress } from "@/web3";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { MoonLoader } from "react-spinners";
 import Button from "@/app/dashboard/_components/Button";
 import { useChains } from "wagmi";
+
+dayjs.extend(utc);
 
 const PAGE_SIZE = 10;
 
@@ -23,7 +26,7 @@ const ClaimedList = ({ pool }: { pool: Pool }) => {
 
   const tableHeads = useMemo(
     () => [
-      { field: "claimedAt", title: "Date", enableSort: true },
+      { field: "claimedAt", title: "Date (UTC)", enableSort: true },
       { field: "buyer__id", title: "Buyer" },
       { field: "paymentAmount", title: "Payment" },
       { field: "claimedAmount", title: `Claimed` },
@@ -97,6 +100,7 @@ const ClaimedList = ({ pool }: { pool: Pool }) => {
                     >
                       {dayjs
                         .unix(Number(purchase.claimedAt))
+                        .utc()
                         .format("DD MMM, hh:mm A")}
                     </a>
                   </td>
