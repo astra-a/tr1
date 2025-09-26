@@ -5,6 +5,7 @@ import Icon from "@/app/dashboard/_components/Icon";
 import DeleteItems from "@/app/dashboard/_components/DeleteItems";
 import { Post } from "@/payload-types";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import Link from "next/link";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
@@ -12,6 +13,8 @@ import { ROUTES } from "@/app/dashboard/_contstants/routes";
 import TablePostCell from "../../TablePostCell";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "@/app/dashboard/_helpers/axios";
+
+dayjs.extend(utc);
 
 const Item = ({
   post,
@@ -55,7 +58,7 @@ const Item = ({
         mobileContent={
           <div className="flex items-center gap-2 text-t-secondary/80">
             <Icon className="!size-4 fill-t-secondary" name="clock-1" />
-            {dayjs(post.updatedAt).format("DD MMM, hh:mm A")}
+            {dayjs(post.updatedAt).utc().format("DD MMM, hh:mm A")}
           </div>
         }
       >
@@ -92,7 +95,7 @@ const Item = ({
       {/*  </div>*/}
       {/*</td>*/}
       <td className="text-t-secondary max-lg:hidden">
-        {dayjs(post.updatedAt).format("DD MMM, hh:mm A")}
+        {dayjs(post.updatedAt).utc().format("DD MMM, hh:mm A")}
       </td>
     </TableRow>
   );

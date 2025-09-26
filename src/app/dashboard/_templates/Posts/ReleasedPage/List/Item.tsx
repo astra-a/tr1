@@ -12,10 +12,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { ROUTES } from "@/app/dashboard/_contstants/routes";
 import TablePostCell from "../../TablePostCell";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "@/app/dashboard/_helpers/axios";
+
+dayjs.extend(utc);
 
 const Item = ({
   post,
@@ -127,7 +130,7 @@ const Item = ({
       {/*  </div>*/}
       {/*</td>*/}
       <td className="text-t-secondary max-lg:hidden">
-        {dayjs(post.publishedAt).format("DD MMM, hh:mm A")}
+        {dayjs(post.publishedAt).utc().format("DD MMM, hh:mm A")}
       </td>
     </TableRow>
   );

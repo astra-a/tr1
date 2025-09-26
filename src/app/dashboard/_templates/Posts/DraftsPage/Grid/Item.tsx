@@ -7,10 +7,13 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import GridPost from "@/app/dashboard/_components/GridPost";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { toast } from "sonner";
 import { ROUTES } from "@/app/dashboard/_contstants/routes";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "@/app/dashboard/_helpers/axios";
+
+dayjs.extend(utc);
 
 const Item = ({
   post,
@@ -75,7 +78,7 @@ const Item = ({
     >
       <div className="flex items-center gap-2 text-caption text-t-secondary/80">
         <Icon className="fill-t-secondary" name="clock" />
-        {dayjs(post.updatedAt).format("DD MMM, hh:mm A")}
+        {dayjs(post.updatedAt).utc().format("DD MMM, hh:mm A")}
       </div>
     </GridPost>
   );

@@ -6,17 +6,19 @@ import TableRow from "@/app/dashboard/_components/TableRow";
 import Card from "@/app/dashboard/_components/Card";
 import { Pool } from "@/payload-types";
 import { usePoolsClaimedPurchases } from "@/subgraph";
-import { displayBalance, FACTORIES, shortenAddress } from "@/web3";
+import { displayBalance, shortenAddress } from "@/web3";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import { MoonLoader } from "react-spinners";
 import Button from "@/app/dashboard/_components/Button";
 import { Chain } from "viem";
 import { ROUTES } from "@/app/dashboard/_contstants/routes";
 
+dayjs.extend(utc);
+
 const PAGE_SIZE = 10;
 
 const ClaimedList = ({ chain, pools }: { chain: Chain; pools: Pool[] }) => {
-  const factory = FACTORIES[chain.id];
   const [poolAddresses, poolsMap] = useMemo(() => {
     const _poolAddresses: string[] = [];
     const _poolsMap: Map<string, Pool> = new Map();
@@ -31,7 +33,7 @@ const ClaimedList = ({ chain, pools }: { chain: Chain; pools: Pool[] }) => {
 
   const tableHeads = useMemo(
     () => [
-      { field: "claimedAt", title: "Date", enableSort: true },
+      { field: "claimedAt", title: "Date (UTC)", enableSort: true },
       { field: "buyer__id", title: "Buyer" },
       { field: "pool__name", title: "Pool", enableSort: true },
       { field: "paymentAmount", title: "Payment" },
@@ -109,6 +111,7 @@ const ClaimedList = ({ chain, pools }: { chain: Chain; pools: Pool[] }) => {
                       >
                         {dayjs
                           .unix(Number(purchase.claimedAt))
+                          .utc()
                           .format("DD MMM, hh:mm A")}
                       </a>
                     </td>
