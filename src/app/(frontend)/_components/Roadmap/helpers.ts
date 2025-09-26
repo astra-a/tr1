@@ -172,7 +172,7 @@ export class AnimationController {
     });
   }
 
-  animateRotation(targetRotation: number, skipSnap = false) {
+  animateRotation(targetRotation: number, onComplete?: () => void) {
     this.targetRotation = targetRotation;
     gsap.to(this, {
       currentRotation: this.targetRotation,
@@ -181,51 +181,10 @@ export class AnimationController {
       overwrite: true,
       onUpdate: () => this.updateAllItems(false),
       onComplete: () => {
-        if (!skipSnap) {
-          this.snapTimeout = setTimeout(() => this.maybeSnap(), 300);
+        if (onComplete) {
+          onComplete();
         }
       },
-    });
-  }
-
-  maybeSnap() {
-    this.snapToClosestItem();
-  }
-
-  snapToClosestItem() {
-    let closestDistance = Infinity;
-    let closestItemAngle = 0;
-
-    this.allItems.forEach((item) => {
-      if (item.domElement.className === "center-svg-item") return;
-
-      const effectiveDistance = this.currentRotation + item.baseAngle;
-      const normalized = effectiveDistance % 360;
-      const absNormalized = Math.abs(
-        normalized > 180 ? normalized - 360 : normalized,
-      );
-
-      if (absNormalized < closestDistance - 0.1) {
-        closestDistance = absNormalized;
-        closestItemAngle = item.baseAngle;
-      } else if (Math.abs(absNormalized - closestDistance) < 1) {
-        if (this.lastScrollDirection > 0) {
-          if (item.baseAngle > closestItemAngle)
-            closestItemAngle = item.baseAngle;
-        } else {
-          if (item.baseAngle < closestItemAngle)
-            closestItemAngle = item.baseAngle;
-        }
-      }
-    });
-
-    const newTargetRotation = 0 - closestItemAngle;
-    gsap.to(this, {
-      currentRotation: newTargetRotation,
-      duration: 1.2,
-      ease: "power3.out",
-      overwrite: true,
-      onUpdate: () => this.updateAllItems(false),
     });
   }
 }
@@ -237,6 +196,9 @@ export class StateTransitionController {
   lastRotationBeforeTransition: number;
   isTransitioningToPageScroll: boolean;
   private lenis: Lenis;
+  private isAnimating: boolean = false;
+  private triggerThreshold = 60; // 滚动达到此阈值才触发旋转
+  private readyForPageScroll = false;
 
   constructor(animationController: AnimationController, allItems: ItemBase[]) {
     this.animationController = animationController;
@@ -244,32 +206,29 @@ export class StateTransitionController {
     this.currentState = "ROTATION";
     this.lastRotationBeforeTransition = 0;
     this.isTransitioningToPageScroll = false;
-    this.lenis = new Lenis({
-      lerp: 0.1, // 滚动平滑度，可以调节
-    });
+    this.lenis = new Lenis({ lerp: 0.1 });
   }
 
   init() {
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
-    }
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
     window.addEventListener("wheel", this.handleWheel.bind(this), {
       passive: false,
     });
     document.body.style.overflowY = "hidden";
+
     const raf = (time: number) => {
       this.lenis.raf(time);
       requestAnimationFrame(raf);
     };
     requestAnimationFrame(raf);
 
-    // 初始在旋转状态，停掉 Lenis
-    this.lenis.stop();
+    this.lenis.stop(); // 初始停掉页面滚动
   }
 
   handleWheel(e: WheelEvent) {
     this.animationController.lastScrollDirection = e.deltaY;
+
     switch (this.currentState) {
       case "ROTATION":
         this.handleRotationState(e);
@@ -280,47 +239,100 @@ export class StateTransitionController {
     }
   }
 
-  handleRotationState(e: WheelEvent) {
-    const fifthItem = this.allItems.find(
-      (i) => (i as TextItem)?.isBoundaryTrigger,
-    );
-    const isAtBoundary = fifthItem && Math.abs(fifthItem.currentAngle) < 0.01;
+  private normalizeDelta(e: WheelEvent) {
+    let d = e.deltaY;
+    if (e.deltaMode === 1) d *= 16;
+    else if (e.deltaMode === 2) d *= window.innerHeight;
+    return d;
+  }
 
-    if (isAtBoundary && e.deltaY > 0) {
-      e.preventDefault();
+  handleRotationState(e: WheelEvent) {
+    e.preventDefault();
+
+    // 动画锁，旋转中不处理
+    if (this.isAnimating) return;
+
+    // --- 边界检测：进入页面滚动 ---
+    const boundaryItem = this.allItems.find(
+      (i) => i instanceof TextItem && i.isBoundaryTrigger,
+    ) as TextItem | undefined;
+
+    const isAtBoundary =
+      boundaryItem && Math.abs(boundaryItem.currentAngle) < 0.05;
+
+    if (isAtBoundary) {
+      // 到达边界，先不滑动页面，只记录状态
+      this.readyForPageScroll = true;
+    } else {
+      this.readyForPageScroll = false;
+    }
+
+    // --- 用户滑动且已经准备好滑动页面 ---
+    if (this.readyForPageScroll && e.deltaY > 0) {
+      this.currentState = "PAGE_SCROLL";
       this.lastRotationBeforeTransition =
         this.animationController.currentRotation;
-      this.currentState = "PAGE_SCROLL";
-      gsap.killTweensOf(this.animationController);
       this.lenis.start();
-      this.updateAppearance();
-    } else {
-      let newRotation =
-        this.animationController.currentRotation -
-        e.deltaY * CONFIG.scrollSpeed;
-      if (newRotation > CONFIG.rotationBounds.max) {
-        newRotation = CONFIG.rotationBounds.max;
-      } else if (newRotation < CONFIG.rotationBounds.min) {
-        newRotation = CONFIG.rotationBounds.min;
+      return;
+    }
+
+    // --- 常规旋转逻辑 ---
+    const delta = this.normalizeDelta(e);
+    if (Math.abs(delta) < this.triggerThreshold) return;
+
+    const direction = Math.sign(delta);
+
+    const navItems = this.allItems.filter(
+      (item): item is TextItem => item instanceof TextItem && item.isOuter,
+    );
+
+    let closestDistance = Infinity;
+    let currentItemIndex = -1;
+
+    navItems.forEach((item, index) => {
+      const effectiveDistance =
+        this.animationController.currentRotation + item.baseAngle;
+      const normalized = effectiveDistance % 360;
+      const absNormalized = Math.abs(
+        normalized > 180 ? normalized - 360 : normalized,
+      );
+      if (absNormalized < closestDistance) {
+        closestDistance = absNormalized;
+        currentItemIndex = index;
       }
-      this.animationController.animateRotation(newRotation);
+    });
+
+    if (currentItemIndex === -1) return;
+
+    const targetIndex = currentItemIndex + direction;
+    const clampedTargetIndex = Math.max(
+      0,
+      Math.min(navItems.length - 1, targetIndex),
+    );
+
+    if (clampedTargetIndex === currentItemIndex) return;
+
+    const targetItem = navItems[clampedTargetIndex];
+    if (targetItem) {
+      const newTargetRotation = -targetItem.baseAngle;
+      this.isAnimating = true;
+      this.animationController.animateRotation(newTargetRotation, () => {
+        this.isAnimating = false;
+      });
     }
   }
 
   handlePageScrollState(e: WheelEvent) {
+    // 页面向上滚动到顶部 → 回到 ROTATION 状态
     if (e.deltaY < 0 && window.scrollY === 0) {
       e.preventDefault();
       this.currentState = "ROTATION";
       this.lenis.stop();
-
+      this.isAnimating = false;
       this.animationController.animateRotation(
         this.lastRotationBeforeTransition,
-        true,
       );
-
       this.updateAppearance();
-
-      return;
     }
   }
 
