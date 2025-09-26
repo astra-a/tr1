@@ -17,7 +17,7 @@ export default async function Page({
   }
 
   return (
-    <div className="news-detail w-full max-w-370 mx-auto p-10 pt-6 relative overflow-hidden antialiased">
+    <div className="news-detail w-full max-w-370 mx-auto p-5 sm:p-6 md:p-7 lg:p-8 xl:p-9 2xl:p-10 pt-3 md:pt-4 xl:pt-5 2xl:pt-6 relative overflow-hidden antialiased">
       <Breadcrumbs news={news} />
       <NewsDetail news={news} />
     </div>
