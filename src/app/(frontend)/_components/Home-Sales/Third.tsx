@@ -114,7 +114,10 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
       ("intro" === phase ? introRef : loopRef).current?.play().finally();
     } else {
       introRef.current?.pause();
+      introRef.current?.load();
       loopRef.current?.pause();
+      loopRef.current?.load();
+      setPhase("intro");
     }
     // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
   }, [isInView, introRef?.current, loopRef?.current]);
@@ -144,7 +147,7 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         ref={loopRef}
         width={2560}
         height={1440}
-        autoPlay
+        autoPlay={false}
         muted
         controls={false}
         loop={true}
