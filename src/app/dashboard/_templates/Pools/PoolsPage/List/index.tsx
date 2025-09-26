@@ -70,7 +70,7 @@ function Item({ pool }: { pool: Pool }) {
 
 const List = ({ pools }: { pools: Pool[] }) => {
   const tableHeads = useMemo(
-    () => ["Pool", "Status", "Price", `Sale Cap`, "Created At (UTC)"],
+    () => ["Pool", "Status", "Price", `Sale Cap`, "Created At (UTC 0:00)"],
     [],
   );
 
