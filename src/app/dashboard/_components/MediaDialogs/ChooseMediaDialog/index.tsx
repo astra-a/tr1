@@ -9,6 +9,9 @@ import Pagination from "@/app/dashboard/_components/Pagination";
 import Button from "@/app/dashboard/_components/Button";
 import { filesize } from "filesize";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 const PAGE_SIZE = 10;
 
@@ -84,7 +87,7 @@ export default function ChooseMediaDialog({
                 </th>
                 <th className="max-lg:nth-5:hidden max-lg:last:hidden">Alt</th>
                 <th className="max-lg:nth-5:hidden max-lg:last:hidden">
-                  Last edited
+                  Last edited (UTC)
                 </th>
               </tr>
             </thead>
@@ -130,7 +133,7 @@ export default function ChooseMediaDialog({
                   </td>
                   <td className="max-md:hidden">{doc.alt}</td>
                   <td className="text-t-secondary max-lg:hidden">
-                    {dayjs(doc.updatedAt).format("DD MMM, hh:mm A")}
+                    {dayjs(doc.updatedAt).utc().format("DD MMM, hh:mm A")}
                   </td>
                 </tr>
               ))}

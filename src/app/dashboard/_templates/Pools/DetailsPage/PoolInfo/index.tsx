@@ -18,6 +18,9 @@ import Parameter from "../../Parameter";
 import { useChains } from "wagmi";
 import { useMemo } from "react";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+
+dayjs.extend(utc);
 
 const PoolInfo = ({ pool }: { pool: Pool }) => {
   const chains = useChains();
@@ -79,7 +82,10 @@ const PoolInfo = ({ pool }: { pool: Pool }) => {
         />
         <Parameter
           label="Sale Started At"
-          content={dayjs.unix(pool.saleStartedAt).format("DD MMM, hh:mm A")}
+          content={dayjs
+            .unix(pool.saleStartedAt)
+            .utc()
+            .format("DD MMM, hh:mm A [UTC]")}
         />
         <Parameter
           label="Paused Duration Sum"
@@ -89,7 +95,10 @@ const PoolInfo = ({ pool }: { pool: Pool }) => {
           label="Deployed At"
           content={
             pool.deployedAt
-              ? dayjs.unix(pool.deployedAt).format("DD MMM, hh:mm A")
+              ? dayjs
+                  .unix(pool.deployedAt)
+                  .utc()
+                  .format("DD MMM, hh:mm A [UTC]")
               : "-"
           }
         />
@@ -197,7 +206,7 @@ const PoolInfo = ({ pool }: { pool: Pool }) => {
         />
         <Parameter
           label="Created At"
-          content={dayjs(pool.createdAt).format("DD MMM, hh:mm A")}
+          content={dayjs(pool.createdAt).utc().format("DD MMM, hh:mm A [UTC]")}
         />
         {pool.createdHash ? (
           <Parameter

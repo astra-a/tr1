@@ -542,10 +542,10 @@ const PoolForm = () => {
                   suffix="Days"
                 />
                 <Field
-                  label="Sale Started At"
+                  label="Sale Started At (UTC)"
                   type="datetime-local"
                   {...register("saleStartedAt", {
-                    setValueAs: (v) => `${v}:00${dayjs().format("Z")}`,
+                    setValueAs: (v) => `${v}:00Z`,
                   })}
                   errorMessage={errors?.saleStartedAt?.message}
                 />

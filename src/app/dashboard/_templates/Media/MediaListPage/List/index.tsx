@@ -4,7 +4,7 @@ import Table from "@/app/dashboard/_components/Table";
 import { Media } from "@/payload-types";
 import Item from "./Item";
 
-const tableHead = ["Media", "Alt", "Last Edited"];
+const tableHead = ["Media", "Alt", "Last Edited (UTC)"];
 
 type ListProps = {
   mediaArray: Media[];

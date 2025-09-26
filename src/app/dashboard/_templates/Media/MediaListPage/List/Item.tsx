@@ -6,12 +6,15 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { toast } from "sonner";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 import Image from "@/app/dashboard/_components/Image";
 import { filesize } from "filesize";
 import { useState } from "react";
 import { ROUTES } from "@/app/dashboard/_contstants/routes";
 import { useMutation } from "@tanstack/react-query";
 import axiosInstance from "@/app/dashboard/_helpers/axios";
+
+dayjs.extend(utc);
 
 const Item = ({
   media,
@@ -98,7 +101,7 @@ const Item = ({
       </td>
       <td className="max-md:hidden">{media.alt}</td>
       <td className="text-t-secondary max-lg:hidden">
-        {dayjs(media.updatedAt).format("DD MMM, hh:mm A")}
+        {dayjs(media.updatedAt).utc().format("DD MMM, hh:mm A")}
       </td>
     </TableRow>
   );

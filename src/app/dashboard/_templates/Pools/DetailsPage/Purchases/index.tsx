@@ -9,11 +9,13 @@ import { usePoolPurchases } from "@/subgraph";
 import { displayBalance, shortenAddress } from "@/web3";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import utc from "dayjs/plugin/utc";
 import { MoonLoader } from "react-spinners";
 import Button from "@/app/dashboard/_components/Button";
 import { useChains } from "wagmi";
 
 dayjs.extend(relativeTime);
+dayjs.extend(utc);
 
 const PAGE_SIZE = 10;
 
@@ -26,7 +28,7 @@ const Purchases = ({ pool }: { pool: Pool }) => {
 
   const tableHeads = useMemo(
     () => [
-      { field: "createdAt", title: "Date", enableSort: true },
+      { field: "createdAt", title: "Date (UTC)", enableSort: true },
       { field: "buyer__id", title: "Buyer" },
       { field: "paymentAmount", title: "Payment" },
       { field: "saleAmount", title: `Sale & Reward` },
@@ -41,7 +43,7 @@ const Purchases = ({ pool }: { pool: Pool }) => {
   const { data, isFetching } = usePoolPurchases(
     pool.chainId,
     pool.address,
-    false,
+    undefined,
     orderBy,
     orderDirection,
     PAGE_SIZE,
@@ -101,6 +103,7 @@ const Purchases = ({ pool }: { pool: Pool }) => {
                     >
                       {dayjs
                         .unix(Number(purchase.createdAt))
+                        .utc()
                         .format("DD MMM, hh:mm A")}
                     </a>
                   </td>
