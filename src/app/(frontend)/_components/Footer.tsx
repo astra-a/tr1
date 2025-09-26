@@ -26,7 +26,7 @@ export default function Footer({ small }: { small?: boolean }) {
               Decentralized AI Infrastructure for Global Scale
             </p>
           </div>
-          <div className="flex items-center gap-6">
+          <div className="flex items-center gap-6 invisible">
             <a className="" href="" target="_blank" rel="noopener noreferrer">
               <Image
                 src="/images/icon-twitter.svg"
