@@ -542,7 +542,7 @@ const PoolForm = () => {
                   suffix="Days"
                 />
                 <Field
-                  label="Sale Started At (UTC)"
+                  label="Sale Started At (UTC 0:00)"
                   type="datetime-local"
                   {...register("saleStartedAt", {
                     setValueAs: (v) => `${v}:00Z`,

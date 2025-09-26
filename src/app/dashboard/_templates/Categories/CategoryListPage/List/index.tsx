@@ -4,7 +4,7 @@ import Table from "@/app/dashboard/_components/Table";
 import { Category } from "@/payload-types";
 import Item from "./Item";
 
-const tableHead = ["Category", "Parent", "Last Edited (UTC)"];
+const tableHead = ["Category", "Parent", "Last Edited (UTC 0:00)"];
 
 type ListProps = {
   categories: Category[];

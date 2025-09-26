@@ -85,7 +85,7 @@ const PoolInfo = ({ pool }: { pool: Pool }) => {
           content={dayjs
             .unix(pool.saleStartedAt)
             .utc()
-            .format("DD MMM, hh:mm A [UTC]")}
+            .format("DD MMM, hh:mm A [UTC 0:00]")}
         />
         <Parameter
           label="Paused Duration Sum"
@@ -98,7 +98,7 @@ const PoolInfo = ({ pool }: { pool: Pool }) => {
               ? dayjs
                   .unix(pool.deployedAt)
                   .utc()
-                  .format("DD MMM, hh:mm A [UTC]")
+                  .format("DD MMM, hh:mm A [UTC 0:00]")
               : "-"
           }
         />
@@ -206,7 +206,9 @@ const PoolInfo = ({ pool }: { pool: Pool }) => {
         />
         <Parameter
           label="Created At"
-          content={dayjs(pool.createdAt).utc().format("DD MMM, hh:mm A [UTC]")}
+          content={dayjs(pool.createdAt)
+            .utc()
+            .format("DD MMM, hh:mm A [UTC 0:00]")}
         />
         {pool.createdHash ? (
           <Parameter

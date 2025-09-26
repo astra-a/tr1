@@ -28,7 +28,7 @@ const Purchases = ({ pool }: { pool: Pool }) => {
 
   const tableHeads = useMemo(
     () => [
-      { field: "createdAt", title: "Date (UTC)", enableSort: true },
+      { field: "createdAt", title: "Date (UTC 0:00)", enableSort: true },
       { field: "buyer__id", title: "Buyer" },
       { field: "paymentAmount", title: "Payment" },
       { field: "saleAmount", title: `Sale & Reward` },

@@ -87,7 +87,7 @@ export default function ChooseMediaDialog({
                 </th>
                 <th className="max-lg:nth-5:hidden max-lg:last:hidden">Alt</th>
                 <th className="max-lg:nth-5:hidden max-lg:last:hidden">
-                  Last edited (UTC)
+                  Last edited (UTC 0:00)
                 </th>
               </tr>
             </thead>
