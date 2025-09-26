@@ -52,37 +52,37 @@ export default function Footer({ small }: { small?: boolean }) {
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
           <p className="text-xs md:text-sm text-slate-gray">
-            ©️ 2025 All Rights Reserved
+            ©️ All Rights Reserved By {APP_NAME}
           </p>
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-12 2xl:gap-14 3xl:gap-16">
-            <div
-              className="text-xs md:text-sm text-slate-gray"
-              // className="text-xs md:text-sm text-slate-gray hover:text-white hover:underline transition"
-              // href=""
-              // target="_blank"
-              // rel="noopener noreferrer"
-            >
-              Privacy Policy
-            </div>
-            <div
-              className="text-xs md:text-sm text-slate-gray"
-              // className="text-xs md:text-sm text-slate-gray hover:text-white hover:underline transition"
-              // href=""
-              // target="_blank"
-              // rel="noopener noreferrer"
-            >
-              Terms & Condition
-            </div>
-            <div
-              className="text-xs md:text-sm text-slate-gray"
-              // className="text-xs md:text-sm text-slate-gray hover:text-white hover:underline transition"
-              // href=""
-              // target="_blank"
-              // rel="noopener noreferrer"
-            >
-              Security Policy
-            </div>
-          </div>
+          {/*<div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 md:gap-6 lg:gap-8 xl:gap-12 2xl:gap-14 3xl:gap-16">*/}
+          {/*  <div*/}
+          {/*    className="text-xs md:text-sm text-slate-gray"*/}
+          {/*    // className="text-xs md:text-sm text-slate-gray hover:text-white hover:underline transition"*/}
+          {/*    // href=""*/}
+          {/*    // target="_blank"*/}
+          {/*    // rel="noopener noreferrer"*/}
+          {/*  >*/}
+          {/*    Privacy Policy*/}
+          {/*  </div>*/}
+          {/*  <div*/}
+          {/*    className="text-xs md:text-sm text-slate-gray"*/}
+          {/*    // className="text-xs md:text-sm text-slate-gray hover:text-white hover:underline transition"*/}
+          {/*    // href=""*/}
+          {/*    // target="_blank"*/}
+          {/*    // rel="noopener noreferrer"*/}
+          {/*  >*/}
+          {/*    Terms & Condition*/}
+          {/*  </div>*/}
+          {/*  <div*/}
+          {/*    className="text-xs md:text-sm text-slate-gray"*/}
+          {/*    // className="text-xs md:text-sm text-slate-gray hover:text-white hover:underline transition"*/}
+          {/*    // href=""*/}
+          {/*    // target="_blank"*/}
+          {/*    // rel="noopener noreferrer"*/}
+          {/*  >*/}
+          {/*    Security Policy*/}
+          {/*  </div>*/}
+          {/*</div>*/}
         </div>
       </div>
     </div>
