@@ -6,13 +6,7 @@ import Link from "next/link";
 import { Category, Post, Media } from "@/payload-types";
 import NewMatrix from "../NewMatrix";
 
-export default function TopNews({
-  pinnedPosts,
-  setLastCompleted,
-}: {
-  pinnedPosts: Post[];
-  setLastCompleted: (val: boolean) => void;
-}) {
+export default function TopNews({ pinnedPosts }: { pinnedPosts: Post[] }) {
   return (
     <div className="top-news flex flex-col-reverse md:flex-row gap-4 sm:gap-6 md:gap-2 mt-4 md:mt-5 lg:mt-6 xl:mt-7 relative z-[1]">
       <div className="top-news-left md:w-[50%] flex flex-col gap-2">
@@ -24,14 +18,8 @@ export default function TopNews({
               key={item.id}
               initial={{ opacity: 0, y: 150 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: i * 0.3 }}
+              transition={{ duration: 0.75 }}
               viewport={{ once: true, margin: "150px" }}
-              onAnimationComplete={() => {
-                // console.log("onAnimationComplete", i, dayjs().format('mm:ss SSS'))
-                if (1 === i) {
-                  setLastCompleted(true);
-                }
-              }}
             >
               <Link
                 href={`/news/${item.id}`}

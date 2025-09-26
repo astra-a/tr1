@@ -1,11 +1,10 @@
 "use client";
 
-import { useScroll } from "ahooks";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import ReactPaginate from "react-paginate";
 import { Media, Post } from "@/payload-types";
 import NewMatrix from "../NewMatrix";
@@ -56,13 +55,11 @@ export default function NewsList({
   pageSize,
   pageIndex,
   posts,
-  lastCompleted,
 }: {
   postCount: number;
   pageSize: number;
   pageIndex: number;
   posts: Post[];
-  lastCompleted: boolean;
 }) {
   const router = useRouter();
 
@@ -71,29 +68,8 @@ export default function NewsList({
     [postCount, pageSize],
   );
 
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-  const scrollPosition = useScroll();
-
-  const [showContent, setShowContent] = useState(false);
-  useEffect(() => {
-    if (isInView && lastCompleted) {
-      setShowContent(true);
-    } else if (
-      ref?.current?.offsetTop &&
-      scrollPosition?.top &&
-      scrollPosition.top / ref.current.offsetTop > 0.9
-    ) {
-      setShowContent(true);
-    }
-  }, [isInView, lastCompleted, ref.current?.offsetTop, scrollPosition?.top]);
-
-  if (!showContent) {
-    return <div ref={ref} className="mt-10 h-180" />;
-  }
-
   return (
-    <div ref={ref} className="news-list flex flex-col mt-10 relative z-[2]">
+    <div className="news-list flex flex-col mt-10 relative z-[2]">
       <div className="flex flex-col gap-4">
         {posts.map((item) => (
           <motion.div
