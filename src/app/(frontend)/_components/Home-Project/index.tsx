@@ -36,6 +36,7 @@ export default function ProjectHome() {
               <div id="section3" className="section">
                 <Third />
               </div>
+              <div className="w-full h-0.25 line-ray" />
               <div id="section5" className="section">
                 <Fifth />
               </div>
@@ -96,6 +97,7 @@ export default function ProjectHome() {
           <Second />
           <div className="w-full h-0.25 line-ray" />
           <Third />
+          <div className="w-full h-0.25 line-ray" />
           <Fifth />
         </>
       )}
