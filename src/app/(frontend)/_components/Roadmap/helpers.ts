@@ -2,11 +2,11 @@ import gsap from "gsap";
 import Lenis from "@studio-freight/lenis";
 
 export const CONFIG = {
-  angleInterval: 36,
+  angleInterval: 28,
   scrollSpeed: 0.3,
   svg: { minSize: 5, maxSize: 24 },
   animation: { duration: 1.2, ease: "power3.out" },
-  rotationBounds: { min: -72, max: 72 },
+  rotationBounds: { min: -56, max: 56 },
   overshootFadePx: 500,
   transitionThreshold: 50,
   pageScrollThreshold: 100,
@@ -135,7 +135,7 @@ export class CenterSvgItem extends ItemBase {
 
   updateAppearance() {
     if (this.controller) {
-      const rotationSpeedFactor = 360 / 36;
+      const rotationSpeedFactor = 360 / CONFIG.angleInterval;
       const rotation = this.controller.currentRotation * rotationSpeedFactor;
       gsap.set(this.domElement, { rotation: rotation });
     }
@@ -182,7 +182,7 @@ export class AnimationController {
       onUpdate: () => this.updateAllItems(false),
       onComplete: () => {
         if (!skipSnap) {
-          this.snapTimeout = setTimeout(() => this.maybeSnap(), 300);
+          this.snapTimeout = setTimeout(() => this.maybeSnap(), 150);
         }
       },
     });
