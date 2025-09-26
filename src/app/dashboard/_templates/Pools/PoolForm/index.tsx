@@ -608,6 +608,15 @@ const PoolForm = () => {
                         placeholder="0.1"
                         tooltip={`Decimals: ${token.decimals}`}
                         {...register(`paymentRules.${index}.minPurchase`)}
+                        onChange={(e) => {
+                          factory.paymentTokens.forEach((_, k) => {
+                            setValue(
+                              `paymentRules.${k}.minPurchase`,
+                              e.target.value,
+                              { shouldValidate: true },
+                            );
+                          });
+                        }}
                         errorMessage={
                           errors?.paymentRules?.[index]?.minPurchase?.message
                         }
@@ -617,6 +626,15 @@ const PoolForm = () => {
                         placeholder="100"
                         tooltip={`Decimals: ${token.decimals}`}
                         {...register(`paymentRules.${index}.maxPurchase`)}
+                        onChange={(e) => {
+                          factory.paymentTokens.forEach((_, k) => {
+                            setValue(
+                              `paymentRules.${k}.maxPurchase`,
+                              e.target.value,
+                              { shouldValidate: true },
+                            );
+                          });
+                        }}
                         errorMessage={
                           errors?.paymentRules?.[index]?.maxPurchase?.message
                         }
