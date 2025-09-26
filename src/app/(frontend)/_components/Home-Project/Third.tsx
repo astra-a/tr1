@@ -154,7 +154,7 @@ export default function Third() {
           <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
             <SectionHeader
               image="/images/icon-thumbs-up.svg"
-              tag="Our Values"
+              tag="The Vision"
               title="Intelligence + Decentralization = A New Social Operating System"
               description={`Our mission is to merge adaptive AI reasoning with the fault tolerance of distributed ledgers, enabling <b>trustless, permissionless collaboration</b> at global scale.`}
             />

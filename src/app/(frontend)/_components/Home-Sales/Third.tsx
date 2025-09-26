@@ -175,7 +175,7 @@ export default function Third() {
           <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
             <SectionHeader
               image="/images/icon-thumbs-up.svg"
-              tag="Our Values"
+              tag="The Vision"
               title="Where Autonomous AI Meets Trustless Blockchains — A Global-Scale Intelligence Network"
               description={`We fuse <b>adaptive AI reasoning</b> with the <b>resilience of distributed ledgers</b> to produce trustless, composable systems that scale globally—<b>without sacrificing privacy or control</b>.`}
             />

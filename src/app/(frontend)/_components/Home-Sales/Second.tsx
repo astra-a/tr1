@@ -64,7 +64,7 @@ export default function Second() {
       <div className="page-second-container flex flex-col items-center gap-4 w-full max-w-[1920px] relative z-[1] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
         <SectionHeader
           image="/images/icon-zap.svg"
-          tag="Features"
+          tag="Our Foundation"
           title="The World’s First Local-First AI + Multi-Chain Operating System for Web3"
           description={`An all-in-one, local-first AI platform to <b>build</b>, <b>automate</b>, and <b>scale</b> in the Web3 era—where <b>self-custody</b>, <b>zero-knowledge privacy</b>, and <b>sovereign control</b> are the defaults, not add-ons.`}
         />
