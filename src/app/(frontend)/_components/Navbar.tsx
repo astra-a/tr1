@@ -60,14 +60,14 @@ function WindowNavChild({ route }: { route: { name: string; url: string } }) {
     return (
       <a
         href={route.url}
-        className={`text-base 3xl:text-lg 4xl:text-xl ${isActive ? "text-white" : "text-white/60"} hover:text-white hover:underline transition`}
+        className={`text-base 2xl:text-lg 3xl:text-xl ${isActive ? "text-white" : "text-white/60"} hover:text-white hover:underline transition`}
       >
         {route.name}
       </a>
     );
   } else {
     return (
-      <div className="text-base 3xl:text-lg 4xl:text-xl text-white/60">
+      <div className="text-base 2xl:text-lg 3xl:text-xl text-white/60">
         {route.name}
       </div>
     );
@@ -168,7 +168,7 @@ function MobileNav() {
 export default function Navbar() {
   return (
     <>
-      <div className="navbar fixed top-0 w-full h-12 md:h-13 lg:h-14 xl:h-15 2xl:h-18 3xl:h-20 4xl:h-22 z-40 flex justify-center bg-jet-black border-b border-dark-slate-gray">
+      <div className="navbar fixed top-0 w-full h-12 md:h-13 lg:h-14 xl:h-15 2xl:h-18 3xl:h-20 z-40 flex justify-center bg-jet-black border-b border-dark-slate-gray">
         <div className="navbar-container flex items-center justify-between w-full h-full">
           <MobileNav />
           <WindowNav />
