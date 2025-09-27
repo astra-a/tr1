@@ -7,13 +7,6 @@ import { Countries } from "../../_mocks/map";
 // @see https://globe.gl/example/countries-population/
 // @see https://github.com/vasturiano/globe.gl/blob/master/example/countries-population/index.html
 
-const CATEGORIES = [
-  { label: "Available", color: "#59FF93" }, // rgb(89, 255, 147)
-  { label: "Waitlist", color: "#59FFEE" }, // rgb(89, 255, 238)
-  { label: "Coming soon", color: "#3399FF" }, // rgb(51, 153, 255)
-  { label: "None", color: "#1F2B37" }, // rgb(31, 43, 55)
-];
-
 const CATEGORIES_COLOR: {
   [key: string]: { cap: string; side: string; base: number; increment: number };
 } = {
@@ -122,20 +115,5 @@ export default function GlobeMap() {
     // });
   }, []);
 
-  return (
-    <div className="relative w-full h-full">
-      <div ref={ref}></div>
-      <div className="absolute top-5 left-5 flex gap-3 pointer-events-none">
-        {CATEGORIES.map((item, i) => (
-          <div key={i} className="flex items-center gap-1">
-            <div
-              className="w-3 h-3 rounded-xs"
-              style={{ background: item.color }}
-            />
-            <div className="text-base text-white">{item.label}</div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+  return <div ref={ref} className="w-full h-full" />;
 }
