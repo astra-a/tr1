@@ -183,7 +183,7 @@ export default function Third() {
         </div>
 
         <motion.div
-          className="relative max-w-320 max-h-[40vh] aspect-16/5 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+          className="relative max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 mt-7 md:mt-0 mb-12 md:mb-0 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
@@ -198,7 +198,7 @@ export default function Third() {
           <div className="w-full">
             <Marquee speed={0.05} direction="left" isInView={isInView} />
           </div>
-          <div className="flex justify-center px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-14 3xl:px-16 py-4 md:py-5 lg:py-6 xl:py-7 border-b-[0.6px] border-[#9f9f9f]">
+          <div className="flex justify-center md:px-6 lg:px-8 xl:px-10 2xl:px-14 3xl:px-16 py-4 md:py-5 lg:py-6 xl:py-7 border-b-[0.6px] border-[#9f9f9f]">
             <p className="text-xs md:text-sm xl:text-base font-semibold text-white">
               By uniting adaptive AI with resilient decentralized
               infrastructure, we deliver smarter, faster, and truly sovereign
