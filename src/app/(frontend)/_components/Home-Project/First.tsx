@@ -32,8 +32,14 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         className="w-full h-full object-cover"
       >
         <source
+          src={`${CDN_BASEURL}/images/bg-project-mobile-first.mp4`}
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+        <source
           src={`${CDN_BASEURL}/images/bg-project-first.mp4`}
           type="video/mp4"
+          media="(min-width: 768px)"
         />
       </video>
     </div>
