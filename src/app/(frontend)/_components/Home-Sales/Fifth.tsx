@@ -179,7 +179,7 @@ export default function Fifth() {
         {/*  />*/}
         {/*</div>*/}
 
-        <div className="page-fifth-container flex flex-col justify-center items-center gap-6 md:gap-4 2xl:gap-12 3xl:gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
+        <div className="page-fifth-container flex flex-col justify-center items-center gap-6 md:gap-4 2xl:gap-12 3xl:gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-0 z-[1]">
           <motion.div
             className="relative max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             initial={{ opacity: 0, y: 150 }}
@@ -216,7 +216,7 @@ export default function Fifth() {
               </p>
             </div>
             <Link
-              className="flex text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
+              className="flex text-base xl:text-lg text-jet-black text-nowrap btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
               href="/launchpad"
             >
               Get Started

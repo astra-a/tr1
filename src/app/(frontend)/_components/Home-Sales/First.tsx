@@ -54,7 +54,7 @@ export default function First() {
         <VideoBackground isInView={isInView} />
 
         <div className="page-first-container flex flex-col md:flex-row justify-between gap-5 md:gap-10 w-full max-w-[1920px] h-full pt-10 md:pt-20 pb-10 md:pb-20 pl-4 sm:pl-6 md:pl-8 lg:pl-12 xl:pl-16 2xl:pl-20 3xl:pl-32 pr-8 lg:pr-12 xl:pr-16 2xl:pr-18 3xl:pr-20 z-[1]">
-          <div className="w-full md:w-[64%] 2xl:w-[62%] 3xl:max-w-[60%] pt-6 md:pt-0 flex flex-col justify-center gap-15">
+          <div className="w-full md:w-[78%] lg:w-[68%] xl:w-[64%] 2xl:w-[62%] 3xl:max-w-[60%] pt-6 md:pt-0 flex flex-col justify-center gap-15">
             <div className="flex flex-col gap-4 md:gap-5">
               <motion.div
                 className="text-sm md::text-base font-semibold text-bright-aqua"
@@ -135,7 +135,7 @@ export default function First() {
               </div>
               <div className="flex justify-center md:justify-start">
                 <Link
-                  className="flex text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
+                  className="flex text-base xl:text-lg text-jet-black text-nowrap btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
                   href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
                   target="_blank"
                 >

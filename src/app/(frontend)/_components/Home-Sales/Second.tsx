@@ -61,7 +61,7 @@ export default function Second() {
       ref={ref}
       className="home-section page-second w-full h-screen-custom flex flex-col justify-center items-center gap-8 md:gap-10 lg:gap-12 xl:gap-14 2xl:gap-16 overflow-hidden relative z-[2]"
     >
-      <div className="page-second-container flex flex-col items-center gap-8 md:gap-4 w-full max-w-[1920px] relative z-[1] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
+      <div className="page-second-container flex flex-col items-center gap-8 md:gap-4 w-full max-w-[1920px] relative z-[1] px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-0">
         <SectionHeader
           image="/images/icon-zap.svg"
           tag="Our Foundation"
@@ -119,7 +119,7 @@ export default function Second() {
               </GlowingEdgeCard>
             </motion.div>
           </div>
-          <div className="max-w-full mt-8 md:-mt-5 2xl:mt-2 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-3 sm:gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
+          <div className="max-w-full mt-8 md:mt-0 lg:-mt-3 xl:-mt-5 2xl:mt-2 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-3 sm:gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
             <motion.div
               className="flex flex-col gap-3 md:gap-2 w-full xl:max-w-146 2xl:max-w-158"
               initial={{
