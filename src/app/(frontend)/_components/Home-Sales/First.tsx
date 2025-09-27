@@ -57,7 +57,7 @@ export default function First() {
           <div className="w-full md:w-[78%] lg:w-[68%] xl:w-[64%] 2xl:w-[62%] 3xl:max-w-[60%] pt-6 md:pt-0 flex flex-col justify-center gap-15">
             <div className="flex flex-col gap-4 md:gap-5">
               <motion.div
-                className="text-sm md::text-base font-semibold text-bright-aqua"
+                className="text-sm md:text-base font-semibold text-bright-aqua"
                 initial={{ opacity: 0, y: 150 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}

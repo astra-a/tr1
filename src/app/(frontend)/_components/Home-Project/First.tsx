@@ -52,11 +52,11 @@ export default function First() {
       <div className="relative w-full h-full flex justify-center">
         <VideoBackground isInView={isInView} />
 
-        <div className="page-first-container flex flex-col md:flex-row justify-between gap-5 md:gap-10 w-full max-w-[1920px] h-full pt-10 md:pt-20 pb-10 md:pb-20 pl-8 lg:pl-12 xl:pl-16 2xl:pl-20 3xl:pl-32 pr-8 lg:pr-12 xl:pr-16 2xl:pr-18 3xl:pr-20 z-[1]">
-          <div className="w-full md:w-[64%] 2xl:w-[62%] 3xl:max-w-[60%] pt-6 md:pt-0 flex flex-col justify-center gap-4 md:gap-15">
-            <div className="flex flex-col gap-2 md:gap-5">
+        <div className="page-first-container flex flex-col md:flex-row justify-between gap-5 md:gap-10 w-full max-w-[1920px] h-full pt-10 md:pt-20 pb-10 md:pb-20 pl-4 sm:pl-6 md:pl-8 lg:pl-12 xl:pl-16 2xl:pl-20 3xl:pl-32 pr-8 lg:pr-12 xl:pr-16 2xl:pr-18 3xl:pr-20 z-[1]">
+          <div className="w-full md:w-[78%] lg:w-[68%] xl:w-[64%] 2xl:w-[62%] 3xl:max-w-[60%] pt-6 md:pt-0 flex flex-col justify-center gap-15">
+            <div className="flex flex-col gap-4 md:gap-5">
               <motion.div
-                className="text-xs md:text-sm xl:text-base font-semibold text-bright-aqua"
+                className="text-sm md:text-base font-semibold text-bright-aqua"
                 initial={{ opacity: 0, y: 150 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
@@ -86,49 +86,51 @@ export default function First() {
               </motion.div>
             </div>
             <motion.div
-              className="lg:w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6"
+              className="w-full flex flex-col md:flex-row md:items-center gap-10"
               initial={{ opacity: 0, y: 150 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
             >
-              <div
-                className={`glow-text ${isInView ? "" : "paused"} text-xs md:text-sm xl:text-base text-light-blue-gray`}
-              >
-                Built on distributed ledgers and cross-chain interoperability,
-                it streamlines blockchain interaction — from Ethereum to Solana
-                to BSC — with AI managing contracts, transfers, and security,
-                all while you retain full control.
-              </div>
-              <div className="flex items-center gap-7.5 invisible">
-                <a
-                  className=""
-                  href=""
-                  target="_blank"
-                  rel="noopener noreferrer"
+              <div className="w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6">
+                <div
+                  className={`glow-text ${isInView ? "" : "paused"} text-xs md:text-sm xl:text-base text-light-blue-gray`}
                 >
-                  <Image
-                    src="/images/icon-twitter.svg"
-                    alt="Twitter"
-                    width={20}
-                    height={20}
-                    className="size-4 lg:size-5"
-                  />
-                </a>
-                <a
-                  className=""
-                  href=""
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Image
-                    src="/images/icon-telegram.svg"
-                    alt="Telegram"
-                    width={20}
-                    height={20}
-                    className="size-4 lg:size-5"
-                  />
-                </a>
+                  Built on distributed ledgers and cross-chain interoperability,
+                  it streamlines blockchain interaction — from Ethereum to
+                  Solana to BSC — with AI managing contracts, transfers, and
+                  security, all while you retain full control.
+                </div>
+                <div className="flex items-center gap-7.5 invisible">
+                  <a
+                    className=""
+                    href=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/images/icon-twitter.svg"
+                      alt="Twitter"
+                      width={20}
+                      height={20}
+                      className="size-4 lg:size-5"
+                    />
+                  </a>
+                  <a
+                    className=""
+                    href=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Image
+                      src="/images/icon-telegram.svg"
+                      alt="Telegram"
+                      width={20}
+                      height={20}
+                      className="size-4 lg:size-5"
+                    />
+                  </a>
+                </div>
               </div>
             </motion.div>
           </div>
