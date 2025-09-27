@@ -135,7 +135,7 @@ export default function First() {
               </div>
               <div className="flex justify-center md:justify-start">
                 <Link
-                  className="flex text-sm md:text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
+                  className="flex text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
                   href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
                   target="_blank"
                 >

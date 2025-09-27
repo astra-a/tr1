@@ -132,6 +132,16 @@ input:focus-visible {
       padding-bottom: 48px;
     }
   }
+
+  &.page-fifth-group {
+    @media (width < 48rem) {
+      height: auto;
+
+      .page-fifth {
+        padding-bottom: 48px;
+      }
+    }
+  }
 }
 
 .text-white-gradient {
