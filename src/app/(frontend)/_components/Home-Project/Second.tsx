@@ -40,6 +40,7 @@ function VideoBackground({
         autoPlay
         loop
         muted
+        playsInline
         controls={false}
         preload="auto"
         poster={poster}
@@ -61,7 +62,7 @@ export default function Second() {
       ref={ref}
       className="home-section page-second w-full h-screen-custom flex flex-col justify-center items-center gap-8 md:gap-10 lg:gap-12 xl:gap-14 2xl:gap-16 overflow-hidden relative z-[2]"
     >
-      <div className="page-second-container flex flex-col items-center gap-4 w-full max-w-[1920px] relative z-[1] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
+      <div className="page-second-container flex flex-col items-center gap-8 md:gap-4 w-full max-w-[1920px] relative z-[1] px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-0">
         <SectionHeader
           image="/images/icon-zap.svg"
           tag="Our Foundation"
@@ -69,9 +70,9 @@ export default function Second() {
           description="A trust-minimized intelligence network that unites AI agents, multi-chain protocols, and sovereign identities—built for openness, resilience, and human-centric design."
         />
         <div className="max-w-full 2xl:mt-6">
-          <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
+          <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-3 sm:gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
             <motion.div
-              className="flex flex-col gap-2 w-full xl:max-w-146 2xl:max-w-158"
+              className="flex flex-col gap-3 md:gap-2 w-full xl:max-w-146 2xl:max-w-158"
               initial={{
                 opacity: 0,
                 x: width >= 768 ? -200 : 0,
@@ -81,7 +82,7 @@ export default function Second() {
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
             >
-              <h3 className="text-xl md:text-[1.375rem] xl:text-2xl leading-[1.33333333em] tracking-[-0.02em] font-semibold text-white">
+              <h3 className="text-lg sm:text-xl md:text-[1.375rem] xl:text-2xl leading-[1.33333333em] tracking-[-0.02em] font-semibold text-white">
                 Multi-Chain Interoperability at the Core
               </h3>
               <p className="text-xs md:text-sm xl:text-base text-cool-gray">
@@ -101,7 +102,7 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-full max-w-120 2xl:max-w-140 aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
@@ -114,9 +115,9 @@ export default function Second() {
               </GlowingEdgeCard>
             </motion.div>
           </div>
-          <div className="max-w-full -mt-5 2xl:mt-2 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
+          <div className="max-w-full mt-8 md:mt-2 lg:-mt-3 xl:-mt-5 2xl:mt-2 flex flex-col-reverse md:flex-row-reverse justify-between items-center gap-3 sm:gap-4 md:gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 3xl:gap-16">
             <motion.div
-              className="flex flex-col gap-2 w-full xl:max-w-146 2xl:max-w-158"
+              className="flex flex-col gap-3 md:gap-2 w-full xl:max-w-146 2xl:max-w-158"
               initial={{
                 opacity: 0,
                 x: width >= 768 ? 200 : 0,
@@ -126,7 +127,7 @@ export default function Second() {
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
             >
-              <h3 className="text-xl md:text-[1.375rem] xl:text-2xl leading-[1.33333333em] tracking-[-0.02em] font-semibold text-white">
+              <h3 className="text-lg sm:text-xl md:text-[1.375rem] xl:text-2xl leading-[1.33333333em] tracking-[-0.02em] font-semibold text-white">
                 Sovereign AI Agents
               </h3>
               <p className="text-xs md:text-sm xl:text-base text-cool-gray">
@@ -150,7 +151,7 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-full max-w-120 2xl:max-w-140 aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground

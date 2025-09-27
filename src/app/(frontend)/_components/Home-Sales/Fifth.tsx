@@ -127,6 +127,7 @@ function VideoBackground({
         height={1440}
         autoPlay
         muted
+        playsInline
         loop={false}
         controls={false}
         preload="auto"
@@ -147,6 +148,7 @@ function VideoBackground({
         height={1440}
         autoPlay={false}
         muted
+        playsInline
         controls={false}
         loop={true}
         preload="auto"
@@ -179,9 +181,9 @@ export default function Fifth() {
         {/*  />*/}
         {/*</div>*/}
 
-        <div className="page-fifth-container flex flex-col justify-center items-center gap-4 2xl:gap-12 3xl:gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0 z-[1]">
+        <div className="page-fifth-container flex flex-col justify-center items-center gap-6 md:gap-4 2xl:gap-12 3xl:gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-0 z-[1]">
           <motion.div
-            className="relative max-w-320 max-h-[40vh] aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+            className="relative max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             initial={{ opacity: 0, y: 150 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
@@ -198,17 +200,17 @@ export default function Fifth() {
           </motion.div>
 
           <motion.div
-            className="flex flex-col justify-center items-center gap-2 md:gap-3 lg:gap-4 xl:gap-5 2xl:gap-6 relative z-1"
+            className="flex flex-col justify-center items-center gap-6 md:gap-3 lg:gap-4 xl:gap-5 2xl:gap-6 relative z-1"
             initial={{ opacity: 0, y: 150 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
             viewport={{ amount: "some" }}
           >
-            <div className="flex flex-col items-center gap-2">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] 2xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-mint-green-gradient text-shadow-black-10 text-center">
+            <div className="flex flex-col items-center gap-3 md:gap-2">
+              <h2 className="text-[1.25rem] sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] 2xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-mint-green-gradient text-shadow-black-10 text-center">
                 Co-Create the Future of Decentralized AI and Borderless Finance
               </h2>
-              <p className="text-xs md:text-sm xl:text-base text-mint-green-gradient-2 text-center">
+              <p className="text-sm xl:text-base text-mint-green-gradient-2 text-center">
                 Step into a world where your{" "}
                 <b>AI is an ally, blockchains interoperate without borders</b>,
                 and your <b>sovereignty is non-negotiable—build</b> intelligent,
@@ -216,7 +218,7 @@ export default function Fifth() {
               </p>
             </div>
             <Link
-              className="flex text-sm md:text-base xl:text-lg text-jet-black btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
+              className="flex text-base xl:text-lg text-jet-black text-nowrap btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
               href="/launchpad"
             >
               Get Started

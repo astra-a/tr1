@@ -15,6 +15,7 @@ export default function FixedStarVideoBackground({
         autoPlay
         loop
         muted
+        playsInline
         controls={false}
         preload="auto"
         poster={`${CDN_BASEURL}/images/bg-second-poster.png`}
