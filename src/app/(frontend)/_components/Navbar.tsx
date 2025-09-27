@@ -9,7 +9,7 @@ import {
 } from "@headlessui/react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { APP_NAME, SITE_TYPE } from "@/constants";
+import { APP_NAME, CDN_BASEURL, SITE_TYPE } from "@/constants";
 import WalletButton from "./WalletButton";
 
 const ROUTES =
@@ -19,7 +19,7 @@ const ROUTES =
         { name: "LaunchPad", url: "/launchpad" },
         { name: "News", url: "/news" },
         // { name: "Roadmap", url: "/roadmap" },
-        // { name: "White Paper", url: "" },
+        // { name: "White Paper", url: `${CDN_BASEURL}/aios-whitepaper.pdf` },
         { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ]
@@ -28,7 +28,7 @@ const ROUTES =
         // { name: "LaunchPad", url: "/launchpad" },
         // { name: "News", url: "/news" },
         { name: "Roadmap", url: "/roadmap" },
-        { name: "White Paper", url: "" },
+        { name: "White Paper", url: `${CDN_BASEURL}/aios-whitepaper.pdf` },
         // { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ];
