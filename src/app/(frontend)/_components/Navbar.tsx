@@ -85,6 +85,7 @@ function WindowNav() {
             width={192}
             height={73}
             className="w-auto h-8 xl:h-10 2xl:h-12 3xl:h-14"
+            priority
           />
         </div>
         <div className="h-full w-px bg-dark-slate-gray" />
@@ -127,6 +128,7 @@ function MobileNav() {
           width={192}
           height={73}
           className="w-auto h-6"
+          priority
         />
       </div>
       <Popover>

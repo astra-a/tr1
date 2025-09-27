@@ -60,7 +60,7 @@ const VC_ARRAY = [
 export default function Fourth() {
   return (
     <div className="home-section page-fourth w-full h-screen-custom flex flex-auto justify-center items-center relative">
-      <div className="page-fourth-container relative z-[1] flex flex-col items-center gap-10">
+      <div className="page-fourth-container relative z-[1] flex flex-col items-center gap-6 md:gap-10 px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-0">
         <SectionHeader
           image="/images/icon-thumbs-up.svg"
           tag="Our Ecosystem"
@@ -68,25 +68,25 @@ export default function Fourth() {
           description={`From <b>wallet automation</b> to <b>cross-chain orchestration</b>, our local-first AI absorbs Web3 complexity so builders and power users can focus on outcomes—not tooling.`}
         />
         <motion.div
-          className="w-240 2xl:w-321.5 border-gradient-rounded line-ray rounded-[20px] shadow-[0_20px_32px_28px_#000,1px_1px_1px_0_rgba(255,255,255,0.1)_inset] backdrop-blur-[20px]"
+          className="w-full md:w-180 lg:w-240 2xl:w-321.5 border-gradient-rounded line-ray rounded-[20px] shadow-[0_20px_32px_28px_#000,1px_1px_1px_0_rgba(255,255,255,0.1)_inset] backdrop-blur-[20px]"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
           viewport={{ amount: "some" }}
         >
           <GlowingEdgeCard autoPlayOnHover>
-            <div className="relative w-full h-full flex flex-wrap bg-[#040b0f] rounded-[20px]">
+            <div className="relative w-full h-full flex flex-wrap gap-2 sm:gap-3 md:gap-0 px-2 md:px-0 py-6 lg:py-0 bg-[#040b0f] rounded-[20px]">
               <NewMatrix
                 className="absolute inset-0 z-0 overflow-hidden rounded-inherit bg-eerie-black"
                 baseColor={0x7453ff}
                 hoverColor={0x52ffa8}
               />
-              <div className="absolute inset-0 bg-[url(/images/logo-vc-bg.svg)] bg-top-left bg-contain bg-no-repeat z-1 pointer-events-none" />
+              <div className="absolute inset-0 md:bg-[url(/images/logo-vc-bg.svg)] bg-top-left bg-contain bg-no-repeat z-1 pointer-events-none" />
 
               {VC_ARRAY.map((item, i) => (
                 <div
                   key={i}
-                  className="w-[25%] aspect-320/212 flex flex-col justify-center items-center gap-2 border-1 border-white/3 relative z-2 pointer-events-none"
+                  className="w-[calc(50%-4px)] sm:w-[calc(33.333333%-8px)] md:w-[25%] aspect-320/212 flex flex-col justify-center items-center gap-2 border-1 border-white/3 relative z-2 pointer-events-none"
                 >
                   <div className="w-22 2xl:w-30">
                     <Image
@@ -98,7 +98,7 @@ export default function Fourth() {
                     />
                   </div>
                   <p
-                    className="text-sm leading-[2em] font-semibold uppercase"
+                    className="h-[3em] lg:h-auto text-sm leading-[1.5em] lg:leading-[2em] font-semibold uppercase text-center"
                     style={{ color: item.color }}
                   >
                     {item.name}

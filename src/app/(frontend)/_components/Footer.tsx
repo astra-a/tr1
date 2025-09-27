@@ -6,13 +6,16 @@ import { APP_NAME } from "@/constants";
 export default function Footer({ small }: { small?: boolean }) {
   return (
     <div
-      className={`footer w-full flex justify-center relative z-30 bg-jet-black ${small ? "pt-6 sm:pt-7 md:pt-8 lg:pt-9 xl:pt-10 2xl:pt-12 pb-12 md:pb-16 lg:pb-20 xl:pb-24 2xl:pb-28 3xl:pb-30" : "py-6 md:py-7 lg:py-8 xl:py-9 2xl:py-10"}`}
+      className={`footer w-full flex justify-center relative z-30 bg-jet-black ${small ? "pt-6 sm:pt-7 md:pt-8 lg:pt-9 xl:pt-10 2xl:pt-12 pb-12 md:pb-16 lg:pb-20 xl:pb-24 2xl:pb-28 3xl:pb-30" : "py-8 xl:py-9 2xl:py-10"}`}
     >
       <div
-        className={`footer-container flex flex-col items-center w-full max-w-[1920px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-28 3xl:px-35 relative ${small ? "gap-5 md:gap-6 lg:gap-7 xl:gap-8" : "gap-2.5 md:gap-3 lg:gap-3.5 xl:gap-4"}`}
+        className={`footer-container flex flex-col items-center w-full max-w-[1920px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-14 2xl:px-28 3xl:px-35 relative ${small ? "gap-5 md:gap-6 lg:gap-7 xl:gap-8" : "gap-6 md:gap-3 lg:gap-3.5 xl:gap-4"}`}
       >
-        <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center gap-4 w-full">
-          <div className="flex flex-col items-center sm:items-start gap-2">
+        <div
+          className="w-full flex"
+          // className="flex flex-col sm:flex-row justify-center sm:justify-between sm:items-center gap-4 w-full"
+        >
+          <div className="flex flex-col gap-3">
             <div className="text-3xl text-white font-semibold text-center sm:text-left">
               <Image
                 src="/images/logo-full.png"
@@ -50,7 +53,7 @@ export default function Footer({ small }: { small?: boolean }) {
 
         <div className="w-full max-w-410 h-0.25 line-ray" />
 
-        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 w-full">
+        <div className="w-full">
           <p className="text-xs md:text-sm text-slate-gray">
             ©️ All Rights Reserved By {APP_NAME}
           </p>

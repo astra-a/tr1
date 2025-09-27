@@ -16,7 +16,7 @@ export default function SectionHeader({
 }) {
   return (
     <motion.div
-      className="section-header flex flex-col items-center gap-4 md:gap-4.5 lg:gap-5 xl:gap-5.5 2xl:gap-6"
+      className="section-header flex flex-col items-center gap-5 xl:gap-5.5 2xl:gap-6"
       initial={{ opacity: 0, y: 150 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
@@ -30,16 +30,16 @@ export default function SectionHeader({
           height={20}
           className="size-4 lg:size-5"
         />
-        <p className="text-lg md:text-xl xl:text-2xl leading-[1.25em] text-white">
+        <p className="text-base sm:text-lg md:text-xl xl:text-2xl leading-[1.25em] text-white">
           {tag}
         </p>
       </div>
-      <div className="flex flex-col items-center gap-2">
-        <h2 className="text-2xl md:text-[1.75rem] lg:text-3xl xl:text-4xl 2xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-white-gradient text-center">
+      <div className="flex flex-col items-center gap-3 md:gap-2">
+        <h2 className="text-[1.25rem] sm:text-2xl md:text-[1.75rem] lg:text-3xl xl:text-4xl 2xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-white-gradient text-center">
           {title}
         </h2>
         <p
-          className="text-xs md:text-sm xl:text-base text-aquaGreen-skyblue-gradient text-center"
+          className="text-sm md:text-base text-aquaGreen-skyblue-gradient text-center"
           // data-text={description}
           dangerouslySetInnerHTML={{ __html: description }}
         />

@@ -43,10 +43,10 @@ function Marquee({
       return 68 * 4 * FEATURES.length;
     } else if (width >= 640) {
       // sm
-      return 60 * 4 * FEATURES.length;
+      return 66 * 4 * FEATURES.length;
     } else {
       // xs
-      return 55 * 4 * FEATURES.length;
+      return 62 * 4 * FEATURES.length;
     }
   }, [width]);
 
@@ -82,7 +82,7 @@ function Marquee({
               {FEATURES.map((item, i) => (
                 <div
                   key={i}
-                  className="flex w-55 sm:w-60 md:w-68 lg:w-72 xl:w-84 2xl:w-90 3xl:w-100 items-center gap-2 md:gap-2.5 lg:gap-3 xl:gap-3.5 px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 3xl:px-14 py-4 md:py-5 lg:py-6 xl:py-7 feature-box"
+                  className="flex w-62 sm:w-66 md:w-68 lg:w-72 xl:w-84 2xl:w-90 3xl:w-100 items-center gap-2 md:gap-2.5 lg:gap-3 xl:gap-3.5 px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 3xl:px-14 py-4 md:py-5 lg:py-6 xl:py-7 feature-box"
                 >
                   <Image
                     src={item.icon}
@@ -91,7 +91,7 @@ function Marquee({
                     height={20}
                     className="size-4 lg:size-5"
                   />
-                  <p className="text-xs md:text-sm xl:text-base font-semibold text-white whitespace-normal">
+                  <p className="text-sm xl:text-base font-semibold text-white whitespace-normal">
                     {item.text}
                   </p>
                 </div>
@@ -125,6 +125,7 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         autoPlay
         loop
         muted
+        playsInline
         controls={false}
         preload="auto"
         className="w-full h-full object-cover"
@@ -148,10 +149,10 @@ export default function Third() {
       ref={ref}
       className="home-section page-third w-full h-screen-custom flex flex-col justify-center items-center relative overflow-hidden z-[3]"
     >
-      <div className="page-third-container w-full flex flex-auto flex-col justify-between items-center relative px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
+      <div className="page-third-container w-full flex flex-auto flex-col justify-between items-center relative px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-0">
         <div />
         <div className="w-full flex flex-col justify-start items-center gap-12 md:gap-14 lg:gap-16 xl:gap-18 2xl:gap-20 3xl:gap-22 relative z-[1]">
-          <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:px-0">
+          <div className="px-4 sm:px-6 md:px-0">
             <SectionHeader
               image="/images/icon-thumbs-up.svg"
               tag="The Vision"
@@ -162,7 +163,7 @@ export default function Third() {
         </div>
 
         <motion.div
-          className="relative max-w-320 max-h-[40vh] aspect-16/5 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+          className="relative max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 mt-7 md:mt-0 mb-12 md:mb-0 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
@@ -177,8 +178,8 @@ export default function Third() {
           <div className="w-full">
             <Marquee speed={0.05} direction="left" isInView={isInView} />
           </div>
-          <div className="flex justify-center px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-14 3xl:px-16 py-4 md:py-5 lg:py-6 xl:py-7 border-b-[0.6px] border-[#9f9f9f]">
-            <p className="text-xs md:text-sm xl:text-base font-semibold text-white">
+          <div className="flex justify-center md:px-6 lg:px-8 xl:px-10 2xl:px-14 3xl:px-16 py-4 md:py-5 lg:py-6 xl:py-7 border-b-[0.6px] border-[#9f9f9f]">
+            <p className="text-sm xl:text-base font-semibold text-white">
               By uniting adaptive AI with resilient decentralized
               infrastructure, we deliver smarter, faster, and truly sovereign
               experiences — built to empower human potential worldwide.

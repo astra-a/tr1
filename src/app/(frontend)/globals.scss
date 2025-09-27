@@ -37,6 +37,14 @@
   --toastify-font-family: var(--font-sarpanch);
 }
 
+.fp-enabled body,
+html.fp-enabled {
+  @media (width < 48rem) {
+    overflow: auto !important;
+    height: auto !important;
+  }
+}
+
 body {
   background: var(--color-jet-black);
 }
@@ -102,6 +110,38 @@ input:focus-visible {
   //  //height: calc(100vh - 88px);
   //  padding-top: 88px;
   //}
+
+  &.page-second {
+    @media (width < 48rem) {
+      height: auto;
+      min-height: 100vh;
+      padding-bottom: 48px;
+    }
+  }
+
+  &.page-third {
+    @media (width < 48rem) {
+      height: auto;
+    }
+  }
+
+  &.page-fourth {
+    @media (width < 48rem) {
+      height: auto;
+      min-height: 100vh;
+      padding-bottom: 48px;
+    }
+  }
+
+  &.page-fifth-group {
+    @media (width < 48rem) {
+      height: auto;
+
+      .page-fifth {
+        padding-bottom: 48px;
+      }
+    }
+  }
 }
 
 .text-white-gradient {
