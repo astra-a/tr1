@@ -40,6 +40,7 @@ function VideoBackground({
         autoPlay
         loop
         muted
+        playsInline
         controls={false}
         preload="auto"
         poster={poster}

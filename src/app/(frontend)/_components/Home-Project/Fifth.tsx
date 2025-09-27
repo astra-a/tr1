@@ -127,6 +127,7 @@ function VideoBackground({
         height={1440}
         autoPlay
         muted
+        playsInline
         loop={false}
         controls={false}
         preload="auto"
@@ -147,6 +148,7 @@ function VideoBackground({
         height={1440}
         autoPlay={false}
         muted
+        playsInline
         controls={false}
         loop={true}
         preload="auto"

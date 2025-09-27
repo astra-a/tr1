@@ -30,6 +30,7 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         autoPlay
         loop
         muted
+        playsInline
         controls={false}
         preload="auto"
         poster={`${CDN_BASEURL}/images/bg-sales-first-poster.png`}

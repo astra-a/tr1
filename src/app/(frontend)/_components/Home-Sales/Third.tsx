@@ -130,6 +130,7 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         height={1440}
         autoPlay
         muted
+        playsInline
         controls={false}
         loop={false}
         preload="auto"
@@ -149,6 +150,7 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         height={1440}
         autoPlay={false}
         muted
+        playsInline
         controls={false}
         loop={true}
         preload="auto"

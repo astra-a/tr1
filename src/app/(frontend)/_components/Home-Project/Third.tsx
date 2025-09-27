@@ -125,6 +125,7 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         autoPlay
         loop
         muted
+        playsInline
         controls={false}
         preload="auto"
         className="w-full h-full object-cover"
