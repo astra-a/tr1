@@ -43,7 +43,7 @@ function Marquee({
       return 68 * 4 * FEATURES.length;
     } else if (width >= 640) {
       // sm
-      return 62 * 4 * FEATURES.length;
+      return 66 * 4 * FEATURES.length;
     } else {
       // xs
       return 62 * 4 * FEATURES.length;
@@ -82,7 +82,7 @@ function Marquee({
               {FEATURES.map((item, i) => (
                 <div
                   key={i}
-                  className="flex w-62 sm:w-62 md:w-68 lg:w-72 xl:w-84 2xl:w-90 3xl:w-100 items-center gap-2 md:gap-2.5 lg:gap-3 xl:gap-3.5 px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 3xl:px-14 py-4 md:py-5 lg:py-6 xl:py-7 feature-box"
+                  className="flex w-62 sm:w-66 md:w-68 lg:w-72 xl:w-84 2xl:w-90 3xl:w-100 items-center gap-2 md:gap-2.5 lg:gap-3 xl:gap-3.5 px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 3xl:px-14 py-4 md:py-5 lg:py-6 xl:py-7 feature-box"
                 >
                   <Image
                     src={item.icon}

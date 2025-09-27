@@ -75,7 +75,7 @@ export default function Fourth() {
           viewport={{ amount: "some" }}
         >
           <GlowingEdgeCard autoPlayOnHover>
-            <div className="relative w-full h-full flex flex-wrap gap-2 md:gap-0 px-2 md:px-0 py-6 md:py-0 bg-[#040b0f] rounded-[20px]">
+            <div className="relative w-full h-full flex flex-wrap gap-2 sm:gap-3 md:gap-0 px-2 md:px-0 py-6 md:py-0 bg-[#040b0f] rounded-[20px]">
               <NewMatrix
                 className="absolute inset-0 z-0 overflow-hidden rounded-inherit bg-eerie-black"
                 baseColor={0x7453ff}
@@ -86,7 +86,7 @@ export default function Fourth() {
               {VC_ARRAY.map((item, i) => (
                 <div
                   key={i}
-                  className="w-[calc(50%-4px)] md:w-[25%] aspect-320/212 flex flex-col justify-center items-center gap-2 border-1 border-white/3 relative z-2 pointer-events-none"
+                  className="w-[calc(50%-4px)] sm:w-[calc(33.333333%-8px)] md:w-[25%] aspect-320/212 flex flex-col justify-center items-center gap-2 border-1 border-white/3 relative z-2 pointer-events-none"
                 >
                   <div className="w-22 2xl:w-30">
                     <Image
@@ -98,7 +98,7 @@ export default function Fourth() {
                     />
                   </div>
                   <p
-                    className="text-sm leading-[2em] font-semibold uppercase text-center"
+                    className="h-[3em] md:h-auto text-sm leading-[1.5em] md:leading-[2em] font-semibold uppercase text-center"
                     style={{ color: item.color }}
                   >
                     {item.name}

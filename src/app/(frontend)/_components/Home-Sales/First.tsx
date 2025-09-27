@@ -53,7 +53,7 @@ export default function First() {
       <div className="relative w-full h-full flex justify-center">
         <VideoBackground isInView={isInView} />
 
-        <div className="page-first-container flex flex-col md:flex-row justify-between gap-5 md:gap-10 w-full max-w-[1920px] h-full pt-10 md:pt-20 pb-10 md:pb-20 pl-4 md:pl-8 lg:pl-12 xl:pl-16 2xl:pl-20 3xl:pl-32 pr-8 lg:pr-12 xl:pr-16 2xl:pr-18 3xl:pr-20 z-[1]">
+        <div className="page-first-container flex flex-col md:flex-row justify-between gap-5 md:gap-10 w-full max-w-[1920px] h-full pt-10 md:pt-20 pb-10 md:pb-20 pl-4 sm:pl-6 md:pl-8 lg:pl-12 xl:pl-16 2xl:pl-20 3xl:pl-32 pr-8 lg:pr-12 xl:pr-16 2xl:pr-18 3xl:pr-20 z-[1]">
           <div className="w-full md:w-[64%] 2xl:w-[62%] 3xl:max-w-[60%] pt-6 md:pt-0 flex flex-col justify-center gap-15">
             <div className="flex flex-col gap-4 md:gap-5">
               <motion.div

@@ -106,7 +106,7 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-full max-w-120 2xl:max-w-140 aspect-2496/1408 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-2496/1408 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
@@ -157,7 +157,7 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-full max-w-120 2xl:max-w-140 aspect-1920/1080 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-1920/1080 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
