@@ -5,8 +5,11 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import { CDN_BASEURL } from "@/constants";
 import Link from "next/link";
+import { useWindowSize } from "react-use";
 
 function VideoBackground({ isInView }: { isInView: boolean }) {
+  const { width } = useWindowSize();
+
   const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     if (!ref?.current) return;
@@ -22,8 +25,8 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
     <div className="absolute inset-0 w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
         ref={ref}
-        width={1920}
-        height={1080}
+        width={width >= 768 ? 1920 : 1080}
+        height={width >= 768 ? 1080 : 1622}
         autoPlay
         loop
         muted
@@ -33,8 +36,14 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         className="w-full h-full object-cover"
       >
         <source
+          src={`${CDN_BASEURL}/images/bg-sales-mobile-first.mp4`}
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+        <source
           src={`${CDN_BASEURL}/images/bg-sales-first.mp4`}
           type="video/mp4"
+          media="(min-width: 768px)"
         />
       </video>
     </div>
