@@ -124,6 +124,14 @@ input:focus-visible {
       height: auto;
     }
   }
+
+  &.page-fourth {
+    @media (width < 48rem) {
+      height: auto;
+      min-height: 100vh;
+      padding-bottom: 48px;
+    }
+  }
 }
 
 .text-white-gradient {
