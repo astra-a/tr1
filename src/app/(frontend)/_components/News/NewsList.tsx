@@ -15,7 +15,7 @@ function NewsItem({ news }: { news: Post }) {
       href={`/news/${news.id}`}
       className="news-container flex flex-col sm:flex-row bg-eerie-black border-2 border-dark-greenish-gray rounded-xl hover:border-mint-green transition-all ease-in-out duration-200"
     >
-      <div className="news-image-container w-full sm:max-w-[40%] aspect-5/3 shrink-0 max-sm:rounded-t-xl sm:rounded-s-xl overflow-hidden">
+      <div className="news-image-container w-full sm:max-w-[40%] lg:max-w-100 aspect-5/3 shrink-0 max-sm:rounded-t-xl sm:rounded-s-xl overflow-hidden">
         {news.coverImage ? (
           <Image
             src={(news.coverImage as Media)?.url ?? ""}
