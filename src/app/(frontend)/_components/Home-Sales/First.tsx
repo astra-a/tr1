@@ -70,60 +70,60 @@ export default function First() {
               </motion.div>
             </div>
             <motion.div
-              className="w-full flex flex-col md:flex-row md:items-center gap-10"
+              className="w-full flex flex-col  gap-3 md:gap-6"
               initial={{ opacity: 0, y: 150 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
             >
-              <div className="w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6">
+              <div className="w-full flex flex-col md:flex-row md:items-center gap-10">
                 <div
-                  className={`glow-text ${isInView ? "" : "paused"} text-xs md:text-sm xl:text-base text-light-blue-gray`}
+                  className={`glow-text ${isInView ? "" : "paused"} w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] text-xs md:text-sm xl:text-base text-light-blue-gray`}
                 >
                   Built on distributed ledgers and cross-chain interoperability,
                   it streamlines blockchain interaction — from Ethereum to
                   Solana to BSC — with AI managing contracts, transfers, and
                   security, all while you retain full control.
                 </div>
-                <div className="flex items-center gap-7.5 invisible">
-                  <a
-                    className=""
-                    href=""
+                <div className="flex justify-center md:justify-start">
+                  <Link
+                    className="flex text-base xl:text-lg text-jet-black text-nowrap btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
+                    href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
                     target="_blank"
-                    rel="noopener noreferrer"
                   >
-                    <Image
-                      src="/images/icon-twitter.svg"
-                      alt="Twitter"
-                      width={20}
-                      height={20}
-                      className="size-4 lg:size-5"
-                    />
-                  </a>
-                  <a
-                    className=""
-                    href=""
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Image
-                      src="/images/icon-telegram.svg"
-                      alt="Telegram"
-                      width={20}
-                      height={20}
-                      className="size-4 lg:size-5"
-                    />
-                  </a>
+                    Go to Project
+                  </Link>
                 </div>
               </div>
-              <div className="flex justify-center md:justify-start">
-                <Link
-                  className="flex text-base xl:text-lg text-jet-black text-nowrap btn-main rounded-lg px-6 xl:px-7 py-2 xl:py-3"
-                  href={process.env.NEXT_PUBLIC_PROJECT_URL || ""}
+              <div className="flex items-center gap-7.5 invisible">
+                <a
+                  className=""
+                  href=""
                   target="_blank"
+                  rel="noopener noreferrer"
                 >
-                  Go to Project
-                </Link>
+                  <Image
+                    src="/images/icon-twitter.svg"
+                    alt="Twitter"
+                    width={20}
+                    height={20}
+                    className="size-4 lg:size-5"
+                  />
+                </a>
+                <a
+                  className=""
+                  href=""
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Image
+                    src="/images/icon-telegram.svg"
+                    alt="Telegram"
+                    width={20}
+                    height={20}
+                    className="size-4 lg:size-5"
+                  />
+                </a>
               </div>
             </motion.div>
           </div>

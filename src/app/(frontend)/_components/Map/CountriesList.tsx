@@ -38,11 +38,11 @@ export default function CountriesList() {
       const _waitlistArr2 = [];
       for (let i = 0; i < _rows - 1; i++) {
         _waitlistArr2.push(
-          _waitlistArr.slice(_waitlistRows * i, _waitlistRows * (i + 1)),
+          _waitlistArr.slice(_waitlistRows * i, _waitlistRows * (i + 1)).sort(),
         );
       }
       return [
-        _availableArr,
+        _availableArr.sort(),
         _waitlistArr2,
         _columns,
         _rows,
@@ -58,7 +58,7 @@ export default function CountriesList() {
             <div
               className="-m-0.25 rounded-xl"
               style={{
-                background: "linear-gradient(90deg, #00FFC2 0%, #7DDAFF 100%)",
+                background: "linear-gradient(90deg, #59FF93 0%, #7DDAFF 100%)",
               }}
             >
               <div className="flex justify-between px-4 md:px-5 xl:px-6">
@@ -68,7 +68,15 @@ export default function CountriesList() {
                 >
                   Available
                 </div>
-                <div className="flex-auto shrink-0 px-3 py-4">Waitlist</div>
+                <div
+                  className="flex-auto shrink-0 px-3 py-4 rounded-se-xl"
+                  style={{
+                    background:
+                      "linear-gradient(90deg, #59FFEE 0%, #7DDAFF 100%)",
+                  }}
+                >
+                  Waitlist
+                </div>
               </div>
             </div>
             <div className="text-white px-4 md:px-5 xl:px-6">
