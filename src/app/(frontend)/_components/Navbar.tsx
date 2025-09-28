@@ -56,22 +56,14 @@ function WindowNavChild({ route }: { route: { name: string; url: string } }) {
   //   );
   // }
 
-  if (route.url) {
-    return (
-      <a
-        href={route.url}
-        className={`text-base 2xl:text-lg 3xl:text-xl ${isActive ? "text-white" : "text-white/60"} hover:text-white hover:underline transition`}
-      >
-        {route.name}
-      </a>
-    );
-  } else {
-    return (
-      <div className="text-base 2xl:text-lg 3xl:text-xl text-white/60">
-        {route.name}
-      </div>
-    );
-  }
+  return (
+    <a
+      href={route.url}
+      className={`text-base 2xl:text-lg 3xl:text-xl ${isActive ? "text-white" : "text-white/60"} hover:text-white hover:underline transition`}
+    >
+      {route.name}
+    </a>
+  );
 }
 
 function WindowNav() {
@@ -134,6 +126,14 @@ function MobileNav() {
       <Popover>
         <PopoverButton className="block text-base text-white focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white">
           {activeRoute.name}
+          <svg
+            className="inline-flex size-4 relative z-2 ml-auto fill-white"
+            width="16"
+            height="16"
+            viewBox="0 0 24 24"
+          >
+            <path d="M7.47 9.88a.75.75 0 0 1 1.061 0l2.586 2.586a1.25 1.25 0 0 0 1.768 0L15.47 9.88a.75.75 0 1 1 1.061 1.061l-2.586 2.586a2.75 2.75 0 0 1-3.889 0L7.47 10.94a.75.75 0 0 1 0-1.061z" />
+          </svg>
         </PopoverButton>
         <PopoverPanel
           transition
@@ -156,12 +156,7 @@ function MobileNav() {
         </PopoverPanel>
       </Popover>
       <div className="flex items-center gap-2.5">
-        <button
-          type="button"
-          className="btn-mint-green connect-wallet h-full flex justify-center items-center gap-2 px-1.5 py-3 border border-white/10 text-sm text-[#051117] cursor-pointer"
-        >
-          Connect
-        </button>
+        <WalletButton />
       </div>
     </div>
   );
