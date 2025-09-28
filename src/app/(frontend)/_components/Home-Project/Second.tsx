@@ -1,56 +1,12 @@
 "use client";
 
 import { motion, useInView } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useWindowSize } from "react-use";
 import SectionHeader from "../SectionHeader";
 import { CDN_BASEURL } from "@/constants";
 import GlowingEdgeCard from "../GlowingEdgeCard";
-
-function VideoBackground({
-  url,
-  poster,
-  width,
-  height,
-  isInView,
-}: {
-  url: string;
-  poster?: string;
-  width?: number;
-  height?: number;
-  isInView?: boolean;
-}) {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    if (!ref?.current) return;
-    if (isInView) {
-      ref.current.play().finally();
-    } else {
-      ref.current.pause();
-    }
-    // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView]);
-
-  return (
-    <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
-      <video
-        ref={ref}
-        width={width}
-        height={height}
-        autoPlay
-        loop
-        muted
-        playsInline
-        controls={false}
-        preload="auto"
-        poster={poster}
-        className="w-full h-full object-cover"
-      >
-        <source src={url} type="video/mp4" />
-      </video>
-    </div>
-  );
-}
+import VideoBackground from "../VideoBackground";
 
 export default function Second() {
   const ref = useRef<HTMLDivElement>(null);
@@ -102,14 +58,24 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-680/382 md:aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
-                  url={`${CDN_BASEURL}/images/bg-project-second-right-top.mp4`}
-                  poster={`${CDN_BASEURL}/images/bg-project-second-right-top-poster.png`}
-                  width={2560}
-                  height={1440}
+                  videos={{
+                    mobile: {
+                      url: `${CDN_BASEURL}/images/bg-project-mobile-second-right-top.mp4`,
+                      poster: `${CDN_BASEURL}/images/bg-project-mobile-second-right-top-poster.png`,
+                      width: 680,
+                      height: 382,
+                    },
+                    desktop: {
+                      url: `${CDN_BASEURL}/images/bg-project-second-right-top.mp4`,
+                      poster: `${CDN_BASEURL}/images/bg-project-second-right-top-poster.png`,
+                      width: 2560,
+                      height: 1440,
+                    },
+                  }}
                   isInView={isInView}
                 />
               </GlowingEdgeCard>
@@ -151,14 +117,24 @@ export default function Second() {
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
               viewport={{ amount: "some" }}
-              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+              className="relative z-[1] w-full md:max-w-120 2xl:max-w-140 aspect-680/382 md:aspect-2560/1440 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             >
               <GlowingEdgeCard autoPlayOnHover>
                 <VideoBackground
-                  url={`${CDN_BASEURL}/images/bg-project-second-left-bottom.mp4`}
-                  poster={`${CDN_BASEURL}/images/bg-project-second-left-bottom-poster.png`}
-                  width={2560}
-                  height={1440}
+                  videos={{
+                    mobile: {
+                      url: `${CDN_BASEURL}/images/bg-project-mobile-second-left-bottom.mp4`,
+                      poster: `${CDN_BASEURL}/images/bg-project-mobile-second-left-bottom-poster.png`,
+                      width: 680,
+                      height: 382,
+                    },
+                    desktop: {
+                      url: `${CDN_BASEURL}/images/bg-project-second-left-bottom.mp4`,
+                      poster: `${CDN_BASEURL}/images/bg-project-second-left-bottom-poster.png`,
+                      width: 2560,
+                      height: 1440,
+                    },
+                  }}
                   isInView={isInView}
                 />
               </GlowingEdgeCard>

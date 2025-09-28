@@ -2,54 +2,10 @@
 
 import { motion, useInView } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { CDN_BASEURL } from "@/constants";
 import Link from "next/link";
-import { useWindowSize } from "react-use";
-
-function VideoBackground({ isInView }: { isInView: boolean }) {
-  const { width } = useWindowSize();
-
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    if (!ref?.current) return;
-    if (isInView) {
-      ref.current.play().finally();
-    } else {
-      ref.current.pause();
-    }
-    // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView]);
-
-  return (
-    <div className="absolute inset-0 w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
-      <video
-        ref={ref}
-        width={width >= 768 ? 1920 : 1080}
-        height={width >= 768 ? 1080 : 1622}
-        autoPlay
-        loop
-        muted
-        playsInline
-        controls={false}
-        preload="auto"
-        poster={`${CDN_BASEURL}/images/bg-sales-first-poster.png`}
-        className="w-full h-full object-cover"
-      >
-        <source
-          src={`${CDN_BASEURL}/images/bg-sales-mobile-first.mp4`}
-          type="video/mp4"
-          media="(max-width: 767px)"
-        />
-        <source
-          src={`${CDN_BASEURL}/images/bg-sales-first.mp4`}
-          type="video/mp4"
-          media="(min-width: 768px)"
-        />
-      </video>
-    </div>
-  );
-}
+import VideoBackground from "../VideoBackground";
 
 export default function First() {
   const ref = useRef<HTMLDivElement>(null);
@@ -61,7 +17,24 @@ export default function First() {
       className="home-section page-first w-full h-screen-custom flex justify-center bg-black relative overflow-hidden z-[1]"
     >
       <div className="relative w-full h-full flex justify-center">
-        <VideoBackground isInView={isInView} />
+        <VideoBackground
+          videos={{
+            mobile: {
+              url: `${CDN_BASEURL}/images/bg-sales-mobile-first.mp4`,
+              poster: `${CDN_BASEURL}/images/bg-sales-mobile-first-poster.png`,
+              width: 680,
+              height: 1024,
+            },
+            desktop: {
+              url: `${CDN_BASEURL}/images/bg-sales-first.mp4`,
+              poster: `${CDN_BASEURL}/images/bg-sales-first-poster.png`,
+              width: 1920,
+              height: 1080,
+            },
+          }}
+          className="absolute inset-0 w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none"
+          isInView={isInView}
+        />
 
         <div className="page-first-container flex flex-col md:flex-row justify-between gap-5 md:gap-10 w-full max-w-[1920px] h-full pt-10 md:pt-20 pb-10 md:pb-20 pl-4 sm:pl-6 md:pl-8 lg:pl-12 xl:pl-16 2xl:pl-20 3xl:pl-32 pr-8 lg:pr-12 xl:pr-16 2xl:pr-18 3xl:pr-20 z-[1]">
           <div className="w-full md:w-[78%] lg:w-[68%] xl:w-[64%] 2xl:w-[62%] 3xl:max-w-[60%] pt-6 md:pt-0 flex flex-col justify-center gap-15">

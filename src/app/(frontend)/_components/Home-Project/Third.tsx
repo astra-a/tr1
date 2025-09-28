@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import SectionHeader from "../SectionHeader";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import { motion, useAnimationFrame, useInView } from "framer-motion";
 import { useWindowSize } from "react-use";
 import { CDN_BASEURL } from "@/constants";
 import GlowingEdgeCard from "../GlowingEdgeCard";
+import VideoBackground from "../VideoBackground";
 
 const FEATURES = [
   { icon: "/images/icon-review.svg", text: "Decentralized Intelligence" },
@@ -104,42 +105,6 @@ function Marquee({
   );
 }
 
-function VideoBackground({ isInView }: { isInView: boolean }) {
-  const ref = useRef<HTMLVideoElement>(null);
-  useEffect(() => {
-    if (!ref?.current) return;
-    if (isInView) {
-      ref.current.play().finally();
-    } else {
-      ref.current.pause();
-    }
-    // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView, ref?.current]);
-
-  return (
-    <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
-      <video
-        ref={ref}
-        width={2560}
-        height={1440}
-        autoPlay
-        loop
-        muted
-        playsInline
-        controls={false}
-        preload="auto"
-        className="w-full h-full object-cover"
-        poster={`${CDN_BASEURL}/images/bg-project-third-poster.png`}
-      >
-        <source
-          src={`${CDN_BASEURL}/images/bg-project-third.mp4`}
-          type="video/mp4"
-        />
-      </video>
-    </div>
-  );
-}
-
 export default function Third() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { amount: 0.2 });
@@ -163,14 +128,30 @@ export default function Third() {
         </div>
 
         <motion.div
-          className="relative max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 mt-7 md:mt-0 mb-12 md:mb-0 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+          className="relative w-full max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 mt-7 md:mt-0 mb-12 md:mb-0 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
           viewport={{ amount: "some" }}
         >
           <GlowingEdgeCard autoPlayOnHover>
-            <VideoBackground isInView={isInView} />
+            <VideoBackground
+              videos={{
+                mobile: {
+                  url: `${CDN_BASEURL}/images/bg-project-mobile-third.mp4`,
+                  poster: `${CDN_BASEURL}/images/bg-project-mobile-third-poster.png`,
+                  width: 680,
+                  height: 382,
+                },
+                desktop: {
+                  url: `${CDN_BASEURL}/images/bg-project-third.mp4`,
+                  poster: `${CDN_BASEURL}/images/bg-project-third-poster.png`,
+                  width: 2556,
+                  height: 796,
+                },
+              }}
+              isInView={isInView}
+            />
           </GlowingEdgeCard>
         </motion.div>
 

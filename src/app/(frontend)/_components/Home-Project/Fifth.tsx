@@ -102,6 +102,7 @@ function VideoBackground({
   isInView: boolean;
   onEnded?: () => void;
 }) {
+  const { width } = useWindowSize();
   const [phase, setPhase] = useState<"intro" | "loop">("intro");
 
   const introRef = useRef<HTMLVideoElement>(null);
@@ -123,17 +124,16 @@ function VideoBackground({
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
         ref={introRef}
-        width={2560}
-        height={1440}
+        width={width >= 768 ? 2556 : 680}
+        height={width >= 768 ? 796 : 382}
         autoPlay
         muted
         playsInline
-        loop={false}
         controls={false}
+        loop={false}
         preload="auto"
         className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-project-fifth-1-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-project-fifth-1.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-project-${width >= 768 ? "" : "mobile-"}fifth-1-poster.png`}
         onEnded={() => {
           if ("intro" === phase) {
             onEnded?.();
@@ -141,11 +141,22 @@ function VideoBackground({
             loopRef.current?.play().finally();
           }
         }}
-      />
+      >
+        <source
+          src={`${CDN_BASEURL}/images/bg-project-mobile-fifth-1.mp4`}
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+        <source
+          src={`${CDN_BASEURL}/images/bg-project-fifth-1.mp4`}
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
+      </video>
       <video
         ref={loopRef}
-        width={2560}
-        height={1440}
+        width={width >= 768 ? 2556 : 680}
+        height={width >= 768 ? 796 : 382}
         autoPlay={false}
         muted
         playsInline
@@ -153,9 +164,19 @@ function VideoBackground({
         loop={true}
         preload="auto"
         className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-project-fifth-2-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-project-fifth-2.mp4`}
-      />
+        poster={`${CDN_BASEURL}/images/bg-project-${width >= 768 ? "" : "mobile-"}fifth-2-poster.png`}
+      >
+        <source
+          src={`${CDN_BASEURL}/images/bg-project-mobile-fifth-2.mp4`}
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+        <source
+          src={`${CDN_BASEURL}/images/bg-project-fifth-2.mp4`}
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
+      </video>
     </div>
   );
 }
@@ -183,7 +204,7 @@ export default function Fifth() {
 
         <div className="page-fifth-container flex flex-col justify-center items-center gap-6 md:gap-4 2xl:gap-12 3xl:gap-16 w-full max-w-[1920px] relative px-4 sm:px-6 md:px-8 lg:px-10 2xl:px-0 z-[1]">
           <motion.div
-            className="relative max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+            className="relative w-full max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 flex justify-center items-center border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
             initial={{ opacity: 0, y: 150 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
