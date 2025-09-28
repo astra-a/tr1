@@ -105,6 +105,7 @@ function Marquee({
 }
 
 function VideoBackground({ isInView }: { isInView: boolean }) {
+  const { width } = useWindowSize();
   const [phase, setPhase] = useState<"intro" | "loop">("intro");
 
   const introRef = useRef<HTMLVideoElement>(null);
@@ -126,8 +127,8 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
       <video
         ref={introRef}
-        width={2560}
-        height={1440}
+        width={width >= 768 ? 2560 : 680}
+        height={width >= 768 ? 1440 : 382}
         autoPlay
         muted
         playsInline
@@ -135,19 +136,29 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         loop={false}
         preload="auto"
         className={`w-full h-full object-cover ${"intro" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-sales-third-1-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-sales-third-1.mp4`}
+        poster={`${CDN_BASEURL}/images/bg-sales-${width >= 768 ? "" : "mobile-"}third-1-poster.png`}
         onEnded={() => {
           if ("intro" === phase) {
             setPhase("loop");
             loopRef.current?.play().finally();
           }
         }}
-      />
+      >
+        <source
+          src={`${CDN_BASEURL}/images/bg-sales-mobile-third-1.mp4`}
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+        <source
+          src={`${CDN_BASEURL}/images/bg-sales-third-1.mp4`}
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
+      </video>
       <video
         ref={loopRef}
-        width={2560}
-        height={1440}
+        width={width >= 768 ? 2560 : 680}
+        height={width >= 768 ? 1440 : 382}
         autoPlay={false}
         muted
         playsInline
@@ -155,9 +166,19 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         loop={true}
         preload="auto"
         className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
-        poster={`${CDN_BASEURL}/images/bg-sales-third-2-poster.png`}
-        src={`${CDN_BASEURL}/images/bg-sales-third-2.mp4`}
-      />
+        poster={`${CDN_BASEURL}/images/bg-sales-${width >= 768 ? "" : "mobile-"}third-2-poster.png`}
+      >
+        <source
+          src={`${CDN_BASEURL}/images/bg-sales-mobile-third-2.mp4`}
+          type="video/mp4"
+          media="(max-width: 767px)"
+        />
+        <source
+          src={`${CDN_BASEURL}/images/bg-sales-third-2.mp4`}
+          type="video/mp4"
+          media="(min-width: 768px)"
+        />
+      </video>
     </div>
   );
 }
@@ -185,7 +206,7 @@ export default function Third() {
         </div>
 
         <motion.div
-          className="relative max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 mt-7 md:mt-0 mb-12 md:mb-0 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
+          className="relative w-full max-w-320 md:max-h-[40vh] aspect-16/9 md:aspect-16/5 mt-7 md:mt-0 mb-12 md:mb-0 border-gradient-rounded line-ray rounded-[20px] overflow-hidden"
           initial={{ opacity: 0, y: 150 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}

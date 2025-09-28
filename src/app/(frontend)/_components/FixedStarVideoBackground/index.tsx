@@ -18,10 +18,10 @@ export default function FixedStarVideoBackground({
         playsInline
         controls={false}
         preload="auto"
-        poster={`${CDN_BASEURL}/images/bg-second-poster.png`}
+        poster={`${CDN_BASEURL}/images/bg-star-poster.png`}
         className="w-full h-full object-cover"
       >
-        <source src={`${CDN_BASEURL}/images/bg-second.mp4`} type="video/mp4" />
+        <source src={`${CDN_BASEURL}/images/bg-star.mp4`} type="video/mp4" />
       </video>
     </div>
   );
