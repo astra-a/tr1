@@ -18,6 +18,7 @@ import Field from "@/app/dashboard/_components/Field";
 import {
   useAccount,
   useChains,
+  useReadContract,
   useSwitchChain,
   useWaitForTransactionReceipt,
   useWriteContract,
@@ -39,6 +40,7 @@ import {
   useBalance,
   FACTORIES,
   TEAM_CODES,
+  POOL_CREATOR_ROLE,
 } from "@/web3";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import BigNumber from "bignumber.js";
@@ -76,6 +78,16 @@ const PoolForm = () => {
   );
 
   // --- check
+  const { data: hasRole } = useReadContract({
+    chainId: connectedChain?.id,
+    address: factory.address as Address,
+    abi: BondingPoolFactoryABI,
+    functionName: "hasRole",
+    args: [POOL_CREATOR_ROLE, account as Address],
+    query: {
+      enabled: !!account && !!factory?.address && isAddress(factory.address),
+    },
+  });
   const [totalRequired, setTotalRequired] = useState("0"); // saftToken
   const { data: sBalance } = useBalance({
     chainId: connectedChain?.id,
@@ -344,6 +356,10 @@ const PoolForm = () => {
       toast.error(`Please switch to ${selectedChain.name}!`);
       return;
     }
+    if (!hasRole) {
+      toast.error(`Account not creator`);
+      return;
+    }
 
     const paymentRules: {
       index: number;
@@ -366,7 +382,12 @@ const PoolForm = () => {
       const paymentRule = {
         index,
         paymentToken: rule.paymentToken,
-        price: BigNumber(BigNumber(rule.price).toFixed(18, 1)).toString(),
+        price: BigNumber(
+          BigNumber(rule.price).toFixed(
+            rule.paymentToken.decimals - factory.saleToken.decimals,
+            1,
+          ),
+        ).toString(),
         minPurchase: BigNumber(
           BigNumber(rule.minPurchase).toFixed(rule.paymentToken.decimals, 1),
         ).toString(),
@@ -377,7 +398,12 @@ const PoolForm = () => {
       };
       paymentRules.push(paymentRule);
       paymentTokens.push(rule.paymentToken.address as Address);
-      prices.push(parseUnits(paymentRule.price, 18));
+      prices.push(
+        parseUnits(
+          paymentRule.price,
+          18 + rule.paymentToken.decimals - factory.saleToken.decimals,
+        ),
+      );
       mins.push(
         parseUnits(paymentRule.minPurchase, rule.paymentToken.decimals),
       );
@@ -668,6 +694,15 @@ const PoolForm = () => {
                 className="max-md:w-[calc(50%-0.75rem)] max-md:mx-1.5 mb-2 w-full gap-2"
               >
                 Send Transaction & Save
+              </Button>
+            ) : !hasRole ? (
+              <Button
+                type="button"
+                isWhite
+                disabled
+                className="max-md:w-[calc(50%-0.75rem)] max-md:mx-1.5 mb-2 w-full gap-2 !text-primary-03"
+              >
+                Account not creator
               </Button>
             ) : !balanceIsSufficient ? (
               <Button

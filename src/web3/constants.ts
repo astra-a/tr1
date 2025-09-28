@@ -11,6 +11,9 @@ export const DEFAULT_ADMIN_ROLE =
 export const OPERATOR_ROLE =
   "0x97667070c54ef182b0f5858b034beac1b6f3089aa2d3188bb1e8929f4fa9b929";
 
+export const POOL_CREATOR_ROLE =
+  "0x4066b03ab177190abcd4de6384e71f7a60f56b879537b65d43a0523ade6cfe52";
+
 export const NETWORKS_ICON: { [key: number]: string } = {
   [bsc.id]: "/images/network-bsc.svg",
   [holesky.id]: "/images/network-ethereum.svg",
@@ -27,10 +30,10 @@ export const SALE_TOKENS: { [key: number]: IToken } = {
   // },
   [holesky.id]: {
     chainId: holesky.id,
-    address: "0xde04e26cc0990fc417745fdd37ea3f7b690af80e",
+    address: "0x7807418371Fa50900571d3adb25eC29f527e61B8",
     name: DEFAULT_TOKEN_NAME,
     symbol: DEFAULT_TOKEN_NAME,
-    decimals: 6,
+    decimals: 5,
     logo: "/images/token-aios.svg",
   },
 };
@@ -57,18 +60,18 @@ export const PAYMENT_TOKENS: { [key: number]: IToken[] } = {
   [holesky.id]: [
     {
       chainId: holesky.id,
-      address: "0xb39f1a5566dbda75b978ae9b03374b1ff0f9c72d",
-      name: "USDT",
+      address: "0x57404346543e8D3A922BF6C6b92DfeA1aDB18576",
+      name: "Tether USD",
       symbol: "USDT",
-      decimals: 6,
+      decimals: 18,
       logo: "/images/token-usdt.svg",
     },
     {
       chainId: holesky.id,
-      address: "0x5991fc2010affd28e7d10042e862da3a3d305004",
-      name: "USDC",
+      address: "0x4a7b2b48bBA3A47aC15C09788393B1d1404dB66c",
+      name: "USD Coin",
       symbol: "USDC",
-      decimals: 6,
+      decimals: 18,
       logo: "/images/token-usdc.svg",
     },
   ],
@@ -82,7 +85,7 @@ export const ALL_TOKENS: { [key: number]: IToken[] } = {
 export const FACTORIES: { [key: number]: IFactory } = {
   // [bsc.id]: "",
   [holesky.id]: {
-    address: "0x36CA97aA7c6fd8942D8850fE8cd0935a491a0310",
+    address: "0xe54fAEE21bA614A965146cCab3FBF249c57e137a",
     treasury: "0x3621139d175206e6a159805e8c98A54488bcdE5C",
     saleToken: SALE_TOKENS[holesky.id],
     paymentTokens: PAYMENT_TOKENS[holesky.id],
