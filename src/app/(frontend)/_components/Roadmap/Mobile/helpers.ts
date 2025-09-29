@@ -4,6 +4,7 @@ import Lenis from "@studio-freight/lenis";
 export const CONFIG = {
   // 角度间隔保持不变
   angleInterval: 28,
+  svg: { minSize: 5, maxSize: 18 },
   // scrollSpeed 不再用于连续旋转，但可以保留以供将来参考
   animation: { duration: 1.2, ease: "power3.out" },
   // rotationBounds 不再用于限制连续滚动，可以保留但作用变小
@@ -58,51 +59,57 @@ export class TextItem extends ItemBase {
     // 中心激活状态：当 item 靠近中心时 (0度)
     const isActive = normalizedAbsoluteAngle < centerAngle;
     this.el.classList.toggle("active", isActive);
+
+    // --- 内圈文字透明度 ---
+    if (!(this.el.dataset.isOuter === "true")) {
+      // 内圈文字判定
+      const maxVisibleDiff = CONFIG.angleInterval * 2; // 可调范围
+      const opacityFactor = Math.pow(
+        1 - Math.min(normalizedAbsoluteAngle / maxVisibleDiff, 1),
+        2,
+      ); // 指数变化让过渡柔和
+      gsap.set(this.el, { opacity: opacityFactor });
+    }
   }
 }
-
 export class SvgItem extends ItemBase {
   update(rotation: number) {
     this.currentAngle = this.baseAngle + rotation;
-    // 旋转
     gsap.set(this.el, { rotation: this.currentAngle });
 
-    // 缩放和透明度逻辑... (保持不变)
-    // 这里的逻辑主要控制 svg-item 的大小和透明度
-    const normalizedAngle = this.normalizeAngle(this.currentAngle);
-    const centerAngle = CONFIG.angleInterval;
-    const normalizedAbsoluteAngle = Math.abs(normalizedAngle);
+    const svgContainer = this.el.querySelector(".svg-container") as HTMLElement;
+    if (!svgContainer) return;
 
-    let opacity = 1;
-    let filter = "grayscale(1)";
+    let opacity: number;
+    let size: number;
+    let filter: string;
 
-    if (normalizedAbsoluteAngle <= centerAngle * 2) {
-      // 在中心附近的 2 个间隔内
-      const t = normalizedAbsoluteAngle / (centerAngle * 2); // t 从 0 到 1
-      filter = `grayscale(${t * 1})`; // 0 -> 1
-    } else {
-      filter = "grayscale(1)";
-    }
-
-    if (normalizedAngle > 0) {
-      // 靠近中点（比如 -5° ~ +5°），立即透明
-      if (Math.abs(normalizedAngle) === 0) {
-        opacity = 0;
-      } else {
-        opacity = 1;
-        filter = "grayscale(0)";
-      }
-    } else {
+    if (this.currentAngle > 0) {
+      // 左侧强制不可见
       opacity = 0;
+      size = CONFIG.svg.minSize;
+      filter = "grayscale(100%)";
+    } else {
+      // 右侧渐变（currentAngle <= 0）
+      const diff = Math.abs(this.currentAngle); // 0 -> 90
+      const maxAngle = CONFIG.angleInterval * 3; // 可调渐变范围
+      const t = diff >= maxAngle ? 0 : 1 - diff / maxAngle;
+      const tEx = Math.pow(t, 1.5); // 指数过渡
+
+      opacity = tEx;
+      size =
+        CONFIG.svg.minSize + tEx * (CONFIG.svg.maxSize - CONFIG.svg.minSize);
+      filter = `grayscale(${100 - tEx * 100}%)`;
     }
 
-    const svgContainer = this.el.querySelector(".svg-container");
-    if (svgContainer) {
-      gsap.set(svgContainer, { opacity: opacity, filter: filter });
-    }
+    gsap.set(svgContainer, {
+      opacity,
+      width: `${size}px`,
+      height: `${size}px`,
+      filter,
+    });
   }
 }
-
 export class CenterSvgItem extends ItemBase {
   update(rotation: number) {
     const progress = rotation / CONFIG.angleInterval; // 得到经过了多少段
@@ -143,7 +150,7 @@ export class AnimationController {
   animateRotation(targetRotation: number) {
     this.targetRotation = targetRotation;
     gsap.to(this, {
-      currentRotation: this.targetRotation,
+      currentRotation: -this.targetRotation,
       duration: 0.6, // 稍微缩短，与 OuterTextCarousel 同步
       ease: "power2.out",
       overwrite: true,

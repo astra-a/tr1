@@ -3,7 +3,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    transform: rotate(90deg) translate3d(-35vw, 0, 0);
+    transform: rotate(90deg) translate3d(-35vw, 0, 0) scaley(-1);
   }
 
   &-bg-container {
@@ -61,7 +61,7 @@
 
       .block {
         width: 100vw;
-        padding-left: 18vw;
+        padding-left: 15vw;
         display: flex;
         flex-direction: column; // 标题和内容纵向排列
         align-items: flex-start;
@@ -92,7 +92,7 @@
       padding: 0 10vw;
       display: flex;
       flex-direction: column; // 标题和内容纵向排列
-      align-items: flex-start;
+      align-items: center;
       gap: 8px; // 内部标题与内容间距
     }
   }
@@ -101,12 +101,15 @@
     position: relative;
     padding: 12px 20px;
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 1.3rem;
     line-height: 1.2;
     color: white;
     letter-spacing: -0.02em;
     border: 2px dashed rgba(255, 255, 255, 0.1);
     border-radius: 12px;
+    display: flex; // 改成弹性布局
+    justify-content: center; // 水平居中
+    text-align: center; // 避免内容有多行时跑偏
 
     &::before,
     &::after {
@@ -132,7 +135,7 @@
 
   .content {
     font-weight: 400;
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.3333;
     color: white;
     letter-spacing: -0.02em;
@@ -169,7 +172,6 @@
       transition-duration: 0.18s;
       transition-timing-function: linear;
       will-change: width, height, opacity, filter;
-      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
 
       svg {
         width: 100%;
@@ -190,15 +192,16 @@
     justify-content: center;
     align-items: center;
     fill: #98fce4;
+    filter: grayscale(0%);
   }
 }
 
 .center-svg-item {
   position: absolute;
-  left: 60%;
+  left: 54%;
   top: 50%;
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   transform: translate(-50%, -50%);
   transform-origin: 50% 50%;
   pointer-events: none;
