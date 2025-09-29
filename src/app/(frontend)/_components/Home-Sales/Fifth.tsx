@@ -233,7 +233,7 @@ export default function Fifth() {
               <h2 className="text-[1.25rem] sm:text-2xl md:text-3xl lg:text-4xl xl:text-[2.5rem] 2xl:text-5xl leading-[1.16667em] tracking-[-0.03em] text-mint-green-gradient text-shadow-black-10 text-center">
                 Co-Create the Future of Decentralized AI and Borderless Finance
               </h2>
-              <p className="text-sm xl:text-base text-mint-green-gradient-2 text-center">
+              <p className="text-sm xl:text-base text-mint-green/82 text-center">
                 Step into a world where your{" "}
                 <b>AI is an ally, blockchains interoperate without borders</b>,
                 and your <b>sovereignty is non-negotiable—build</b> intelligent,

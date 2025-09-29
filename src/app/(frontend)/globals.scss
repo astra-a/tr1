@@ -323,13 +323,13 @@ input:focus-visible {
 
 @keyframes gradientShift {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
 
@@ -360,7 +360,9 @@ input:focus-visible {
     z-index: -1;
     pointer-events: none;
     background-size: 200% 200%;
-    animation: gradientShift 12s ease-in-out infinite;
+    @media (width >= 48rem) {
+      animation: gradientShift 12s ease-in-out infinite;
+    }
   }
 
   &::after {
@@ -386,7 +388,9 @@ input:focus-visible {
     z-index: 0;
     pointer-events: none;
     background-size: 200% 200%;
-    animation: gradientShift 12s ease-in-out infinite;
+    @media (width >= 48rem) {
+      animation: gradientShift 12s ease-in-out infinite;
+    }
   }
 
   &.paused::before,

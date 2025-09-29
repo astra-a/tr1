@@ -69,8 +69,8 @@ export default function NewsList({
   );
 
   return (
-    <div className="news-list flex flex-col mt-10 relative z-[2]">
-      <div className="flex flex-col gap-4">
+    <div className="news-list flex flex-col mt-4 sm:mt-6 md:mt-10 relative z-[2]">
+      <div className="flex flex-col gap-4 sm:gap-6 md:gap-2 ">
         {posts.map((item) => (
           <motion.div
             key={item.id}
