@@ -156,7 +156,7 @@ export default function MobileRoadmap() {
       <div className="roadmap-bg-wrapper">
         <div className="roadmap-bg-container">
           <Image
-            src="/images/bg-roadmap-line.png"
+            src="/images/bg-roadmap.png"
             alt=""
             width={1414}
             height={1491}
