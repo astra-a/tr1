@@ -90,7 +90,7 @@ function Marquee({
           ))}
         </ul>
       </div>
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0)_20%,rgba(0,0,0,0)_80%,#000_100%)]" />
+      <div className="absolute top-8 bottom-8 left-0 right-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0)_20%,rgba(0,0,0,0)_80%,#000_100%)]" />
     </div>
   );
 }

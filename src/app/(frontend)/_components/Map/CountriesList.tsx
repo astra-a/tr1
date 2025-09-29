@@ -63,13 +63,13 @@ export default function CountriesList() {
             >
               <div className="flex justify-between px-4 md:px-5 xl:px-6">
                 <div
-                  className="shrink-0 px-3 py-4 border-r-1 border-r-dark-gray"
+                  className="shrink-0 pl-3 pr-7 md:pr-8 xl:pr-9 py-4 border-r-1 border-r-dark-gray text-center"
                   style={{ width: columnWidth }}
                 >
                   Available
                 </div>
                 <div
-                  className="flex-auto shrink-0 px-3 py-4 rounded-se-xl"
+                  className="flex-auto shrink-0 pl-7 md:pl-8 xl:pl-9 pr-3 py-4 rounded-se-xl text-center"
                   style={{
                     background:
                       "linear-gradient(90deg, #59FFEE 0%, #7DDAFF 100%)",
