@@ -89,4 +89,4 @@ export const EARN_MAP = {
 export const DAY_SECONDS = 86_400;
 export const YEAR_SECONDS = 31_536_000; // 365d * 86_400
 
-export const TOTAL_SALE_CAP = 250_000_000;
+export const TOTAL_SALE_CAP = 125_000_000;
