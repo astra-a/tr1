@@ -1,0 +1,505 @@
+.roadmap {
+  &-bg-wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate3d(-50%, -35%, 0) rotate(90deg);
+
+    @media (width >= 40rem) {
+    }
+    @media (width >= 48rem) {
+      top: 50%;
+      left: 0;
+      transform: translate3d(-35vw, -50%, 0);
+    }
+    @media (width >= 64rem) {
+    }
+    @media (width >= 80rem) {
+    }
+    @media (width >= 96rem) {
+    }
+  }
+
+  &-bg-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 120vw;
+
+    @media (width >= 40rem) {
+    }
+    @media (width >= 48rem) {
+      width: 78vw;
+    }
+    @media (width >= 64rem) {
+    }
+    @media (width >= 80rem) {
+    }
+    @media (width >= 96rem) {
+    }
+  }
+
+  .circle-container {
+    position: absolute;
+    top: 7%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    --center-x: 50%;
+    --center-y: 50%;
+
+    @media (width >= 40rem) {
+    }
+    @media (width >= 48rem) {
+      top: 51%;
+      left: 2.8%;
+    }
+    @media (width >= 64rem) {
+    }
+    @media (width >= 80rem) {
+    }
+    @media (width >= 96rem) {
+    }
+  }
+
+  .center-point {
+    //display: none;
+    position: absolute;
+    left: var(--center-x);
+    top: var(--center-y);
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 0, 0, 0.8);
+    //background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+
+    @media (width >= 40rem) {
+    }
+    @media (width >= 48rem) {
+    }
+    @media (width >= 64rem) {
+    }
+    @media (width >= 80rem) {
+    }
+    @media (width >= 96rem) {
+    }
+  }
+
+  .inner-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 1.33333333em;
+    height: 37vw;
+    transform: translateX(-50%);
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 1.33333333;
+    color: white;
+
+    @media (width >= 25rem) {
+      height: 38vw;
+    }
+    @media (width >= 30rem) {
+      height: 41vw;
+    }
+    @media (width >= 35rem) {
+      height: 43vw;
+    }
+    @media (width >= 40rem) {
+      height: 45vw;
+    }
+    @media (width >= 48rem) {
+      width: 25.4%;
+      height: 1.33333333em;
+      transform: translateY(-50%);
+      font-size: 1rem;
+    }
+    @media (width >= 64rem) {
+      font-size: 1.2rem;
+    }
+    @media (width >= 80rem) {
+      font-size: 1.25rem;
+    }
+    @media (width >= 96rem) {
+      font-size: 1.5rem;
+    }
+
+    .inner {
+      position: absolute;
+      inset: 0;
+      transform-origin: center top;
+      writing-mode: sideways-lr;
+
+      //background-color: rgba(255, 0, 0, 0.5);
+
+      @media (width >= 40rem) {
+      }
+      @media (width >= 48rem) {
+        padding-left: calc(100% - 5.5em);
+        transform-origin: left center;
+        writing-mode: horizontal-tb;
+      }
+      @media (width >= 64rem) {
+      }
+      @media (width >= 80rem) {
+      }
+      @media (width >= 96rem) {
+      }
+    }
+  }
+
+  .outer-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 80%;
+    transform: translateX(-49%);
+    display: grid;
+    place-items: center stretch;
+
+    @media (width >= 40rem) {
+    }
+    @media (width >= 48rem) {
+      width: 100%;
+      transform: translateY(-50%);
+    }
+    @media (width >= 64rem) {
+    }
+    @media (width >= 80rem) {
+    }
+    @media (width >= 96rem) {
+    }
+
+    .outer {
+      position: relative;
+      grid-area: 1 /1;
+      transform-origin: center top;
+      width: 100%;
+      padding-top: 90vw;
+      height: min-content;
+      display: flex;
+      justify-content: flex-start;
+
+      //background-color: rgba(0, 255, 0, 0.3);
+
+      @media (width >= 25rem) {
+        padding-top: 90vw;
+      }
+      @media (width >= 30rem) {
+        padding-top: 90vw;
+      }
+      @media (width >= 35rem) {
+        padding-top: 90vw;
+      }
+      @media (width >= 40rem) {
+        padding-top: 90vw;
+      }
+      @media (width >= 48rem) {
+        transform-origin: left center;
+        width: 95%;
+        padding-top: 0;
+        padding-left: 48%;
+      }
+      @media (width >= 64rem) {
+      }
+      @media (width >= 80rem) {
+      }
+      @media (width >= 96rem) {
+      }
+
+      .block {
+        height: min-content;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+
+        @media (width >= 40rem) {
+        }
+        @media (width >= 48rem) {
+          gap: 20px;
+        }
+        @media (width >= 64rem) {
+        }
+        @media (width >= 80rem) {
+        }
+        @media (width >= 96rem) {
+        }
+      }
+
+      .title {
+        position: relative;
+        max-width: 45rem;
+        padding: 6px 10px;
+        border: 2px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+        font-weight: 600;
+        font-size: 0.875rem;
+        line-height: 1.2;
+        color: white;
+        letter-spacing: -0.02em;
+
+        &::before,
+        &::after {
+          content: "";
+          position: absolute;
+          top: -2px;
+          bottom: -2px;
+          aspect-ratio: 52 / 65;
+        }
+
+        &::before {
+          left: -2px;
+          background: url("/images/bg-roadmap-title-left.svg") no-repeat top
+            left/ auto 100% border-box;
+        }
+
+        &::after {
+          right: -2px;
+          background: url("/images/bg-roadmap-title-right.svg") no-repeat top
+            right/ auto 100% border-box;
+        }
+
+        @media (width >= 40rem) {
+        }
+        @media (width >= 48rem) {
+          padding: 8px 12px;
+          border-radius: 8px;
+          font-size: 1.125rem;
+        }
+        @media (width >= 64rem) {
+          font-size: 1.25rem;
+        }
+        @media (width >= 80rem) {
+          padding: 10px 15px;
+          border-radius: 10px;
+          font-size: 1.5rem;
+        }
+        @media (width >= 96rem) {
+          padding: 12px 20px;
+          border-radius: 12px;
+          font-size: 1.875rem;
+        }
+      }
+
+      .content {
+        max-width: 45rem;
+        font-weight: 600;
+        font-size: 0.75rem;
+        line-height: 1.33333333;
+        color: white;
+        letter-spacing: -0.02em;
+
+        @media (width >= 40rem) {
+        }
+        @media (width >= 48rem) {
+          font-size: 0.875rem;
+        }
+        @media (width >= 64rem) {
+          font-size: 1rem;
+        }
+        @media (width >= 80rem) {
+          font-size: 1.25rem;
+        }
+        @media (width >= 96rem) {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+
+  .small-logo-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    transform: translateX(-50%);
+    display: grid;
+    place-items: stretch center;
+
+    @media (width >= 40rem) {
+    }
+    @media (width >= 48rem) {
+      width: 100%;
+      height: auto;
+      transform: translateY(-50%);
+      place-items: center stretch;
+    }
+    @media (width >= 64rem) {
+    }
+    @media (width >= 80rem) {
+    }
+    @media (width >= 96rem) {
+    }
+
+    .svg-item {
+      position: relative;
+      box-sizing: content-box;
+      grid-area: 1/1;
+      transform-origin: center top;
+      padding-top: 60vw;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      will-change: transform;
+
+      //background-color: rgba(0, 0, 255, 0.3);
+
+      @media (width >= 25rem) {
+        padding-top: 61vw;
+      }
+      @media (width >= 30rem) {
+        padding-top: 64vw;
+      }
+      @media (width >= 35rem) {
+        padding-top: 67vw;
+      }
+      @media (width >= 40rem) {
+        padding-top: 68vw;
+      }
+      @media (width >= 48rem) {
+        transform-origin: left center;
+        padding-top: 0;
+        padding-left: 40.7%;
+        width: 24px;
+        height: 24px;
+      }
+      @media (width >= 64rem) {
+      }
+      @media (width >= 80rem) {
+      }
+      @media (width >= 96rem) {
+      }
+
+      .svg-container {
+        background: transparent;
+        transition-property: width, height;
+        transition-duration: 0.18s;
+        transition-timing-function: linear;
+        will-change: width, height, opacity, filter;
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+
+        @media (width >= 40rem) {
+        }
+        @media (width >= 48rem) {
+        }
+        @media (width >= 64rem) {
+        }
+        @media (width >= 80rem) {
+        }
+        @media (width >= 96rem) {
+        }
+
+        svg {
+          width: 100%;
+          height: 100%;
+          transition: none;
+          fill: #98fce4;
+
+          @media (width >= 40rem) {
+          }
+          @media (width >= 48rem) {
+          }
+          @media (width >= 64rem) {
+          }
+          @media (width >= 80rem) {
+          }
+          @media (width >= 96rem) {
+          }
+        }
+      }
+    }
+
+    .fixed-center-svg {
+      position: absolute;
+      top: 60vw;
+      left: calc(50% - 8px);
+      width: 16px;
+      height: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      fill: #98fce4;
+
+      @media (width >= 25rem) {
+        top: 61vw;
+      }
+      @media (width >= 30rem) {
+        top: 64vw;
+      }
+      @media (width >= 35rem) {
+        top: 67vw;
+      }
+      @media (width >= 40rem) {
+        top: 68vw;
+      }
+      @media (width >= 48rem) {
+        top: 0;
+        left: 40.7%;
+        width: 24px;
+        height: 24px;
+      }
+      @media (width >= 64rem) {
+      }
+      @media (width >= 80rem) {
+      }
+      @media (width >= 96rem) {
+      }
+    }
+  }
+
+  .center-svg-item {
+    position: absolute;
+    left: 49%;
+    top: 54%;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%);
+    transform-origin: 50% 50%;
+    pointer-events: none;
+
+    @media (width >= 25rem) {
+      top: 55%;
+      width: 90px;
+      height: 90px;
+    }
+    @media (width >= 30rem) {
+      top: 56%;
+      width: 100px;
+      height: 100px;
+    }
+    @media (width >= 35rem) {
+      top: 57%;
+      width: 110px;
+      height: 110px;
+    }
+    @media (width >= 40rem) {
+      top: 60%;
+      width: 120px;
+      height: 120px;
+    }
+    @media (width >= 48rem) {
+      left: 58.2%;
+      top: 50%;
+      width: 160px;
+      height: 160px;
+    }
+    @media (width >= 64rem) {
+    }
+    @media (width >= 80rem) {
+    }
+    @media (width >= 96rem) {
+    }
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}
