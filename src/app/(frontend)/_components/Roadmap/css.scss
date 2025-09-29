@@ -1,23 +1,23 @@
 .roadmap {
   &-bg-wrapper {
     position: absolute;
-    top: 50%;
+    top: -5%;
     left: 0;
-    transform: translate3d(-35vw, -50%, 0);
+    transform: rotate(90deg) translate3d(-35vw, 0, 0);
   }
 
   &-bg-container {
     position: relative;
     top: 0;
     left: 0;
-    width: 78vw;
+    width: 100vw;
   }
 
   .circle-container {
     position: absolute;
-    top: 51%;
-    left: 2.8%;
-    transform: translate(-50%, -50%);
+    top: -50%;
+    left: 0%;
+    transform: rotate(90deg);
     width: 100%;
     height: 100%;
     --center-x: 50%;
@@ -46,14 +46,14 @@
     height: 1.33333333em;
     transform: translateY(-50%);
     font-weight: 600;
-    font-size: 1.5rem;
+    font-size: 0.8rem;
     line-height: 1.33333333;
     color: white;
 
     .inner {
       position: absolute;
       inset: 0;
-      padding-left: calc(100% - 5.5em);
+      padding-left: calc(120%);
       transform-origin: left center;
 
       //background-color: rgba(255, 0, 0, 0.5);
@@ -62,144 +62,138 @@
 
   .outer-container {
     position: absolute;
-    left: 50%;
-    top: 50%;
+    top: 40%; //
+    left: 0;
+    transform: none;
     width: 100%;
-    transform: translateY(-50%);
-    display: grid;
-    place-items: center stretch;
-
-    .outer {
-      position: relative;
-      grid-area: 1 /1;
-      transform-origin: left center;
-      padding-left: 48%;
-      height: min-content;
-      display: flex;
-      justify-content: flex-start;
-
-      //background-color: rgba(0, 255, 0, 0.3);
-
-      .block {
-        height: min-content;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-      }
-
-      .title {
-        position: relative;
-        max-width: 45rem;
-        padding: 12px 20px;
-        border: 2px dashed rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 1.875rem;
-        line-height: 1.2;
-        color: white;
-        letter-spacing: -0.02em;
-
-        &::before,
-        &::after {
-          content: "";
-          position: absolute;
-          top: -2px;
-          bottom: -2px;
-          aspect-ratio: 52 / 65;
-        }
-
-        &::before {
-          left: -2px;
-          background: url("/images/bg-roadmap-title-left.svg") no-repeat top
-            left/ auto 100% border-box;
-        }
-
-        &::after {
-          right: -2px;
-          background: url("/images/bg-roadmap-title-right.svg") no-repeat top
-            right/ auto 100% border-box;
-        }
-      }
-
-      .content {
-        max-width: 45rem;
-        font-weight: 600;
-        font-size: 1.5rem;
-        line-height: 1.33333333;
-        color: white;
-        letter-spacing: -0.02em;
-      }
-    }
+    overflow: hidden; //
+    display: block; //
   }
 
-  .small-logo-container {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 100%;
-    transform: translateY(-50%);
-    display: grid;
-    place-items: center stretch;
+  .outer {
+    display: flex;
+    flex-direction: row;
+    gap: 100px; // block 间距
+    width: max-content; // 容器宽度自适应内容
+    transform: translateX(0); // 初始偏移
+  }
 
-    .svg-item {
-      position: relative;
-      box-sizing: content-box;
-      grid-area: 1/1;
-      transform-origin: left center;
-      padding-left: 40.7%;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      will-change: transform;
+  .block {
+    width: 300px; //
+    display: flex;
+    flex-direction: column; // 标题和内容纵向排列
+    align-items: flex-start;
+    gap: 8px; // 内部标题与内容间距
+  }
 
-      //background-color: rgba(0, 0, 255, 0.3);
+  .title {
+    position: relative;
+    padding: 12px 20px;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.2;
+    color: white;
+    letter-spacing: -0.02em;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
 
-      .svg-container {
-        background: transparent;
-        transition-property: width, height;
-        transition-duration: 0.18s;
-        transition-timing-function: linear;
-        will-change: width, height, opacity, filter;
-        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
-
-        svg {
-          width: 100%;
-          height: 100%;
-          transition: none;
-          fill: #98fce4;
-        }
-      }
-    }
-
-    .fixed-center-svg {
+    &::before,
+    &::after {
+      content: "";
       position: absolute;
-      top: 0;
-      left: 40.7%;
-      width: 24px;
-      height: 24px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      fill: #98fce4;
+      top: -2px;
+      bottom: -2px;
+      aspect-ratio: 52 / 65;
+    }
+
+    &::before {
+      left: -2px;
+      background: url("/images/bg-roadmap-title-left.svg") no-repeat top left/
+        auto 100% border-box;
+    }
+
+    &::after {
+      right: -2px;
+      background: url("/images/bg-roadmap-title-right.svg") no-repeat top right/
+        auto 100% border-box;
     }
   }
 
-  .center-svg-item {
-    position: absolute;
-    left: 58.2%;
-    top: 50%;
-    width: 160px;
-    height: 160px;
-    transform: translate(-50%, -50%);
-    transform-origin: 50% 50%;
-    pointer-events: none;
+  .content {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.3333;
+    color: white;
+    letter-spacing: -0.02em;
+  }
+}
 
-    svg {
-      width: 100%;
-      height: 100%;
+.small-logo-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 100%;
+  transform: translateY(-50%);
+  display: grid;
+  place-items: center stretch;
+
+  .svg-item {
+    position: relative;
+    box-sizing: content-box;
+    grid-area: 1/1;
+    transform-origin: left center;
+    padding-left: 60%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    will-change: transform;
+
+    //background-color: rgba(0, 0, 255, 0.3);
+
+    .svg-container {
+      background: transparent;
+      transition-property: width, height;
+      transition-duration: 0.18s;
+      transition-timing-function: linear;
+      will-change: width, height, opacity, filter;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
+
+      svg {
+        width: 100%;
+        height: 100%;
+        transition: none;
+        fill: #98fce4;
+      }
     }
+  }
+
+  .fixed-center-svg {
+    position: absolute;
+    top: 0;
+    left: 60%;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    fill: #98fce4;
+  }
+}
+
+.center-svg-item {
+  position: absolute;
+  left: 70%;
+  top: 50%;
+  width: 60px;
+  height: 60px;
+  transform: translate(-50%, -50%);
+  transform-origin: 50% 50%;
+  pointer-events: none;
+
+  svg {
+    width: 100%;
+    height: 100%;
   }
 }
