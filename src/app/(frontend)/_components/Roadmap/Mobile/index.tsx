@@ -97,13 +97,15 @@ export default function Roadmap() {
           ".inner-container",
         );
       if (innerContainerEl) {
-        Roadmaps.forEach((item, i) => {
-          // 保持角度计算与 helpers.ts 中 rotateToIndex 方法的逻辑一致
-          const angle = (i - roadmapCenterIndex + 1) * CONFIG.angleInterval;
-          const itemEl = createDOMElement("item inner", angle, item.date, "");
-          innerContainerEl.appendChild(itemEl);
-          allItems.push(new TextItem(itemEl));
-        });
+        Roadmaps.slice()
+          .reverse()
+          .forEach((item, i) => {
+            // 保持角度计算与 helpers.ts 中 rotateToIndex 方法的逻辑一致
+            const angle = (i - roadmapCenterIndex + 1) * CONFIG.angleInterval;
+            const itemEl = createDOMElement("item inner", angle, item.date, "");
+            innerContainerEl.appendChild(itemEl);
+            allItems.push(new TextItem(itemEl));
+          });
       }
 
       // 2. 初始化小 Logo SvgItem
@@ -112,7 +114,7 @@ export default function Roadmap() {
           ".small-logo-container",
         );
       if (smallLogoContainerEl) {
-        for (let i = -1; i <= 2; i += 1) {
+        for (let i = -2; i <= 1; i += 1) {
           const itemEl = createDOMElement(
             "svg-item",
             CONFIG.angleInterval * i,
