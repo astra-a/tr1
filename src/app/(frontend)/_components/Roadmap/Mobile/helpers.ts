@@ -2,331 +2,442 @@ import gsap from "gsap";
 import Lenis from "@studio-freight/lenis";
 
 export const CONFIG = {
+  // 角度间隔保持不变
   angleInterval: 28,
-  scrollSpeed: 0.3,
-  svg: { minSize: 5, maxSize: 24 },
+  // scrollSpeed 不再用于连续旋转，但可以保留以供将来参考
   animation: { duration: 1.2, ease: "power3.out" },
+  // rotationBounds 不再用于限制连续滚动，可以保留但作用变小
   rotationBounds: { min: -56, max: 56 },
   overshootFadePx: 500,
   transitionThreshold: 50,
   pageScrollThreshold: 100,
 };
 
+// --- 基础元素类 (ItemBase, TextItem, SvgItem, CenterSvgItem) 保持不变 ---
+
 export abstract class ItemBase {
-  domElement: HTMLElement;
-  baseAngle: number = 0;
-  r: number = 0;
-  controller: AnimationController | undefined;
+  el: HTMLElement;
+  baseAngle: number;
+  currentAngle: number = 0;
+  controller: AnimationController | null = null;
 
-  constructor(domElement: HTMLDivElement) {
-    this.domElement = domElement;
-    this.baseAngle = parseFloat(this.domElement?.dataset?.angle ?? "0") || 0;
-    this.r = parseFloat(this.domElement?.dataset?.r ?? "0") || 0;
-  }
-
-  get currentAngle() {
-    let effectiveAngle =
-      (this.baseAngle + (this.controller?.currentRotation ?? 0)) % 360;
-    if (effectiveAngle < -180) effectiveAngle += 360;
-    if (effectiveAngle > 180) effectiveAngle -= 360;
-    return effectiveAngle;
+  constructor(el: HTMLElement) {
+    this.el = el;
+    this.baseAngle = parseFloat(el.dataset.angle || "0");
   }
 
   setController(controller: AnimationController) {
     this.controller = controller;
   }
 
-  updateAppearance(isPageScroll = false) {
-    if (isPageScroll) {
-      return;
-    }
+  abstract update(rotation: number): void;
 
-    const diff = Math.abs(this.currentAngle);
-    const maxVisibleDiff = 90;
-    const opacityFactor = 1 - Math.min(diff / maxVisibleDiff, 1);
-    gsap.set(this.domElement, { opacity: opacityFactor });
+  // 辅助函数：将角度归一化到 [-180, 180]
+  normalizeAngle(angle: number) {
+    angle %= 360;
+    if (angle > 180) {
+      angle -= 360;
+    } else if (angle <= -180) {
+      angle += 360;
+    }
+    return angle;
   }
 }
 
 export class TextItem extends ItemBase {
-  block: HTMLDivElement | null;
-  isOuter: boolean = false;
-  isBoundaryTrigger: boolean = false;
-  isOpacityZero: boolean = false;
+  update(rotation: number) {
+    this.currentAngle = this.baseAngle + rotation;
+    // 旋转
+    gsap.set(this.el, { rotation: this.currentAngle });
 
-  constructor(domElement: HTMLDivElement) {
-    super(domElement);
-    this.block = this.domElement.querySelector(".block");
-    this.isOuter = this.domElement.dataset.isOuter === "true";
-    this.isBoundaryTrigger =
-      this.domElement.dataset.isBoundaryTrigger === "true";
-    this.isOpacityZero = false;
-  }
+    // 缩放和透明度：基于当前角度与 0 角度的接近程度进行控制
+    const normalizedAngle = this.normalizeAngle(this.currentAngle);
+    const centerAngle = CONFIG.angleInterval / 2;
+    const normalizedAbsoluteAngle = Math.abs(normalizedAngle);
 
-  updateAppearance(isPageScroll = false) {
-    if (!this.block) return;
-
-    if (isPageScroll) {
-      return;
-    }
-
-    const diff = Math.abs(this.currentAngle);
-    const maxVisibleDiff = 90;
-    const opacityFactor = 1 - Math.min((diff / maxVisibleDiff) * 2.5, 1);
-    gsap.set(this.block, { opacity: opacityFactor });
-    this.isOpacityZero = opacityFactor === 0;
+    // 中心激活状态：当 item 靠近中心时 (0度)
+    const isActive = normalizedAbsoluteAngle < centerAngle;
+    this.el.classList.toggle("active", isActive);
   }
 }
 
 export class SvgItem extends ItemBase {
-  container: HTMLDivElement | null;
-  svg: SVGSVGElement | null;
+  update(rotation: number) {
+    this.currentAngle = this.baseAngle + rotation;
+    // 旋转
+    gsap.set(this.el, { rotation: this.currentAngle });
 
-  constructor(domElement: HTMLDivElement) {
-    super(domElement);
-    this.container = this.domElement.querySelector(".svg-container");
-    this.svg = this.domElement.querySelector("svg");
-  }
+    // 缩放和透明度逻辑... (保持不变)
+    // 这里的逻辑主要控制 svg-item 的大小和透明度
+    const normalizedAngle = this.normalizeAngle(this.currentAngle);
+    const centerAngle = CONFIG.angleInterval;
+    const normalizedAbsoluteAngle = Math.abs(normalizedAngle);
 
-  updateAppearance(isPageScroll = false) {
-    if (!this.container) return;
+    let opacity = 1;
+    let filter = "grayscale(1)";
 
-    if (isPageScroll) {
-      return;
-    }
-
-    const angle = this.currentAngle;
-    const visible = angle > 0;
-
-    if (this.container) {
-      gsap.set(this.container, {
-        opacity: visible ? 1 : 0,
-      });
-    }
-
-    if (visible) {
-      const diff = Math.abs(angle);
-      const maxVisibleDiff = 90;
-      const interpolateFactor =
-        diff < maxVisibleDiff ? 1 - diff / maxVisibleDiff : 0;
-
-      const exaggeratedFactor = Math.pow(interpolateFactor, 2);
-
-      const size =
-        CONFIG.svg.minSize +
-        exaggeratedFactor * (CONFIG.svg.maxSize - CONFIG.svg.minSize);
-      const grayscale = 100 - exaggeratedFactor * 100;
-
-      gsap.set(this.container, {
-        width: `${size}px`,
-        height: `${size}px`,
-      });
-      this.container.style.filter = `grayscale(${grayscale}%)`;
+    if (normalizedAbsoluteAngle <= centerAngle * 2) {
+      // 在中心附近的 2 个间隔内
+      const t = normalizedAbsoluteAngle / (centerAngle * 2); // t 从 0 到 1
+      filter = `grayscale(${t * 1})`; // 0 -> 1
     } else {
-      gsap.set(this.container, { opacity: 0 });
+      filter = "grayscale(1)";
+    }
+
+    if (normalizedAngle > 0) {
+      // 靠近中点（比如 -5° ~ +5°），立即透明
+      if (Math.abs(normalizedAngle) === 0) {
+        opacity = 0;
+      } else {
+        opacity = 1;
+        filter = "grayscale(0)";
+      }
+    } else {
+      opacity = 0;
+    }
+
+    const svgContainer = this.el.querySelector(".svg-container");
+    if (svgContainer) {
+      gsap.set(svgContainer, { opacity: opacity, filter: filter });
     }
   }
 }
 
 export class CenterSvgItem extends ItemBase {
-  constructor(domElement: HTMLDivElement) {
-    super(domElement);
-  }
-
-  updateAppearance() {
-    if (this.controller) {
-      const rotationSpeedFactor = 360 / CONFIG.angleInterval;
-      const rotation = this.controller.currentRotation * rotationSpeedFactor;
-      gsap.set(this.domElement, { rotation: rotation });
-    }
+  update(rotation: number) {
+    const progress = rotation / CONFIG.angleInterval; // 得到经过了多少段
+    const normalizedRotation = (progress * 360) % 360; // 保证始终在 0~360
+    gsap.set(this.el, { rotation: normalizedRotation });
   }
 }
+
+// --- 动画控制器 (AnimationController) ---
 
 export class AnimationController {
   allItems: ItemBase[] = [];
   targetRotation: number = 0;
   currentRotation: number = 0;
   lastScrollDirection: number = 0;
-  snapTimeout: any = null;
 
   constructor(allItems: ItemBase[]) {
     this.allItems = allItems;
-    this.targetRotation = 0;
-    this.currentRotation = 0;
-    this.lastScrollDirection = 0;
-    this.snapTimeout = null;
   }
 
   init() {
     this.allItems.forEach((item) => item.setController(this));
-    this.currentRotation = -this.allItems[0].baseAngle;
+    // 初始设置，将第一个 TextItem 居中
+    const firstTextItem = this.allItems.find(
+      (item) => item instanceof TextItem,
+    );
+    this.currentRotation = firstTextItem ? -firstTextItem.baseAngle : 0;
     this.updateAllItems(false);
   }
 
   updateAllItems(isPageScroll: boolean) {
-    this.allItems.forEach((item) => {
-      if (item.domElement.className !== "center-svg-item") {
-        item.domElement.style.transform = `rotate(${this.currentRotation + item.baseAngle}deg) translateX(${item.r}px)`;
-      }
-      item.updateAppearance(isPageScroll);
-    });
+    this.allItems.forEach((item) => item.update(this.currentRotation));
   }
 
-  animateRotation(targetRotation: number, skipSnap = false) {
+  /**
+   * 实现段落式的平滑过渡动画到新的旋转角度
+   */
+  animateRotation(targetRotation: number) {
     this.targetRotation = targetRotation;
     gsap.to(this, {
       currentRotation: this.targetRotation,
-      duration: 0.8,
+      duration: 0.6, // 稍微缩短，与 OuterTextCarousel 同步
       ease: "power2.out",
       overwrite: true,
       onUpdate: () => this.updateAllItems(false),
-      onComplete: () => {
-        if (!skipSnap) {
-          this.snapTimeout = setTimeout(() => this.maybeSnap(), 150);
-        }
-      },
     });
   }
 
-  maybeSnap() {
-    this.snapToClosestItem();
-  }
+  rotateToIndex(
+    index: number,
+    roadmaps: { date: string; description: string; title: string }[],
+  ) {
+    // 计算居中的基准索引（例如，总长为 7，居中索引为 4）
+    const roadmapCenterIndex = Math.ceil(roadmaps.length / 2);
 
-  snapToClosestItem() {
-    let closestDistance = Infinity;
-    let closestItemAngle = 0;
+    // 目标 TextItem 的 baseAngle 计算（需要与 index.tsx 中创建 DOM 元素的逻辑一致）
+    // baseAngle = (i - roadmapCenterIndex + 1) * CONFIG.angleInterval;
+    const targetBaseAngle =
+      (index - roadmapCenterIndex + 1) * CONFIG.angleInterval;
 
-    this.allItems.forEach((item) => {
-      if (item.domElement.className === "center-svg-item") return;
+    // 我们希望这个 baseAngle 的元素移动到 0 度位置，所以目标旋转角度为 0 - baseAngle
+    const newTargetRotation = 0 - targetBaseAngle;
 
-      const effectiveDistance = this.currentRotation + item.baseAngle;
-      const normalized = effectiveDistance % 360;
-      const absNormalized = Math.abs(
-        normalized > 180 ? normalized - 360 : normalized,
-      );
-
-      if (absNormalized < closestDistance - 0.1) {
-        closestDistance = absNormalized;
-        closestItemAngle = item.baseAngle;
-      } else if (Math.abs(absNormalized - closestDistance) < 1) {
-        if (this.lastScrollDirection > 0) {
-          if (item.baseAngle > closestItemAngle)
-            closestItemAngle = item.baseAngle;
-        } else {
-          if (item.baseAngle < closestItemAngle)
-            closestItemAngle = item.baseAngle;
-        }
-      }
-    });
-
-    const newTargetRotation = 0 - closestItemAngle;
-    gsap.to(this, {
-      currentRotation: newTargetRotation,
-      duration: 1.2,
-      ease: "power3.out",
-      overwrite: true,
-      onUpdate: () => this.updateAllItems(false),
-    });
+    this.animateRotation(newTargetRotation);
   }
 }
 
-export class StateTransitionController {
-  animationController: AnimationController;
-  allItems: ItemBase[] = [];
-  currentState: string;
-  lastRotationBeforeTransition: number;
-  isTransitioningToPageScroll: boolean;
-  private lenis: Lenis;
+// --- 外圈文字轮播 (OuterTextCarousel) ---
 
-  constructor(animationController: AnimationController, allItems: ItemBase[]) {
-    this.animationController = animationController;
-    this.allItems = allItems;
-    this.currentState = "ROTATION";
-    this.lastRotationBeforeTransition = 0;
-    this.isTransitioningToPageScroll = false;
-    this.lenis = new Lenis({
-      lerp: 0.1, // 滚动平滑度，可以调节
+export class OuterTextCarousel {
+  container: HTMLDivElement;
+  outerEl: HTMLDivElement;
+  currentIndex: number = 0;
+  animating: boolean = false; // 动画状态标志，用于防抖
+
+  constructor(container: HTMLDivElement) {
+    this.container = container;
+    this.outerEl = container.querySelector<HTMLDivElement>(".outer")!;
+    if (!this.outerEl) {
+      throw new Error("Outer container (.outer) not found");
+    }
+  }
+
+  init(blockContents: { title: string; description: string }[]) {
+    this.outerEl.innerHTML = "";
+
+    blockContents.forEach((item) => {
+      const block = document.createElement("div");
+      block.className = "block";
+
+      const titleEl = document.createElement("div");
+      titleEl.className = "title";
+      titleEl.textContent = item.title;
+      block.appendChild(titleEl);
+
+      const contentEl = document.createElement("div");
+      contentEl.className = "content";
+      contentEl.textContent = item.description;
+      block.appendChild(contentEl);
+
+      this.outerEl.appendChild(block);
     });
+
+    // 初始化到第一个索引
+    this.showIndex(0, false);
+  }
+
+  /**
+   * 轮播到指定的索引位置
+   */
+  showIndex(index: number, animate = true) {
+    const blocks = Array.from(this.outerEl.children) as HTMLDivElement[];
+
+    // 约束新索引
+    const newIndex = Math.max(0, Math.min(index, blocks.length - 1));
+
+    // 如果索引没有变化，且不在动画中，直接返回
+    if (newIndex === this.currentIndex && !this.animating && animate) return;
+
+    this.currentIndex = newIndex;
+
+    const block = blocks[0];
+    if (!block) return;
+
+    // 1. 获取尺寸和间距
+    const blockWidth = block.getBoundingClientRect().width;
+    const outerContainerWidth = this.container.getBoundingClientRect().width;
+
+    let gap = 100;
+    if (blocks.length > 1) {
+      const secondBlockLeft = blocks[1].getBoundingClientRect().left;
+      const firstBlockRight = blocks[0].getBoundingClientRect().right;
+      gap = secondBlockLeft - firstBlockRight;
+    }
+
+    // 2. 计算基准平移距离
+    const moveDistance = blockWidth + gap;
+    const leftAlignOffset = this.currentIndex * moveDistance;
+
+    // 3. 计算居中校正量：将当前块的中心与容器的中心对齐
+    const centerCorrection = outerContainerWidth / 2 - blockWidth / 2;
+
+    // 4. 最终的 translateX 偏移量
+    const offset = -leftAlignOffset + centerCorrection;
+
+    if (animate) {
+      this.animating = true;
+      gsap.to(this.outerEl, {
+        x: offset,
+        duration: 0.6,
+        ease: "power3.out",
+        onUpdate: () => {
+          blocks.forEach((b, i) => {
+            b.classList.toggle("active", i === this.currentIndex);
+          });
+        },
+        onComplete: () => {
+          this.animating = false;
+        },
+      });
+    } else {
+      gsap.set(this.outerEl, { x: offset });
+      blocks.forEach((b, i) => {
+        b.classList.toggle("active", i === this.currentIndex);
+      });
+    }
+  }
+
+  next() {
+    if (this.animating) return;
+    this.showIndex(this.currentIndex + 1);
+  }
+
+  prev() {
+    if (this.animating) return;
+    this.showIndex(this.currentIndex - 1);
+  }
+
+  // 移除 bindWheel()
+}
+
+// 移除 StateTransitionController 类
+
+// --- 集中同步控制器 (CarouselSyncController) ---
+
+export class CarouselSyncController {
+  outerCarousel: OuterTextCarousel;
+  animationController: AnimationController;
+  roadmaps: any[];
+  containerRef: React.RefObject<HTMLDivElement>;
+
+  private scrollAccum: number = 0;
+  private readonly scrollThreshold = 50;
+  private lenis: Lenis;
+  private inPageScroll: boolean = false;
+  // 新增：用于记录触摸开始时的 Y 坐标
+  private startY: number = 0;
+
+  constructor(
+    outerCarousel: OuterTextCarousel,
+    animationController: AnimationController,
+    roadmaps: any[],
+    containerRef: React.RefObject<HTMLDivElement>,
+  ) {
+    this.outerCarousel = outerCarousel;
+    this.animationController = animationController;
+    this.roadmaps = roadmaps;
+    this.containerRef = containerRef;
+    this.lenis = new Lenis({ lerp: 0.1 });
   }
 
   init() {
-    if ("scrollRestoration" in history) {
-      history.scrollRestoration = "manual";
+    // 绑定触摸事件处理函数
+    this.handleTouchStart = this.handleTouchStart.bind(this);
+    this.handleTouchMove = this.handleTouchMove.bind(this);
+    this.handleTouchEnd = this.handleTouchEnd.bind(this);
+
+    // 将事件绑定到容器上
+    const containerEl = this.containerRef.current;
+    if (containerEl) {
+      // touchstart/touchend 使用 passive: true 提高性能
+      containerEl.addEventListener("touchstart", this.handleTouchStart, {
+        passive: true,
+      });
+      // touchmove 需要阻止默认行为来控制分段旋转，所以 passive: false
+      containerEl.addEventListener("touchmove", this.handleTouchMove, {
+        passive: false,
+      });
+      containerEl.addEventListener("touchend", this.handleTouchEnd, {
+        passive: true,
+      });
     }
-    window.scrollTo(0, 0);
-    window.addEventListener("wheel", this.handleWheel.bind(this), {
-      passive: false,
-    });
-    document.body.style.overflowY = "hidden";
+
+    // 初始化两个组件的状态到第一个索引
+    this.outerCarousel.showIndex(0, false);
+    this.animationController.rotateToIndex(0, this.roadmaps);
+
+    // Lenis raf 循环
     const raf = (time: number) => {
       this.lenis.raf(time);
       requestAnimationFrame(raf);
     };
     requestAnimationFrame(raf);
-
-    // 初始在旋转状态，停掉 Lenis
-    this.lenis.stop();
+    this.lenis.stop(); // 初始停掉
   }
 
-  handleWheel(e: WheelEvent) {
-    this.animationController.lastScrollDirection = e.deltaY;
-    switch (this.currentState) {
-      case "ROTATION":
-        this.handleRotationState(e);
-        break;
-      case "PAGE_SCROLL":
-        this.handlePageScrollState(e);
-        break;
+  dispose() {
+    // 移除触摸事件监听
+    const containerEl = this.containerRef.current;
+    if (containerEl) {
+      containerEl.removeEventListener("touchstart", this.handleTouchStart);
+      containerEl.removeEventListener("touchmove", this.handleTouchMove);
+      containerEl.removeEventListener("touchend", this.handleTouchEnd);
+    }
+    // 移除原有的 wheel 监听（如果存在，这里假设已经不在 init 中了）
+  }
+
+  // 移除 handleWheel
+
+  handleTouchStart(e: TouchEvent) {
+    if (e.touches.length === 1) {
+      this.startY = e.touches[0].clientY;
+      this.scrollAccum = 0; // 重置累积位移
     }
   }
 
-  handleRotationState(e: WheelEvent) {
-    const fifthItem = this.allItems.find(
-      (i) => (i as TextItem)?.isBoundaryTrigger,
-    );
-    const isAtBoundary = fifthItem && Math.abs(fifthItem.currentAngle) < 0.01;
+  handleTouchEnd() {
+    this.scrollAccum = 0;
+  }
 
-    if (isAtBoundary && e.deltaY > 0) {
-      e.preventDefault();
-      this.lastRotationBeforeTransition =
-        this.animationController.currentRotation;
-      this.currentState = "PAGE_SCROLL";
-      gsap.killTweensOf(this.animationController);
-      this.lenis.start();
-      this.updateAppearance();
-    } else {
-      let newRotation =
-        this.animationController.currentRotation -
-        e.deltaY * CONFIG.scrollSpeed;
-      if (newRotation > CONFIG.rotationBounds.max) {
-        newRotation = CONFIG.rotationBounds.max;
-      } else if (newRotation < CONFIG.rotationBounds.min) {
-        newRotation = CONFIG.rotationBounds.min;
+  handleTouchMove(e: TouchEvent) {
+    if (!this.containerRef.current || e.touches.length !== 1) return;
+
+    const currentY = e.touches[0].clientY;
+    // deltaY: 向上滑动 (正值)；向下滑动 (负值)。
+    // 这与滚轮事件的 deltaY (向下滚为正) 语义相反。
+    const deltaY = this.startY - currentY;
+
+    // 更新起始点，以便下次 move 事件计算相对位移
+    this.startY = currentY;
+
+    // 我们使用 -deltaY 来模拟滚轮的 deltaY (向下滚/上滑为正)
+    const delta = deltaY;
+
+    if (this.inPageScroll) {
+      // 已进入页面滚动模式
+      if (window.scrollY === 0 && delta < 0) {
+        // 在顶部且上滑 (delta < 0)，返回旋转模式
+        e.preventDefault();
+        this.inPageScroll = false;
+        this.lenis.stop();
+        this.scrollAccum = 0;
+        // 回到最后一个索引状态
+        this.outerCarousel.showIndex(this.roadmaps.length - 1, false);
+        this.animationController.rotateToIndex(
+          this.roadmaps.length - 1,
+          this.roadmaps,
+        );
       }
-      this.animationController.animateRotation(newRotation);
-    }
-  }
-
-  handlePageScrollState(e: WheelEvent) {
-    if (e.deltaY < 0 && window.scrollY === 0) {
-      e.preventDefault();
-      this.currentState = "ROTATION";
-      this.lenis.stop();
-
-      this.animationController.animateRotation(
-        this.lastRotationBeforeTransition,
-        true,
-      );
-
-      this.updateAppearance();
-
+      // 其余情况：不阻止默认行为，让浏览器或 Lenis 处理页面滚动
       return;
     }
-  }
 
-  updateAppearance() {
-    this.allItems.forEach((item) =>
-      item.updateAppearance(this.currentState === "PAGE_SCROLL"),
-    );
+    // --- 分段旋转模式 ---
+    e.preventDefault(); // 阻止页面默认滚动，以实现分段旋转
+
+    if (this.outerCarousel.animating) return;
+
+    this.scrollAccum += delta;
+
+    if (Math.abs(this.scrollAccum) >= this.scrollThreshold) {
+      let newIndex = this.outerCarousel.currentIndex;
+      const scrollDirectionPositive = this.scrollAccum > 0; // scrollAccum > 0 表示向下一段（或向上滑）
+
+      if (scrollDirectionPositive) {
+        // 向下一段（模拟 wheel 的 deltaY > 0）
+        if (newIndex === this.roadmaps.length - 1) {
+          // 已在最后一个索引，进入页面滚动
+          this.inPageScroll = true;
+          this.lenis.start();
+          this.scrollAccum = 0;
+          return;
+        }
+        newIndex = Math.min(newIndex + 1, this.roadmaps.length - 1);
+      } else {
+        // 向上一段（模拟 wheel 的 deltaY < 0）
+        newIndex = Math.max(newIndex - 1, 0);
+      }
+
+      if (newIndex !== this.outerCarousel.currentIndex) {
+        this.outerCarousel.showIndex(newIndex);
+        this.animationController.rotateToIndex(newIndex, this.roadmaps);
+      }
+
+      this.scrollAccum = 0;
+    }
   }
 }
