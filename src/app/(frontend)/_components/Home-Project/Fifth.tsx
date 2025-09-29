@@ -9,13 +9,13 @@ import GlowingEdgeCard from "../GlowingEdgeCard";
 import { useWindowSize } from "react-use";
 
 const ICONS = [
-  "/images/icon-ornament-0.svg",
-  "/images/icon-ornament-1.svg",
-  "/images/icon-ornament-2.svg",
-  "/images/icon-ornament-3.svg",
-  "/images/icon-ornament-4.svg",
-  "/images/icon-ornament-5.svg",
-  "/images/icon-ornament-6.svg",
+  "/images/icon-ornament-0.png",
+  "/images/icon-ornament-1.png",
+  "/images/icon-ornament-2.png",
+  "/images/icon-ornament-3.png",
+  "/images/icon-ornament-4.png",
+  "/images/icon-ornament-5.png",
+  "/images/icon-ornament-6.png",
 ];
 
 function Marquee({
@@ -112,13 +112,15 @@ function VideoBackground({
       ("intro" === phase ? introRef : loopRef).current?.play().finally();
     } else {
       introRef.current?.pause();
-      introRef.current?.load();
       loopRef.current?.pause();
-      loopRef.current?.load();
+      if (width >= 768) {
+        introRef.current?.load();
+        loopRef.current?.load();
+      }
       setPhase("intro");
     }
     // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView, introRef?.current, loopRef?.current]);
+  }, [isInView, width, phase, introRef?.current, loopRef?.current]);
 
   return (
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
@@ -157,11 +159,11 @@ function VideoBackground({
         ref={loopRef}
         width={width >= 768 ? 2556 : 680}
         height={width >= 768 ? 796 : 382}
-        autoPlay={false}
+        autoPlay
         muted
         playsInline
         controls={false}
-        loop={true}
+        loop
         preload="auto"
         className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
         poster={`${CDN_BASEURL}/images/bg-project-${width >= 768 ? "" : "mobile-"}fifth-2-poster.png`}

@@ -115,13 +115,15 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
       ("intro" === phase ? introRef : loopRef).current?.play().finally();
     } else {
       introRef.current?.pause();
-      introRef.current?.load();
       loopRef.current?.pause();
-      loopRef.current?.load();
+      if (width >= 768) {
+        introRef.current?.load();
+        loopRef.current?.load();
+      }
       setPhase("intro");
     }
     // ref.current.addEventListener('timeupdate', () => console.log('11', ref?.current?.currentTime))
-  }, [isInView, introRef?.current, loopRef?.current]);
+  }, [isInView, width, phase, introRef?.current, loopRef?.current]);
 
   return (
     <div className="w-full h-full z-[0] morphing-particles-container overflow-hidden pointer-events-none">
@@ -159,11 +161,11 @@ function VideoBackground({ isInView }: { isInView: boolean }) {
         ref={loopRef}
         width={width >= 768 ? 2560 : 680}
         height={width >= 768 ? 1440 : 382}
-        autoPlay={false}
+        autoPlay
         muted
         playsInline
         controls={false}
-        loop={true}
+        loop
         preload="auto"
         className={`w-full h-full object-cover ${"loop" === phase ? "" : "hidden"}`}
         poster={`${CDN_BASEURL}/images/bg-sales-${width >= 768 ? "" : "mobile-"}third-2-poster.png`}
