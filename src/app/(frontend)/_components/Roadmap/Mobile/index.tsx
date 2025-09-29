@@ -86,7 +86,7 @@ export default function Roadmap() {
       return itemEl;
     }
 
-    let animationController: AnimationController; // 修正 3：提升变量作用域
+    let animationController: AnimationController | null = null; // 修正 3：提升变量作用域
 
     function init() {
       const allItems = [];
@@ -145,9 +145,9 @@ export default function Roadmap() {
     // 6. 创建并启动 CarouselSyncController
     const syncController = new CarouselSyncController(
       outerCarousel,
-      animationController,
+      animationController as any,
       Roadmaps,
-      roadmapContainerRef, // 传递最外层容器引用
+      roadmapContainerRef as any, // 传递最外层容器引用
     );
     syncController.init();
 
@@ -169,7 +169,7 @@ export default function Roadmap() {
             alt=""
             width={1414}
             height={1491}
-            className="w-full"
+            className="w-full aspect-1414/1491"
           />
         </div>
       </div>
