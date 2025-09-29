@@ -9,7 +9,7 @@ import NewMatrix from "../NewMatrix";
 export default function TopNews({ pinnedPosts }: { pinnedPosts: Post[] }) {
   return (
     <div className="top-news flex flex-col-reverse lg:flex-row gap-4 sm:gap-6 md:gap-2 mt-4 md:mt-5 lg:mt-6 xl:mt-7 relative z-[1]">
-      <div className="top-news-left lg:w-[50%] flex flex-col gap-2">
+      <div className="top-news-left lg:w-[50%] flex flex-col gap-4 sm:gap-6 md:gap-2 ">
         {pinnedPosts.map((item, i) => {
           if (0 === i) return;
           const infoAtLeft = i % 2 === 1;

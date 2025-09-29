@@ -78,6 +78,7 @@ export default function First() {
               <div className="w-[90%] xl:w-[74%] 2xl:w-[64%] 3xl:w-[53%] flex flex-col gap-3 md:gap-6">
                 <div
                   className={`glow-text ${isInView ? "" : "paused"} text-xs md:text-sm xl:text-base text-light-blue-gray`}
+                  data-text="Built on distributed ledgers and cross-chain interoperability, it streamlines blockchain interaction — from Ethereum to Solana to BSC — with AI managing contracts, transfers, and security, all while you retain full control."
                 >
                   Built on distributed ledgers and cross-chain interoperability,
                   it streamlines blockchain interaction — from Ethereum to

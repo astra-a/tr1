@@ -71,14 +71,16 @@ function WindowNav() {
     <div className="hidden md:flex items-center justify-between w-full h-full relative">
       <div className="flex items-center h-full">
         <div className="text-xl tracking-[-0.03em] text-white flex justify-center items-center px-4 xl:px-6 2xl:px-8">
-          <Image
-            src="/images/logo-full.png"
-            alt={APP_NAME}
-            width={192}
-            height={73}
-            className="w-auto h-8 xl:h-10 2xl:h-12 3xl:h-14"
-            priority
-          />
+          <a href="/">
+            <Image
+              src="/images/logo-full.png"
+              alt={APP_NAME}
+              width={192}
+              height={73}
+              className="w-auto h-8 xl:h-10 2xl:h-12 3xl:h-14"
+              priority
+            />
+          </a>
         </div>
         <div className="h-full w-px bg-dark-slate-gray" />
         <div className="flex items-center gap-4 lg:gap-10 px-8 lg:px-16 xl:px-18 2xl:px-20 3xl:px-22 4xl:px-24">
@@ -114,14 +116,16 @@ function MobileNav() {
   return (
     <div className="flex md:hidden items-center justify-between w-full h-full relative">
       <div className="flex items-center h-full px-2 border-r border-dark-slate-gray">
-        <Image
-          src="/images/logo-full.png"
-          alt={APP_NAME}
-          width={192}
-          height={73}
-          className="w-auto h-6"
-          priority
-        />
+        <a href="/">
+          <Image
+            src="/images/logo-full.png"
+            alt={APP_NAME}
+            width={192}
+            height={73}
+            className="w-auto h-6"
+            priority
+          />
+        </a>
       </div>
       <Popover>
         <PopoverButton className="block text-base text-white focus:outline-none data-active:text-white data-focus:outline data-focus:outline-white data-hover:text-white">
