@@ -24,6 +24,27 @@ export const loginByEmail = async ({
   });
 };
 
+export const changePassword = async ({
+  userId,
+  data,
+}: {
+  userId: string;
+  data: { password: string };
+}) => {
+  const payload = await getPayloadInstance();
+  const { user } = await getAuthUser();
+  return payload.update({
+    collection: COLLECTION_NAME,
+    id: userId,
+    data: {
+      ...data,
+      sessions: [],
+    },
+    overrideAccess: true,
+    user,
+  });
+};
+
 export const getAuthUser = async () => {
   const payload = await getPayloadInstance();
   const headers = await nextHeaders();

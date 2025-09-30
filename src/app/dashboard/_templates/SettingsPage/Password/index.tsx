@@ -2,11 +2,43 @@ import { useState } from "react";
 import Card from "@/app/dashboard/_components/Card";
 import Field from "@/app/dashboard/_components/Field";
 import Button from "@/app/dashboard/_components/Button";
+import { useMutation } from "@tanstack/react-query";
+import axiosInstance from "@/app/dashboard/_helpers/axios";
+import { ROUTES } from "@/app/dashboard/_contstants/routes";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 const Password = ({}) => {
-  const [password, setPassword] = useState("1234567");
-  const [newPassword, setNewPassword] = useState("1234567");
-  const [confirmNewPassword, setConfirmNewPassword] = useState("1234567");
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  const router = useRouter();
+
+  // --- mutation:
+  const changePasswordMutation = useMutation({
+    mutationFn: async (
+      data: any,
+    ): Promise<{ ok: boolean; message: string; data: { id: string } }> => {
+      return axiosInstance.post(ROUTES.settings_change_password, data);
+    },
+  });
+
+  const onSubmit = async (data: {
+    oldPassword: string;
+    newPassword: string;
+    confirmNewPassword: string;
+  }) => {
+    console.log("onSubmit.data", data);
+    try {
+      const resp = await changePasswordMutation.mutateAsync(data);
+      console.log("resp", resp);
+      toast.success(resp.message);
+      router.push(ROUTES.login);
+    } catch (e: any) {
+      toast.error(e?.toString());
+    }
+  };
 
   return (
     <Card title="Password">
@@ -15,8 +47,8 @@ const Password = ({}) => {
           innerLabel="Password"
           placeholder="Enter password"
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          value={oldPassword}
+          onChange={(e) => setOldPassword(e.target.value)}
           required
           handleForgotPassword={() => {}}
         />
@@ -38,9 +70,18 @@ const Password = ({}) => {
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
             required
+            errorMessage={
+              newPassword === confirmNewPassword ? "" : "Passwords do not match"
+            }
           />
         </div>
-        <Button className="self-start" isBlack>
+        <Button
+          className="self-start"
+          isBlack
+          onClick={() =>
+            onSubmit({ oldPassword, newPassword, confirmNewPassword })
+          }
+        >
           Update password
         </Button>
       </div>
