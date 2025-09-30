@@ -82,6 +82,7 @@ export const ROUTES = {
 
   promote: `${ROUTE_PREFIX}/promote`,
   settings: `${ROUTE_PREFIX}/settings`,
+  settings_change_password: `${ROUTE_PREFIX}/settings/change-password/action`,
   affiliateCenter: `${ROUTE_PREFIX}/affiliate-center`,
   exploreCreators: `${ROUTE_PREFIX}/explore-creators`,
   upgradeToPro: `${ROUTE_PREFIX}/upgrade-to-pro`,
