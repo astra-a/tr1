@@ -1,10 +1,10 @@
 import HomePage from "@/app/dashboard/_templates/HomePage";
 import { queryPools } from "@/app/dashboard/_helpers/pools";
-import { holesky } from "viem/chains";
+import { bsc } from "viem/chains";
 import { POOL_STATUS } from "@/constants";
 
 export default async function Page() {
-  const chain = holesky;
+  const chain = bsc;
   const pools = await queryPools({
     where: {
       chainId: {

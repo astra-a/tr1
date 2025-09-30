@@ -46,10 +46,10 @@ const defaultConfig = createConfig({
   ssr: true, // If your dApp uses server side rendering (SSR)
 
   connectors,
-  chains: [holesky],
+  chains: [bsc],
   transports: {
-    // [bsc.id]: http("https://bsc-dataseed1.bnbchain.org"),
-    [holesky.id]: http("https://ethereum-holesky.publicnode.com"),
+    [bsc.id]: http("https://bsc-dataseed1.bnbchain.org"),
+    // [holesky.id]: http("https://ethereum-holesky.publicnode.com"),
   },
 });
 
