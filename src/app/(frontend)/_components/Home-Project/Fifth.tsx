@@ -70,6 +70,8 @@ function Marquee({
       className="relative w-full overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
     >
       <div ref={ref} className="w-full will-change-transform">
         <ul className="flex w-full gap-6 md:gap-7 lg:gap-8 xl:gap-9 2xl:gap-10 py-8">
@@ -90,7 +92,7 @@ function Marquee({
           ))}
         </ul>
       </div>
-      <div className="absolute top-8 bottom-8 left-0 right-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0)_20%,rgba(0,0,0,0)_80%,#000_100%)]" />
+      <div className="absolute top-8 bottom-8 left-0 right-0 bg-[linear-gradient(90deg,#000_0%,rgba(0,0,0,0)_20%,rgba(0,0,0,0)_80%,#000_100%)] pointer-events-none" />
     </div>
   );
 }

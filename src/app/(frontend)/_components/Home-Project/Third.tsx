@@ -75,6 +75,8 @@ function Marquee({
       className="w-full will-change-transform"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onTouchStart={() => setPaused(true)}
+      onTouchEnd={() => setPaused(false)}
     >
       <ul className="flex w-full">
         {[0, 1, 2, 3].map((_, j) => (

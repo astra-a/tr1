@@ -474,9 +474,17 @@ input:focus-visible {
     backdrop-filter: blur(20px);
     transition: all ease-in-out 0.2s;
 
-    &:hover {
-      transform: scale(1.25);
-      z-index: 2;
+    @media (width < 48rem) {
+      &:active {
+        transform: scale(1.25);
+        z-index: 2;
+      }
+    }
+    @media (width >= 48rem) {
+      &:hover {
+        transform: scale(1.25);
+        z-index: 2;
+      }
     }
   }
 }
@@ -486,14 +494,27 @@ input:focus-visible {
     background: url("/images/icon-ornament-bg.svg") no-repeat center/cover;
     transition: all ease-in-out 0.2s;
 
-    &:hover {
-      transform: scale(1.5);
-      border-radius: 12px;
-      box-shadow:
-        0 16px 24px 8px rgba(14, 18, 27, 0.5),
-        0 0 0 3px var(--color-mint-green),
-        0 -12px 12px 0 #181b25 inset,
-        0 4px 32px 0 #2b303b inset;
+    @media (width < 48rem) {
+      &:active {
+        transform: scale(1.5);
+        border-radius: 12px;
+        box-shadow:
+          0 16px 24px 8px rgba(14, 18, 27, 0.5),
+          0 0 0 3px var(--color-mint-green),
+          0 -12px 12px 0 #181b25 inset,
+          0 4px 32px 0 #2b303b inset;
+      }
+    }
+    @media (width >= 48rem) {
+      &:hover {
+        transform: scale(1.5);
+        border-radius: 12px;
+        box-shadow:
+          0 16px 24px 8px rgba(14, 18, 27, 0.5),
+          0 0 0 3px var(--color-mint-green),
+          0 -12px 12px 0 #181b25 inset,
+          0 4px 32px 0 #2b303b inset;
+      }
     }
   }
 }
