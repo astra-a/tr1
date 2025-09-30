@@ -36,7 +36,7 @@ const SaleBalance = ({ chain }: { chain: Chain }) => {
     leftInPool: 0,
     leftRewardInPool: 0,
     leftAmountInPool: 0,
-    leftAllocation: 0,
+    leftAllocation: TOTAL_SALE_CAP,
   });
 
   useEffect(() => {
