@@ -16,7 +16,7 @@ export const SITE_TYPE: "project" | "sales" =
 
 export const DEFAULT_TOKEN_NAME = "AIOS";
 
-export const DEFAULT_TOKEN_PRICE = 0.15;
+export const DEFAULT_TOKEN_PRICE = 0.1;
 
 export const DEFAULT_PRICE_SYMBOL = "USD";
 
