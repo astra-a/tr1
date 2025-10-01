@@ -44,7 +44,7 @@ const Item = ({
               // key={title}
               // start={0}
               end={value}
-              decimals={value > 1_000_000 ? 0 : value > 1_000 ? 2 : 4}
+              decimals={value > 1_000_000 ? 0 : value > 1_000 ? 2 : 3}
               preserveValue
             />
           </div>

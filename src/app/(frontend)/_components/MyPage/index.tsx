@@ -389,7 +389,7 @@ function Headers({
                   // key="token-value"
                   // start={0}
                   end={tokenValue}
-                  decimals={tokenValue > 1_000 ? 2 : 4}
+                  decimals={tokenValue > 1_000 ? 2 : 3}
                   preserveValue
                 />{" "}
                 {DEFAULT_PRICE_SYMBOL}
@@ -429,7 +429,7 @@ function Headers({
                     // key="token-staked"
                     // start={0}
                     end={tokenStaked}
-                    decimals={tokenStaked > 1_000 ? 2 : 4}
+                    decimals={tokenStaked > 1_000 ? 2 : 3}
                     preserveValue
                   />
                 </p>
@@ -444,7 +444,7 @@ function Headers({
                     // key="token-current-farmed"
                     // start={0}
                     end={tokenCurrentFarmed}
-                    decimals={tokenCurrentFarmed > 1_000 ? 2 : 4}
+                    decimals={tokenCurrentFarmed > 1_000 ? 2 : 3}
                     preserveValue
                   />
                   {` / `}
@@ -452,7 +452,7 @@ function Headers({
                     // key="token-farmed"
                     // start={0}
                     end={tokenFarmed}
-                    decimals={tokenFarmed > 1_000 ? 2 : 4}
+                    decimals={tokenFarmed > 1_000 ? 2 : 3}
                     preserveValue
                   />
                 </p>
@@ -514,10 +514,10 @@ export default function MyPage() {
       const currentReward = Number(
         deadline > currentTime
           ? calculateStakeReward(
-              item.saleAmount,
-              item.pool.apr,
-              currentTime - Number(item.createdAt),
-            )
+            item.saleAmount,
+            item.pool.apr,
+            currentTime - Number(item.createdAt),
+          )
           : item.rewardAmount,
       );
       _purchases.push({ ...item, deadline, currentReward });
