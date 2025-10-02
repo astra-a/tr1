@@ -53,7 +53,7 @@ const SelectField = ({
       <Listbox value={value} onChange={onChange} as="div" className="relative">
         <ListboxButton
           disabled={disabled}
-          className={`group flex justify-between items-center w-full h-12 pl-4.5 pr-3 border border-s-stroke2 rounded-3xl text-body-2 text-t-primary fill-t-secondary transition-all data-[hover]:border-s-highlight data-[hover]:text-t-primary data-[open]:text-t-primary data-[open]:rounded-b-none data-[open]:border-s-subtle data-[open]:border-b-transparent ${disabled ? "bg-gray-200" : ""}`}
+          className={`group flex justify-between items-center w-full h-12 pl-4.5 pr-3 border border-s-stroke2 rounded-3xl text-body-2 text-t-primary fill-t-secondary transition-all data-[hover]:border-s-highlight data-[hover]:text-t-primary data-[open]:text-t-primary data-[open]:rounded-b-none data-[open]:border-s-subtle data-[open]:border-b-transparent ${disabled ? "bg-gray-200 dark:bg-shade-02" : ""}`}
         >
           {value?.name ? (
             <div className="truncate">{value.name}</div>

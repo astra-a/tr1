@@ -73,7 +73,7 @@ const Field = ({
               type={type || "text"}
               {...inputProps}
             />
-            <p className="flex justify-center items-center px-4.5 bg-[#eee] border-l border-s-stroke2 rounded-e-full">
+            <p className="flex justify-center items-center px-4.5  bg-shade-09/30 dark:bg-shade-02 border-l border-s-stroke2 rounded-e-full">
               {suffix}
             </p>
           </div>

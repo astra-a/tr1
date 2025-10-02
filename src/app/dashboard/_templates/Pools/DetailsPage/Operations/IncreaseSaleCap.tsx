@@ -213,7 +213,7 @@ const IncreaseSaleCap = ({
         />
         <label
           htmlFor="increase-cap"
-          className="flex justify-center items-center px-2 bg-[#eee] border-x border-s-stroke2"
+          className="flex justify-center items-center px-2 bg-shade-09/30 dark:bg-shade-02 border-x border-s-stroke2"
         >
           {saleToken.symbol}
         </label>
