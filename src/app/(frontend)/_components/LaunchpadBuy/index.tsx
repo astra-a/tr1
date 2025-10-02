@@ -370,7 +370,7 @@ function BuyPanel({
                     (t) =>
                       t.chainId === pool.chainId &&
                       t.address.toLowerCase() ===
-                      rule.paymentToken.address.toLowerCase(),
+                        rule.paymentToken.address.toLowerCase(),
                   );
                   return (
                     <Radio
@@ -801,15 +801,15 @@ export default function BuyAndStake({ pool }: { pool: Pool }) {
     }
     const [_sold, _cap, _remaining] = saleStats
       ? [
-        formatUnits(saleStats[0], pool.saleToken.decimals),
-        formatUnits(saleStats[1], pool.saleToken.decimals),
-        formatUnits(saleStats[2], pool.saleToken.decimals),
-      ]
+          formatUnits(saleStats[0], pool.saleToken.decimals),
+          formatUnits(saleStats[1], pool.saleToken.decimals),
+          formatUnits(saleStats[2], pool.saleToken.decimals),
+        ]
       : [
-        pool.totalSold,
-        pool.totalSaleCap,
-        BigNumber(pool.totalSaleCap).minus(pool.totalSold).toString(),
-      ];
+          pool.totalSold,
+          pool.totalSaleCap,
+          BigNumber(pool.totalSaleCap).minus(pool.totalSold).toString(),
+        ];
     if (POOL_STATUS.Active === _status && saleStats) {
       const mins = pool.paymentRules
         .filter((r) => r.enabled)

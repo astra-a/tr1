@@ -514,10 +514,10 @@ export default function MyPage() {
       const currentReward = Number(
         deadline > currentTime
           ? calculateStakeReward(
-            item.saleAmount,
-            item.pool.apr,
-            currentTime - Number(item.createdAt),
-          )
+              item.saleAmount,
+              item.pool.apr,
+              currentTime - Number(item.createdAt),
+            )
           : item.rewardAmount,
       );
       _purchases.push({ ...item, deadline, currentReward });
