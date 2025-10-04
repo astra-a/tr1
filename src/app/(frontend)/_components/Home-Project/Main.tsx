@@ -4,90 +4,41 @@ import First from "./First";
 import Second from "./Second";
 import Third from "./Third";
 import Fifth from "./Fifth";
-import ReactFullpage from "@fullpage/react-fullpage";
-import dayjs from "dayjs";
-import { useRef } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Mousewheel, Pagination } from "swiper/modules";
 
 export default function Main() {
-  const leaveRef = useRef(0);
-
   return (
     <div className="w-full min-h-screen relative overflow-hidden antialiased">
       <div className="w-full min-h-full hidden md:block">
-        <ReactFullpage
-          // debug
-          // scrollingSpeed={700}
-          touchSensitivity={20}
-          fitToSection={true}
-          licenseKey={process.env.NEXT_PUBLIC_FULL_PAGE_KEY}
-          normalScrollElements=".wallet-popover-panel"
-          render={() => (
-            <ReactFullpage.Wrapper>
-              <div id="section1" className="section">
-                <First />
-              </div>
-              <div className="w-full h-0.25 line-ray" />
-              <div id="section2" className="section">
-                <Second />
-              </div>
-              <div className="w-full h-0.25 line-ray" />
-              <div id="section3" className="section">
-                <Third />
-              </div>
-              <div className="w-full h-0.25 line-ray" />
-              <div id="section5" className="section">
-                <Fifth />
-              </div>
-            </ReactFullpage.Wrapper>
-          )}
-          credits={{
-            enabled: undefined,
-            label: undefined,
-            position: undefined,
+        <Swiper
+          modules={[Mousewheel, Pagination]}
+          direction="vertical"
+          slidesPerView={1}
+          speed={700}
+          allowTouchMove={false}
+          pagination={{ clickable: true }}
+          mousewheel={{
+            forceToAxis: true,
+            sensitivity: 1,
+            thresholdTime: 500,
+            thresholdDelta: 50,
           }}
-          beforeLeave={(origin, destination, direction, trigger) => {
-            console.log(
-              dayjs().format("mm:ss SSS"),
-              "beforeLeave",
-              origin.item.id,
-              "->",
-              destination.item.id,
-              direction,
-              trigger,
-              "interval:",
-              Date.now() - leaveRef.current,
-            );
-            if (leaveRef.current && Date.now() - leaveRef.current < 1_000) {
-              return false;
-            }
-            leaveRef.current = Date.now();
-          }}
-          onLeave={(origin, destination, direction, trigger) => {
-            console.log(
-              dayjs().format("mm:ss SSS"),
-              "onLeave",
-              origin.item.id,
-              "->",
-              destination.item.id,
-              direction,
-              trigger,
-            );
-          }}
-          afterLoad={(origin, destination, direction, trigger) => {
-            console.log(
-              dayjs().format("mm:ss SSS"),
-              "afterLoad",
-              origin.item.id,
-              "->",
-              destination.item.id,
-              direction,
-              trigger,
-            );
-          }}
-          afterRender={() => {
-            window.scrollTo(0, 0);
-          }}
-        />
+          style={{ height: "100vh" }}
+        >
+          <SwiperSlide>
+            <First />
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-line-ray">
+            <Second />
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-line-ray">
+            <Third />
+          </SwiperSlide>
+          <SwiperSlide className="swiper-slide-line-ray">
+            <Fifth />
+          </SwiperSlide>
+        </Swiper>
       </div>
       <div className="w-full min-h-full md:hidden">
         <First />
