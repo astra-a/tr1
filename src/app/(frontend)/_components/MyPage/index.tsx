@@ -225,8 +225,12 @@ function PurchaseItem({
           <div className="text-lg text-white">
             {EARN_MAP.past}：
             <span className="text-bright-cyan">
-              {displayBalance(purchase.currentReward)} /{" "}
-              {displayBalance(purchase.rewardAmount)}{" "}
+              {displayBalance(
+                localDeadline > dayjs().unix()
+                  ? purchase.currentReward
+                  : purchase.rewardAmount,
+              )}{" "}
+              / {displayBalance(purchase.rewardAmount)}{" "}
               {purchase.pool?.saleToken?.symbol ?? DEFAULT_TOKEN_NAME}
             </span>
           </div>
