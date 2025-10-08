@@ -259,10 +259,10 @@ function BuyPanel({
     <div className="pool-operate relative w-full max-w-120 lg:w-120 xl:w-140 xl:max-w-none flex flex-col gap-8 lg:gap-10 xl:gap-12 2xl:gap-14 px-6 sm:px-8 lg:px-10 xl:px-12 2xl:px-14 py-6 sm:py-8 lg:py-10 xl:py-12 2xl:py-14 3xl:py-18 border-2 border-dark-charcoal rounded-inherit">
       <div className="pool-operate-header flex flex-col items-center gap-2">
         <h3 className="text-lg leading-none font-semibold text-white">
-          Lock & Earn {pool.saleToken.name}
+          Stake & Earn {pool.saleToken.name}
         </h3>
         <p className="text-base leading-none text-white/70">
-          Purchase and lock now, receive {pool.saleToken.name} plus bonus at
+          Purchase and stake now, receive {pool.saleToken.name} plus bonus at
           maturity.
         </p>
       </div>

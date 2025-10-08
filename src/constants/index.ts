@@ -73,10 +73,10 @@ export const PoolStatusList = [
 ];
 
 export const LOCK_MAP = {
-  general: "Lock",
-  progressive: "Locking",
-  past: "Locked",
-  plural: "Locks",
+  general: "Stake",
+  progressive: "Staking",
+  past: "Staked",
+  plural: "Stakes",
 };
 
 export const EARN_MAP = {
