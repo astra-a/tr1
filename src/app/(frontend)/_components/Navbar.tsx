@@ -20,7 +20,7 @@ const ROUTES =
         { name: "LaunchPad", url: "/launchpad" },
         { name: "News", url: "/news" },
         // { name: "Roadmap", url: "/roadmap" },
-        // { name: "White Paper", url: `${CDN_BASEURL}/aios-whitepaper.pdf` },
+        // { name: "White Paper", url: "white-paper" },
         { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ]
@@ -29,7 +29,7 @@ const ROUTES =
         // { name: "LaunchPad", url: "/launchpad" },
         // { name: "News", url: "/news" },
         { name: "Roadmap", url: "/roadmap" },
-        { name: "White Paper", url: `${CDN_BASEURL}/aios-whitepaper.pdf` },
+        { name: "White Paper", url: "white-paper" },
         // { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ];
@@ -168,7 +168,11 @@ function MobileNav() {
 }
 
 export default function Navbar() {
-  return (
+  const pathname = usePathname();
+
+  return ["/white-paper"].includes(pathname) ? (
+    <></>
+  ) : (
     <>
       <div className="navbar fixed top-0 w-full h-12 md:h-13 lg:h-14 xl:h-15 2xl:h-18 3xl:h-20 z-40 flex justify-center bg-jet-black border-b border-dark-slate-gray">
         <div className="navbar-container flex items-center justify-between w-full h-full">

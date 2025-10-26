@@ -76,7 +76,7 @@ export default function RootLayout({
 
             <Navbar />
             <NavbarPlaceholder />
-            <div className="w-full flex-auto overflow-hidden">{children}</div>
+            <div className="w-full flex-auto">{children}</div>
             <LayoutFooter />
             <TransactionsPadding />
             <ToastContainer theme="dark" />
