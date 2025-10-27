@@ -20,7 +20,7 @@ const ROUTES =
         { name: "LaunchPad", url: "/launchpad" },
         { name: "News", url: "/news" },
         // { name: "Roadmap", url: "/roadmap" },
-        // { name: "White Paper", url: "white-paper", target: "_blank" },
+        // { name: "White Paper", url: "/white-paper", target: "_blank" },
         { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ]
@@ -29,7 +29,7 @@ const ROUTES =
         // { name: "LaunchPad", url: "/launchpad" },
         // { name: "News", url: "/news" },
         { name: "Roadmap", url: "/roadmap" },
-        { name: "White Paper", url: "white-paper", target: "_blank" },
+        { name: "White Paper", url: "/white-paper", target: "_blank" },
         // { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ];
