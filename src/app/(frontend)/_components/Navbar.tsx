@@ -20,7 +20,7 @@ const ROUTES =
         { name: "LaunchPad", url: "/launchpad" },
         { name: "News", url: "/news" },
         // { name: "Roadmap", url: "/roadmap" },
-        // { name: "White Paper", url: "white-paper" },
+        // { name: "White Paper", url: "white-paper", target: "_blank" },
         { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ]
@@ -29,12 +29,12 @@ const ROUTES =
         // { name: "LaunchPad", url: "/launchpad" },
         // { name: "News", url: "/news" },
         { name: "Roadmap", url: "/roadmap" },
-        { name: "White Paper", url: "white-paper" },
+        { name: "White Paper", url: "white-paper", target: "_blank" },
         // { name: "Map", url: "/map" },
         { name: "My Page", url: "/my-page" },
       ];
 
-function WindowNavChild({ route }: { route: { name: string; url: string } }) {
+function WindowNavChild({ route }: { route: { name: string; url: string; target?: string } }) {
   const pathname = usePathname();
   const isActive = useMemo(() => {
     if (pathname === route.url) {
@@ -61,6 +61,7 @@ function WindowNavChild({ route }: { route: { name: string; url: string } }) {
     <a
       href={route.url}
       className={`text-base 2xl:text-lg 3xl:text-xl ${isActive ? "text-white" : "text-white/60"} hover:text-white hover:underline transition`}
+      target={route.target}
     >
       {route.name}
     </a>
