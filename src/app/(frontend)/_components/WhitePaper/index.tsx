@@ -9,7 +9,7 @@ export default function WhitePaper() {
   console.log(`${CDN_BASEURL}/aios-whitepaper.pdf`);
 
   return (
-    <div className="white-paper w-full">
+    <div className="white-paper w-full bg-[#282828]">
       <PDFViewer fileUrl={`${CDN_BASEURL}/aios-whitepaper.pdf`} />
     </div>
   );

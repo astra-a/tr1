@@ -39,6 +39,8 @@ function LazyPage({
             console.log("pageNumber", pageNumber);
           }}
           loading={<Loader />}
+          className="flex justify-center"
+          canvasBackground="#282828"
         />
       ) : (
         <Loader />
